@@ -1,0 +1,250 @@
+package com.davigui.View.Menus;
+
+import com.davigui.Controller.BookService;
+import com.davigui.Controller.MovieService;
+import com.davigui.Controller.SeriesService;
+import com.davigui.Model.Enums.Months;
+import com.davigui.Model.Medias.Book;
+import com.davigui.Model.Medias.Movie;
+import com.davigui.Model.Medias.Series;
+import com.davigui.Model.Result.IResult;
+import com.davigui.View.Prompts.AskInput;
+import com.davigui.View.Prompts.Colors;
+import com.davigui.View.Prompts.Validate;
+
+import java.util.Scanner;
+
+/**
+ * A classe RateMenu é responsável por gerenciar o menu de avaliação de mídias.
+ * Permite ao usuário avaliar livros, filmes e temporadas de séries, escrever reviews
+ * e marcar mídias como vistas.
+ */
+public class RateMenu {
+    private final Scanner scanner; // Scanner para leitura de entradas do usuário.
+    private final BookService bookService; // Serviço para gerenciamento de livros.
+    private final MovieService movieService; // Serviço para gerenciamento de filmes.
+    private final SeriesService seriesService; // Serviço para gerenciamento de séries.
+
+    /**
+     * Construtor da classe RateMenu.
+     *
+     * @param bookService Serviço para gerenciamento de livros.
+     * @param movieService Serviço para gerenciamento de filmes.
+     * @param seriesService Serviço para gerenciamento de séries.
+     * @param scanner Objeto Scanner para leitura de entradas do usuário.
+     */
+    public RateMenu(BookService bookService, MovieService movieService,
+                    SeriesService seriesService, Scanner scanner) {
+        this.bookService = bookService;
+        this.movieService = movieService;
+        this.seriesService = seriesService;
+        this.scanner = scanner;
+    }
+
+    /**
+     * Exibe o menu de avaliação e gerencia as interações do usuário.
+     * O menu permite avaliar mídias, escrever reviews e marcar mídias como vistas.
+     * O loop continua até que o usuário escolha a opção de voltar.
+     */
+    public void show() {
+        int option;
+        do {
+            System.out.println(Colors.blue + "--== MENU DE AVALIAÇÃO ==--" + Colors.rst);
+            System.out.println("1 - Avaliar livro");
+            System.out.println("2 - Avaliar filme");
+            System.out.println("3 - Avaliar temporada");
+            System.out.println("4 - Escrever review (livro)");
+            System.out.println("5 - Escrever review (filme)");
+            System.out.println("6 - Escrever review (temporada)");
+            System.out.println("7 - Marcar como visto (livro)");
+            System.out.println("8 - Marcar como visto (filme)");
+            System.out.println("9 - Marcar como visto (temporada)");
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
+
+            option = Validate.validateInt(scanner);
+
+            switch (option) {
+                case 1:
+                    handleRateBook();
+                    break;
+                case 2:
+                    handleRateMovie();
+                    break;
+                case 3:
+                    handleRateSeason();
+                    break;
+                case 4:
+                    handleWriteBookReview();
+                    break;
+                case 5:
+                    handleWriteMovieReview();
+                    break;
+                case 6:
+                    handleWriteSeasonReview();
+                    break;
+                case 7:
+                    handleMarkBookAsSeen();
+                    break;
+                case 8:
+                    handleMarkMovieAsSeen();
+                    break;
+                case 9:
+                    handleMarkSeasonAsSeen();
+                    break;
+                case 0:
+                    System.out.println("Retornando...");
+                    break;
+                default:
+                    System.out.println(Colors.red + "Opção inválida." + Colors.rst);
+            }
+        } while (option != 0);
+    }
+
+    /**
+     * Gerencia a avaliação de um livro.
+     * Solicita ao usuário selecionar um livro e atribuir uma nota.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleRateBook() {
+        if (bookService.getAllBooks().isEmpty()) {
+            System.out.println("Você não possui livros cadastrados.");
+            return;
+        }
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        int rating = AskInput.askForRate(scanner);
+        IResult result = bookService.rate(selectedBook, rating);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a avaliação de um filme.
+     * Solicita ao usuário selecionar um filme e atribuir uma nota.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleRateMovie() {
+        if (movieService.getAllMovies().isEmpty()) {
+            System.out.println("Você não possui filmes cadastrados.");
+            return;
+        }
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        int rating = AskInput.askForRate(scanner);
+        IResult result = movieService.rate(selectedMovie, rating);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a avaliação de uma temporada de série.
+     * Solicita ao usuário selecionar uma série, uma temporada e atribuir uma nota.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleRateSeason() {
+        if (seriesService.getAllSeries().isEmpty()) {
+            System.out.println("Você não possui séries cadastradas.");
+            return;
+        }
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        int rating = AskInput.askForRate(scanner);
+        int seasonNumber = AskInput.askForSeasonNumber(scanner);
+        IResult result = seriesService.rateSeason(selectedSeries, seasonNumber, rating);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a escrita de uma review para um livro.
+     * Solicita ao usuário selecionar um livro e escrever uma review.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleWriteBookReview() {
+        if (bookService.getAllBooks().isEmpty()) {
+            System.out.println("Você não possui livros cadastrados.");
+            return;
+        }
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        String review = AskInput.askForReview(scanner);
+        IResult result = bookService.writeReview(selectedBook, review);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a escrita de uma review para um filme.
+     * Solicita ao usuário selecionar um filme e escrever uma review.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleWriteMovieReview() {
+        if (movieService.getAllMovies().isEmpty()) {
+            System.out.println("Você não possui filmes cadastrados.");
+            return;
+        }
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        String review = AskInput.askForReview(scanner);
+        IResult result = movieService.writeReview(selectedMovie, review);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a escrita de uma review para uma temporada de série.
+     * Solicita ao usuário selecionar uma série, uma temporada e escrever uma review.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleWriteSeasonReview() {
+        if (seriesService.getAllSeries().isEmpty()) {
+            System.out.println("Você não possui séries cadastradas.");
+            return;
+        }
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        int seasonNumber = AskInput.askForSeasonNumber(scanner);
+        String review = AskInput.askForReview(scanner);
+        IResult result = seriesService.writeReviewSeason(selectedSeries, seasonNumber, review);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a marcação de um livro como visto.
+     * Solicita ao usuário selecionar um livro, informar o ano e o mês em que foi visto.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleMarkBookAsSeen() {
+        if (bookService.getAllBooks().isEmpty()) {
+            System.out.println("Você não possui livros cadastrados.");
+            return;
+        }
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        int year = AskInput.askForSeenYear(scanner);
+        Months month = AskInput.askForSeenMonth(scanner);
+        IResult result = bookService.markAsSeen(selectedBook, year, month);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a marcação de um filme como visto.
+     * Solicita ao usuário selecionar um filme, informar o ano e o mês em que foi visto.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleMarkMovieAsSeen() {
+        if (movieService.getAllMovies().isEmpty()) {
+            System.out.println("Você não possui filmes cadastrados.");
+            return;
+        }
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        int year = AskInput.askForSeenYear(scanner);
+        Months month = AskInput.askForSeenMonth(scanner);
+        IResult result = movieService.markAsSeen(selectedMovie, year, month);
+        System.out.println(result.getMessage());
+    }
+
+    /**
+     * Gerencia a marcação de uma temporada de série como vista.
+     * Solicita ao usuário selecionar uma série e uma temporada.
+     * Exibe uma mensagem com o resultado da operação.
+     */
+    private void handleMarkSeasonAsSeen() {
+        if (seriesService.getAllSeries().isEmpty()) {
+            System.out.println("Você não possui séries cadastradas.");
+            return;
+        }
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        int seasonNumber = AskInput.askForSeasonNumber(scanner);
+        IResult result = seriesService.markAsSeenSeason(selectedSeries, seasonNumber);
+        System.out.println(result.getMessage());
+    }
+}
