@@ -9,7 +9,7 @@ import com.davigui.Model.Result.IResult;
 import com.davigui.View.Menus.MainMenu;
 
 import java.util.Scanner;
-//test
+
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
