@@ -35,7 +35,7 @@ public class RemoveMenu {
             System.out.println("1 - Remover livro");
             System.out.println("2 - Remover filme");
             System.out.println("3 - Remover série");
-            System.out.println("0 - Voltar");
+            System.out.println(Colors.red + "0 - Voltar" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
