@@ -159,4 +159,16 @@ public class Library {
     public void setYearsRegistered(TreeSet<Integer> yearsRegistered) {
         this.yearsRegistered = yearsRegistered;
     }
+
+    public void remove(Book book) {
+        bookList.remove(book);
+    }
+
+    public void remove(Movie movie) {
+        movieList.remove(movie);
+    }
+
+    public void remove(Series series) {
+        seriesList.remove(series);
+    }
 }
