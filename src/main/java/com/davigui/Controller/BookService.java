@@ -113,4 +113,12 @@ public class BookService extends CommonService<Book> {
         return journal.getBookList();
     }
 
+    public IResult deleteBook(Book book) {
+        if (journal.getBookList().contains(book)) {
+            journal.remove(book);
+            return new Success("Livro", "Removido com sucesso!");
+        } else {
+            return new Failure("Livro", "Esse livro não existe na biblioteca!");
+        }
+    }
 }

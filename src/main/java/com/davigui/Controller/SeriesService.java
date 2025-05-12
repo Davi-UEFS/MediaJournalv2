@@ -278,4 +278,13 @@ public class SeriesService extends CommonService<Series> {
     public ArrayList<Series> getAllSeries(){
         return journal.getSeriesList();
     }
+
+    public IResult deleteSeries(Series series) {
+        if(journal.getSeriesList().contains(series)) {
+            journal.remove(series);
+            return new Success("Série", "Removida com sucesso!");
+        }else{
+            return new Failure("Série", "Essa série não existe na biblioteca!");
+        }
+    }
 }
