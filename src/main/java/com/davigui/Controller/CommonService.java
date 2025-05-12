@@ -16,7 +16,7 @@ import java.util.*;
  *
  * @param <T> O tipo de mídia que será manipulado, que deve estender a classe Media.
  */
-public abstract class CommonService<T extends Media> implements IMediaService<T> {
+public abstract class CommonService<T extends Media> {
     // Biblioteca que armazena as mídias
     protected final Library journal;
 
@@ -36,7 +36,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @param rating A nota a ser atribuída (deve ser entre 1 e 5).
      * @return Um objeto IResult indicando sucesso ou falha da operação.
      */
-    @Override
     public IResult rate(T media, int rating) {
         if (rating <= 0 || rating > 5) {
             return new Failure(media.getMediaType(), "Avaliação deve ser maior que 0 e menor ou igual a 5.");
@@ -55,7 +54,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @param review O texto da review.
      * @return Um objeto IResult indicando sucesso ou falha da operação.
      */
-    @Override
     public IResult writeReview(T media, String review) {
         if (media.isSeen()) {
             media.setReview(review);
@@ -70,7 +68,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @param media A mídia cuja review será lida.
      * @return Uma string contendo a review ou uma mensagem indicando que não há review.
      */
-    @Override
     public String readReview(T media) {
         return "Review: " + ((media.getReview() == null) ?
                 "Você ainda não escreveu uma review" : media.getReview());
@@ -82,7 +79,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @param media A mídia cuja nota será exibida.
      * @return Uma string contendo a nota ou uma mensagem indicando que não há nota.
      */
-    @Override
     public String showRating(T media) {
         return "Nota: " + ((media.getRating() == 0) ?
                 "Você ainda não avaliou a obra" : "★".repeat(media.getRating()));
@@ -95,7 +91,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @param mediaList A lista de mídias onde a busca será realizada.
      * @return Uma lista de mídias que correspondem ao título, ordenadas de forma crescente.
      */
-    @Override
     public List<T> searchByTitle(String title, List<T> mediaList) {
         String titleLower = title.toLowerCase().trim();
         List<T> filteredMedia = mediaList.stream().filter
@@ -111,7 +106,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @param mediaList A lista de mídias onde a busca será realizada.
      * @return Uma lista de mídias que correspondem ao ano, ordenadas de forma crescente.
      */
-    @Override
     public List<T> searchByYear(int year, List<T> mediaList) {
         List<T> filteredMedia = mediaList.stream().filter
                 (media -> media.getYear() == year).toList();
@@ -126,7 +120,6 @@ public abstract class CommonService<T extends Media> implements IMediaService<T>
      * @param mediaList A lista de mídias onde a busca será realizada.
      * @return Uma lista de mídias que correspondem ao gênero, ordenadas de forma crescente.
      */
-    @Override
     public List<T> searchByGenre(Genres genre, List<T> mediaList) {
         List<T> filteredMedia = mediaList.stream().filter
                 (media -> media.getGenre() == genre).toList();
