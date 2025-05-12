@@ -18,6 +18,7 @@ public class MainMenu {
     private final RegisterMenu registerMenu;  // Menu para registro de mídias.
     private final RateMenu rateMenu;  // Menu para avaliação de mídias.
     private final SearchMenu searchMenu;  // Menu para busca de mídias.
+    private final RemoveMenu deleteMenu; // Menu para remoção de mídias.
 
     /**
      * Construtor da classe MainMenu.
@@ -34,6 +35,7 @@ public class MainMenu {
         this.rateMenu = new RateMenu(bookService, movieService, seriesService, scanner);
         this.registerMenu = new RegisterMenu(bookService, movieService, seriesService, scanner);
         this.searchMenu = new SearchMenu(bookService, movieService, seriesService, scanner);
+        this.deleteMenu = new RemoveMenu(bookService, movieService, seriesService, scanner);
         this.scanner = scanner;
     }
 
@@ -51,6 +53,7 @@ public class MainMenu {
             System.out.println("2 - Avaliar ");
             System.out.println("3 - Ver");
             System.out.println("4 - Buscar");
+            System.out.println("5 - Remover");
             System.out.println(Colors.red + "0 - Encerrar " + Colors.rst);
 
             option = Validate.validateInt(scanner);
@@ -70,6 +73,10 @@ public class MainMenu {
 
                 case 4:
                     searchMenu.show();
+                    break;
+
+                case 5:
+                    deleteMenu.show();
                     break;
 
                 case 0:
