@@ -6,11 +6,8 @@ import com.davigui.Controller.SeriesService;
 import com.davigui.Model.Enums.Genres;
 import com.davigui.Model.Medias.Series;
 import com.davigui.Model.Result.IResult;
-import com.davigui.View.Prompts.AskInput;
-import com.davigui.View.Prompts.Colors;
-import com.davigui.View.Prompts.Validate;
+import com.davigui.View.Prompts.*;
 
-import java.time.Duration;
 import java.util.Scanner;
 
 /**

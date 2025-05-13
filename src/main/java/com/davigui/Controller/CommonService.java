@@ -3,9 +3,7 @@ package com.davigui.Controller;
 import com.davigui.Model.Enums.Genres;
 import com.davigui.Model.Repository.Library;
 import com.davigui.Model.Medias.Media;
-import com.davigui.Model.Result.Failure;
-import com.davigui.Model.Result.IResult;
-import com.davigui.Model.Result.Success;
+import com.davigui.Model.Result.*;
 
 import java.util.*;
 

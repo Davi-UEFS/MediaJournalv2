@@ -8,9 +8,7 @@ import com.davigui.Model.Medias.Book;
 import com.davigui.Model.Medias.Movie;
 import com.davigui.Model.Medias.Season;
 import com.davigui.Model.Medias.Series;
-import com.davigui.View.Prompts.AskInput;
-import com.davigui.View.Prompts.Colors;
-import com.davigui.View.Prompts.Validate;
+import com.davigui.View.Prompts.*;
 
 import java.util.List;
 import java.util.Scanner;

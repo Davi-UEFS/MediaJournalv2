@@ -4,7 +4,6 @@ import com.davigui.Model.Enums.Genres;
 import com.davigui.Model.Enums.Months;
 import com.davigui.Model.Medias.Media;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;

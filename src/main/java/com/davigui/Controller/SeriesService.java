@@ -7,9 +7,7 @@ import com.davigui.Model.Exceptions.UnsupportedOperationException;
 import com.davigui.Model.Repository.Library;
 import com.davigui.Model.Medias.Season;
 import com.davigui.Model.Medias.Series;
-import com.davigui.Model.Result.Failure;
-import com.davigui.Model.Result.IResult;
-import com.davigui.Model.Result.Success;
+import com.davigui.Model.Result.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
