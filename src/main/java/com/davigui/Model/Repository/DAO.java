@@ -40,7 +40,6 @@ public class DAO {
 
     public static IResult load(Library journal) throws IOException{
 
-
             Type bookType = new TypeToken<ArrayList<Book>>() {}.getType();
             Type movieType = new TypeToken<ArrayList<Movie>>() {}.getType();
             Type seriesType = new TypeToken<ArrayList<Series>>() {}.getType();
@@ -80,11 +79,6 @@ public class DAO {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
         StringBuilder stringBuilder = new StringBuilder();
         String line;
-
-        if(path.isEmpty()){
-            System.out.println("Achei vazio aqui");
-            return "[]";
-        }
 
         while ((line = bufferedReader.readLine()) != null){
             stringBuilder.append(line);
