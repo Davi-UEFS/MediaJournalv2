@@ -77,7 +77,7 @@ public class Library {
      *
      * @param book O livro a ser adicionado.
      */
-    public void addBook(Book book) {
+    public void add(Book book) {
         bookList.add(book);
     }
 
@@ -86,7 +86,7 @@ public class Library {
      *
      * @param movie O filme a ser adicionado.
      */
-    public void addMovie(Movie movie) {
+    public void add(Movie movie) {
         movieList.add(movie);
     }
 
@@ -95,7 +95,7 @@ public class Library {
      *
      * @param series A série a ser adicionada.
      */
-    public void addSeries(Series series) {
+    public void add(Series series) {
         seriesList.add(series);
     }
 

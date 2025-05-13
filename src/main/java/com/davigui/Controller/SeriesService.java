@@ -61,7 +61,7 @@ public class SeriesService extends CommonService<Series> {
         try {
             journal.exists(series);
             series.addSeason(season);
-            journal.addSeries(series);
+            journal.add(series);
             journal.addYear(year);
             return new Success("Série","Registrada com sucesso.");
         }catch (MediaAlreadyExistsException e){

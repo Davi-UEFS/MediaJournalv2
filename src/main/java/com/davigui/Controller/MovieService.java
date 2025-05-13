@@ -52,7 +52,7 @@ public class MovieService extends CommonService<Movie> {
 
         try {
             journal.exists(movie);
-            journal.addMovie(movie);
+            journal.add(movie);
             journal.addYear(year);
             return new Success("Filme","Registrado com sucesso!");
 

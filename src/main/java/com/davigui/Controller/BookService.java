@@ -44,7 +44,7 @@ public class BookService extends CommonService<Book> {
 
         try {
             journal.exists(book);
-            journal.addBook(book);
+            journal.add(book);
             journal.addYear(year);
             return new Success("Livro", "Registrado com sucesso!");
         } catch (MediaAlreadyExistsException e) {
