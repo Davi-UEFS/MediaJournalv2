@@ -18,9 +18,9 @@ public class Main {
 
         //TODO: TIRAR ISSO DAQUI
         //TODO: PRINTAR TEMPORADA AO BUSCAR SERIES (NAO TA PRINTANDO)
-        IResult resultSave = DAO.load(journal);
+        IResult resultLoad = DAO.load(journal);
 
-        System.out.println(resultSave.getMessage());
+        System.out.println(resultLoad.getMessage());
         //Controller (add, avaliar, etc)
         BookService bookService = new BookService(journal);
         MovieService movieService = new MovieService(journal);
@@ -28,7 +28,7 @@ public class Main {
         //View (print e prompt)
         MainMenu menivis = new MainMenu(bookService, movieService, seriesService, scanner);
         menivis.showMenu();
-        IResult resultLoad = DAO.save(journal);
-        System.out.println(resultLoad.getMessage());
+        IResult resultSave = DAO.save(journal);
+        System.out.println(resultSave.getMessage());
     }
 }
