@@ -150,24 +150,15 @@ public abstract class CommonService<T extends Media> {
      * correspondentes a cada ano, ordenadas por nota.
      *
      * @param mediaList     A lista de mídias a ser mapeada.
-     * @param ascendingYear Indica se os anos devem ser ordenados de forma crescente.
-     * @param ascendingRate Indica se as notas devem ser ordenadas de forma crescente.
      * @return Um mapa contendo as mídias agrupadas por ano.
      */
-    public Map<Integer, List<T>> mapByYearRate(List<T> mediaList, boolean ascendingYear, boolean ascendingRate) {
+    public Map<Integer, List<T>> mapByAscendingYearAscendingRate(List<T> mediaList) {
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
 
-        if (!ascendingYear)
-            Collections.reverse(years);
-
         for (Integer year : years) {
             List<T> filteredMedia;
-            if (ascendingRate) {
-                filteredMedia = searchByYear(year, mediaList);
-            } else {
-                filteredMedia = sortDescending(searchByYear(year, mediaList));
-            }
+            filteredMedia = searchByYear(year, mediaList);
 
             if (!filteredMedia.isEmpty())
                 mapYearMedia.put(year, filteredMedia);
@@ -175,28 +166,86 @@ public abstract class CommonService<T extends Media> {
         return mapYearMedia;
     }
 
+    public Map<Integer, List<T>> mapByDescendingYearAscendingRate(List<T> mediaList){
+        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
+        List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
+
+        Collections.reverse(years);
+
+        for (Integer year : years) {
+            List<T> filteredMedia = searchByYear(year, mediaList);
+            if (!filteredMedia.isEmpty())
+                mapYearMedia.put(year, new ArrayList<>(filteredMedia));
+        }
+        return mapYearMedia;
+    }
+
+    public Map<Integer, List<T>> mapByAscendingYearDescendingRate(List<T> mediaList){
+        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
+        List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
+
+        for (Integer year : years) {
+            List<T> filteredMedia = sortDescending(searchByYear(year, mediaList));
+            if (!filteredMedia.isEmpty())
+                mapYearMedia.put(year, new ArrayList<>(filteredMedia));
+        }
+        return mapYearMedia;
+    }
+
+    public Map<Integer, List<T>> mapByDescendingYearDescendingRate(List<T> mediaList){
+        Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
+        List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
+
+        Collections.reverse(years);
+
+        for (Integer year : years) {
+            List<T> filteredMedia = sortDescending(searchByYear(year, mediaList));
+            if (!filteredMedia.isEmpty())
+                mapYearMedia.put(year, new ArrayList<>(filteredMedia));
+        }
+        return mapYearMedia;
+    }
+
     /**
      * Gera um mapa onde as chaves são os gêneros e os valores são listas de mídias
-     * correspondentes a cada gênero, ordenadas por nota.
+     * correspondentes a cada gênero, ordenadas por nota crescente.
      *
      * @param mediaList     A lista de mídias a ser mapeada.
-     * @param ascendingRate Indica se as notas devem ser ordenadas de forma crescente.
      * @return Um mapa contendo as mídias agrupadas por gênero.
      */
-    public Map<Genres, List<T>> mapByGenreRate(List<T> mediaList, boolean ascendingRate) {
+    public Map<Genres, List<T>> mapByGenreAscendingRate(List<T> mediaList) {
         Map<Genres, List<T>> mapGenreMedia = new EnumMap<>(Genres.class);
 
         for (Genres genre : Genres.values()) {
             List<T> filteredMedia;
-            if (ascendingRate) {
-                filteredMedia = searchByGenre(genre, mediaList);
-            } else {
-                filteredMedia = sortDescending(searchByGenre(genre, mediaList));
-            }
+            filteredMedia = searchByGenre(genre, mediaList);
+
             if (!filteredMedia.isEmpty())
                 mapGenreMedia.put(genre, filteredMedia);
         }
         return mapGenreMedia;
     }
+
+    /**
+     * Gera um mapa onde as chaves são os gêneros e os valores são listas de mídias
+     * correspondentes a cada gênero, ordenadas por nota decrescente.
+     *
+     * @param mediaList     A lista de mídias a ser mapeada.
+     * @return Um mapa contendo as mídias agrupadas por gênero.
+     */
+    public Map<Genres, List<T>> mapByGenreDescendingRate(List<T> mediaList) {
+        Map<Genres, List<T>> mapGenreMedia = new EnumMap<>(Genres.class);
+
+        for (Genres genre : Genres.values()) {
+            List<T> filteredMedia;
+            filteredMedia = sortDescending(searchByGenre(genre, mediaList));
+
+            if (!filteredMedia.isEmpty())
+                mapGenreMedia.put(genre, filteredMedia);
+        }
+        return mapGenreMedia;
+    }
+
+
 
 }
