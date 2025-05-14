@@ -212,32 +212,32 @@ public class DisplayMenu {
                     break;
 
                 case 3:
-                    mapGenreMedia = service.mapByGenreRate(mediaList, true);
+                    mapGenreMedia = service.mapByGenreAscendingRate(mediaList);
                     printMapGenreMedia(mapGenreMedia);
                     break;
 
                 case 4:
-                    mapGenreMedia = service.mapByGenreRate(mediaList, false);
+                    mapGenreMedia = service.mapByGenreDescendingRate(mediaList);
                     printMapGenreMedia(mapGenreMedia);
                     break;
 
                 case 5:
-                    mapIntMedia = service.mapByYearRate(mediaList, true, true);
+                    mapIntMedia = service.mapByAscendingYearAscendingRate(mediaList);
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 6:
-                    mapIntMedia = service.mapByYearRate(mediaList, true, false);
+                    mapIntMedia = service.mapByAscendingYearDescendingRate(mediaList);
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 7:
-                    mapIntMedia = service.mapByYearRate(mediaList, false, true);
+                    mapIntMedia = service.mapByDescendingYearAscendingRate(mediaList);
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 8:
-                    mapIntMedia = service.mapByYearRate(mediaList, false, false);
+                    mapIntMedia = service.mapByDescendingYearDescendingRate(mediaList);
                     printMapYearMedia(mapIntMedia);
                     break;
 
