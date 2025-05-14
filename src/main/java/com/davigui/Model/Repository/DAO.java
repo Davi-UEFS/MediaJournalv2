@@ -10,7 +10,6 @@ import java.lang.reflect.Type;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class DAO {
     private static final String BOOKSPATH = "src/main/data/books.json";
@@ -36,7 +35,6 @@ public class DAO {
         }catch (IOException e){
             return new Failure("Biblioteca", "Exceção de IO");
         }
-
     }
 
     public static IResult load(Library journal) throws IOException{
@@ -56,17 +54,12 @@ public class DAO {
             ArrayList<Series> series = gson.fromJson(seriesJson,seriesType);
             TreeMap<Integer, Integer> years = gson.fromJson(yearJson, yearType);
 
-            System.out.println(books);
-            System.out.println("Esta e a lista de livros.");
-
             journal.setBookList(books);
             journal.setMovieList(movies);
             journal.setSeriesList(series);
             journal.setYearsRegistered(years);
 
             return new Success("Biblioteca", "Carregada com sucesso.");
-
-
     }
 
     private static void saveFile(String path, String json) throws IOException{
@@ -77,7 +70,12 @@ public class DAO {
     }
 
     public static String loadFile(String path) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(path));
+        }catch(FileNotFoundException e){
+            return "[]";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         String line;
 

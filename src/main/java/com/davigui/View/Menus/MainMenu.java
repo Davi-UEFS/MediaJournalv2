@@ -54,7 +54,7 @@ public class MainMenu {
             System.out.println("3 - Ver");
             System.out.println("4 - Buscar");
             System.out.println("5 - Remover");
-            System.out.println(Colors.red + "0 - Encerrar " + Colors.rst);
+            System.out.println(Colors.red + "0 - Salvar e sair" + Colors.rst);
 
             option = Validate.validateInt(scanner);
 
