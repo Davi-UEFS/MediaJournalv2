@@ -5,8 +5,9 @@ import com.davigui.Model.Medias.Book;
 import com.davigui.Model.Medias.Movie;
 import com.davigui.Model.Medias.Series;
 
+
 import java.util.ArrayList;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 /**
  * A classe Library representa uma biblioteca que gerencia listas de livros, filmes e séries,
@@ -20,7 +21,7 @@ public class Library {
     // Lista de séries cadastradas na biblioteca
     private ArrayList<Series> seriesList;
     // Conjunto de anos registrados na biblioteca
-    private TreeSet<Integer> yearsRegistered;
+    private TreeMap<Integer, Integer> yearsRegistered;
 
     /**
      * Construtor da classe Library.
@@ -30,7 +31,7 @@ public class Library {
         this.bookList = new ArrayList<>();
         this.movieList = new ArrayList<>();
         this.seriesList = new ArrayList<>();
-        this.yearsRegistered = new TreeSet<>();
+        this.yearsRegistered = new TreeMap<>();
     }
 
     /**
@@ -105,7 +106,33 @@ public class Library {
      * @param year O ano a ser adicionado.
      */
     public void addYear(int year) {
-        yearsRegistered.add(year);
+        if (yearsRegistered.containsKey(year)) {
+            yearsRegistered.put(year, yearsRegistered.get(year) + 1);
+        } else{
+            yearsRegistered.put(year, 1);
+        }
+    }
+
+    public void remove(Book book) {
+        bookList.remove(book);
+    }
+
+    public void remove(Movie movie) {
+        movieList.remove(movie);
+    }
+
+    public void remove(Series series) {
+        seriesList.remove(series);
+    }
+
+    public void removeYear(int year){
+
+        if(yearsRegistered.containsKey(year)){
+            yearsRegistered.put(year, yearsRegistered.get(year) - 1);
+            if(yearsRegistered.get(year) == 0)
+                yearsRegistered.remove(year);
+
+        }
     }
 
     /**
@@ -140,7 +167,7 @@ public class Library {
      *
      * @return Um conjunto de anos.
      */
-    public TreeSet<Integer> getYearsRegistered() {
+    public TreeMap<Integer, Integer> getYearsRegistered() {
         return yearsRegistered;
     }
 
@@ -156,19 +183,8 @@ public class Library {
         this.seriesList = seriesList;
     }
 
-    public void setYearsRegistered(TreeSet<Integer> yearsRegistered) {
+    public void setYearsRegistered(TreeMap<Integer, Integer> yearsRegistered) {
         this.yearsRegistered = yearsRegistered;
     }
 
-    public void remove(Book book) {
-        bookList.remove(book);
-    }
-
-    public void remove(Movie movie) {
-        movieList.remove(movie);
-    }
-
-    public void remove(Series series) {
-        seriesList.remove(series);
-    }
 }

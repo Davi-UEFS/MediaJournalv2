@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class DAO {
@@ -43,7 +44,7 @@ public class DAO {
             Type bookType = new TypeToken<ArrayList<Book>>() {}.getType();
             Type movieType = new TypeToken<ArrayList<Movie>>() {}.getType();
             Type seriesType = new TypeToken<ArrayList<Series>>() {}.getType();
-            Type yearType = new TypeToken<TreeSet<Integer>>() {}.getType();
+            Type yearType = new TypeToken<TreeMap<Integer, Integer>>() {}.getType();
 
             String booksJson = loadFile(BOOKSPATH);
             String moviesJson = loadFile(MOVIESPATH);
@@ -53,7 +54,7 @@ public class DAO {
             ArrayList<Book> books = gson.fromJson(booksJson, bookType);
             ArrayList<Movie> movies = gson.fromJson(moviesJson, movieType);
             ArrayList<Series> series = gson.fromJson(seriesJson,seriesType);
-            TreeSet<Integer> years = gson.fromJson(yearJson, yearType);
+            TreeMap<Integer, Integer> years = gson.fromJson(yearJson, yearType);
 
             System.out.println(books);
             System.out.println("Esta e a lista de livros.");
