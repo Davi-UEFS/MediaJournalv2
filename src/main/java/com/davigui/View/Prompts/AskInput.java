@@ -270,6 +270,7 @@ public final class AskInput {
         choice = Validate.validateInt(scanner);
         while (choice < 1 || choice > mediaList.size()) {
             System.out.printf("Escolha de 1 a %d.\n", mediaList.size());
+            choice = Validate.validateInt(scanner);
         }
         return mediaList.get(choice - 1);
     }
