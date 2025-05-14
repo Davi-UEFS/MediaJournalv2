@@ -124,6 +124,7 @@ public class MovieService extends CommonService<Movie> {
     public IResult deleteMovie(Movie movie){
         if(journal.getMovieList().contains(movie)){
             journal.remove(movie);
+            journal.removeYear(movie.getYear());
             return new Success("Filme", "Removido com sucesso!");
         }else{
             return new Failure("Filme", "Esse filme não existe na biblioteca!");

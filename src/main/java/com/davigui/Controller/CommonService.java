@@ -156,7 +156,7 @@ public abstract class CommonService<T extends Media> {
      */
     public Map<Integer, List<T>> mapByYearRate(List<T> mediaList, boolean ascendingYear, boolean ascendingRate) {
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
-        List<Integer> years = new ArrayList<>(journal.getYearsRegistered());
+        List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
 
         if (!ascendingYear)
             Collections.reverse(years);

@@ -280,6 +280,7 @@ public class SeriesService extends CommonService<Series> {
     public IResult deleteSeries(Series series) {
         if(journal.getSeriesList().contains(series)) {
             journal.remove(series);
+            journal.removeYear(series.getYear());
             return new Success("Série", "Removida com sucesso!");
         }else{
             return new Failure("Série", "Essa série não existe na biblioteca!");
