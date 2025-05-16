@@ -99,9 +99,6 @@ public class Book extends Media {
      *
      * @return O identificador único do livro.
      */
-
-
-
     @Override
     public int getId() {
         return isbn.hashCode();

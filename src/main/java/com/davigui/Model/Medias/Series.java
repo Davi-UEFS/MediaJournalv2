@@ -156,9 +156,6 @@ public class Series extends Media {
      *
      * @return Uma string representando a série.
      */
-
-
-
     @Override
     public String toString() {
         String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);

@@ -105,9 +105,6 @@ public class Movie extends Media {
      *
      * @return Uma string representando o tipo de mídia.
      */
-
-
-
     @Override
     public String getMediaType(){
         return "Filme";

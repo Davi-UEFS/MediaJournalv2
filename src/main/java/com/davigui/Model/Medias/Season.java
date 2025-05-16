@@ -98,14 +98,17 @@ public class Season implements Comparable<Season> {
     }
 
     /**
-     * Define o status de visualização da temporada.
-     *
-     * @param seen true para marcar como vista, false caso contrário.
+     * Marca a temporada como vista.
      */
-    public void setSeen(boolean seen) {
-        this.seen = seen;
+    public void setSeen() {
+        this.seen = true;
     }
 
+    /**
+     * Atualiza o ano de lançamento da temporada.
+     *
+     * @param year O ano de lançamento da temporada.
+     */
     public void setYear(int year) {
         this.year = year;
     }
@@ -123,9 +126,6 @@ public class Season implements Comparable<Season> {
      *
      * @return true se a temporada foi vista, false caso contrário.
      */
-
-
-
     public boolean isSeen() {
         return seen;
     }
