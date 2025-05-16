@@ -10,17 +10,17 @@ import java.util.List;
  */
 public class Movie extends Media {
     // Lista com os nomes do elenco do filme
-    private List<String> cast;
+    private final List<String> cast;
     // Duração do filme
-    private int duration;
+    private final int duration;
     // Nome do diretor do filme
-    private String direction;
+    private final String direction;
     // Roteiro do filme
-    private String script;
+    private final String script;
     // Título original do filme
-    private String originalTitle;
+    private final String originalTitle;
     // Lista de plataformas onde o filme pode ser assistido
-    private List<String> whereToWatch;
+    private final List<String> whereToWatch;
     // Data em que o filme foi visto
     private String seenDate;
 
@@ -74,30 +74,6 @@ public class Movie extends Media {
      */
     public void setSeenDate(String seenDate) {
         this.seenDate = seenDate;
-    }
-
-    public void setCast(List<String> cast) {
-        this.cast = cast;
-    }
-
-    public void setWhereToWatch(List<String> whereToWatch) {
-        this.whereToWatch = whereToWatch;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
-    public void setScript(String script) {
-        this.script = script;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     /**

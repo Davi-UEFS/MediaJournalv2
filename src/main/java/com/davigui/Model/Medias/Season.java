@@ -9,13 +9,13 @@ public class Season implements Comparable<Season> {
     // Avaliação da temporada
     private int rating;
     // Número da temporada
-    private int seasonNumber;
+    private final int seasonNumber;
     // Review da temporada
     private String review;
     // Indica se a temporada foi vista
     private boolean seen;
     // Quantidade de episódios na temporada
-    private int episodeCount;
+    private final int episodeCount;
     // Ano de lançamento da temporada
     private int year;
 
@@ -33,10 +33,6 @@ public class Season implements Comparable<Season> {
         this.seen = false;
         this.rating = 0;
         this.review = null;
-    }
-
-    public Season(){
-
     }
 
     /**
@@ -113,14 +109,6 @@ public class Season implements Comparable<Season> {
         this.year = year;
     }
 
-    public void setEpisodeCount(int episodeCount) {
-        this.episodeCount = episodeCount;
-    }
-
-    public void setSeasonNumber(int seasonNumber) {
-        this.seasonNumber = seasonNumber;
-    }
-
     /**
      * Verifica se a temporada foi vista.
      *
@@ -137,14 +125,5 @@ public class Season implements Comparable<Season> {
      */
     public int getSeasonNumber() {
         return seasonNumber;
-    }
-
-    /**
-     * Obtém o número de episódios da temporada
-     *
-     * @return O número de episódios
-     */
-    public int getEpisodeCount() {
-        return episodeCount;
     }
 }

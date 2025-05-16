@@ -6,7 +6,6 @@ import com.davigui.Controller.SeriesService;
 import com.davigui.Model.Enums.Genres;
 import com.davigui.Model.Medias.Book;
 import com.davigui.Model.Medias.Movie;
-import com.davigui.Model.Medias.Season;
 import com.davigui.Model.Medias.Series;
 import com.davigui.View.Prompts.*;
 
