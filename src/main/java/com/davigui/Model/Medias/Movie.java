@@ -1,7 +1,6 @@
 package com.davigui.Model.Medias;
 import com.davigui.Model.Enums.Genres;
 
-import java.time.Duration;
 import java.util.List;
 
 /**
@@ -122,18 +121,29 @@ public class Movie extends Media {
      */
     @Override
     public String toString() {
-        String string =
+        StringBuilder watchString = new StringBuilder(whereToWatch.toString());
+        watchString.deleteCharAt(0).deleteCharAt(watchString.length() - 1);
+
+        StringBuilder castString = new StringBuilder(cast.toString());
+        castString.deleteCharAt(0).deleteCharAt(castString.length() - 1);
+
+        StringBuilder string = new StringBuilder(
                 "\n" + title + " (" + year + ")" +
                 "\nDuração: " + duration + " minutos" +
                 "\nDireção: " + direction +
                 "\nTítulo original: " + originalTitle +
-                "\nOnde assistir: " + whereToWatch;
+                "\nOnde assistir: " + watchString
+                );
+
         if(seenDate != null)
-            string += "\nVisto em: " + seenDate;
+            string.append("\nVisto em: ").append(seenDate);
+
         if(rating != 0)
-            string += "\nAvaliação: " + "★".repeat(rating);
-        string += "\n\nSinopse: " + script +
-                "\nElenco: " + cast;
-        return string;
+            string.append("\nAvaliação: ").append("★".repeat(rating));
+
+        string.append("\n\nSinopse: ").append(script)
+                .append("\nElenco: ").append(castString);
+
+        return string.toString();
     }
 }

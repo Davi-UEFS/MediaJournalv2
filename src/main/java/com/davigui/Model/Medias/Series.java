@@ -162,13 +162,28 @@ public class Series extends Media {
     @Override
     public String toString() {
         String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
-        String string =
+
+        StringBuilder castString = new StringBuilder(cast.toString());
+        castString.deleteCharAt(0).deleteCharAt(castString.length() - 1);
+
+        StringBuilder watchString = new StringBuilder(whereToWatch.toString());
+        watchString.deleteCharAt(0).deleteCharAt(watchString.length() - 1);
+
+        StringBuilder string = new StringBuilder(
                 "\n" + title + " (" + year + " - "  + endingYear + ")" +
                 "\nTítulo original: " + originalTitle +
-                "\nOnde assistir: " + whereToWatch +
-                "\nElenco: " + cast;
+                "\nOnde assistir: " + watchString +
+                "\nElenco: " + castString
+                );
+
         if (rating != 0)
-            string += "\nAvaliação: " + "★".repeat(rating);
-        return string;
+            string.append("\nAvaliação: ").append("★".repeat(rating));
+
+        string.append("\nTemporadas:");
+
+        for(Season season : seasons)
+            string.append("\n\t").append(season.toString());
+
+        return string.toString();
     }
 }

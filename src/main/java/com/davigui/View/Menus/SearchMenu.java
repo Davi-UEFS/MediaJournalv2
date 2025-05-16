@@ -320,10 +320,6 @@ public class SearchMenu {
             System.out.println(Colors.red + "Nenhuma série encontrada!" + Colors.rst);
         for (Series series : seriesList) {
             System.out.println(series);
-            for (Season season : series.getSeasons()) {
-                System.out.print("\t");
-                System.out.println(season);
-            }
             System.out.println("---------------------");
         }
     }
