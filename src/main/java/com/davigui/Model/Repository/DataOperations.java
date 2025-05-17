@@ -11,7 +11,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class DAO {
+public class DataOperations {
     private static final String BOOKSPATH = "src/main/data/books.json";
     private static final String MOVIESPATH = "src/main/data/movies.json";
     private static final String SERIESPATH = "src/main/data/series.json";
@@ -44,15 +44,15 @@ public class DAO {
             Type seriesType = new TypeToken<ArrayList<Series>>() {}.getType();
             Type yearType = new TypeToken<TreeMap<Integer, Integer>>() {}.getType();
 
-            String booksJson = loadFile(BOOKSPATH);
-            String moviesJson = loadFile(MOVIESPATH);
-            String seriesJson = loadFile(SERIESPATH);
-            String yearJson = loadFile(YEARSPATH);
+            Reader booksReader = loadFile(BOOKSPATH);
+            Reader moviesReader = loadFile(MOVIESPATH);
+            Reader seriesReader = loadFile(SERIESPATH);
+            Reader yearReader = loadFile(YEARSPATH);
 
-            ArrayList<Book> books = gson.fromJson(booksJson, bookType);
-            ArrayList<Movie> movies = gson.fromJson(moviesJson, movieType);
-            ArrayList<Series> series = gson.fromJson(seriesJson,seriesType);
-            TreeMap<Integer, Integer> years = gson.fromJson(yearJson, yearType);
+            ArrayList<Book> books = gson.fromJson(booksReader, bookType);
+            ArrayList<Movie> movies = gson.fromJson(moviesReader, movieType);
+            ArrayList<Series> series = gson.fromJson(seriesReader,seriesType);
+            TreeMap<Integer, Integer> years = gson.fromJson(yearReader, yearType);
 
             journal.setBookList(books);
             journal.setMovieList(movies);
@@ -69,21 +69,14 @@ public class DAO {
         fileWriter.close();
     }
 
-    public static String loadFile(String path) throws IOException {
-        BufferedReader bufferedReader;
-        try {
-            bufferedReader = new BufferedReader(new FileReader(path));
-        }catch(FileNotFoundException e){
-            return "[]";
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
+    public static Reader loadFile(String path) {
 
-        while ((line = bufferedReader.readLine()) != null){
-            stringBuilder.append(line);
+        try{
+            return new FileReader(path);
+
+        }catch (FileNotFoundException e){
+            return new StringReader("[]");
         }
-        bufferedReader.close();
-        System.out.println(stringBuilder);
-        return stringBuilder.toString();
+
     }
 }
