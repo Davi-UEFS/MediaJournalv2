@@ -37,10 +37,6 @@ public abstract class Media {
         this.review = null;
     }
 
-    public Media(){
-
-    }
-
     /**
      * Obtém a avaliação da mídia.
      *
@@ -96,12 +92,10 @@ public abstract class Media {
     }
 
     /**
-     * Define o status de visualização da mídia.
-     *
-     * @param seen true para marcar como vista, false caso contrário.
+     * Marca a mídia como vista.
      */
-    public void setSeen(boolean seen) {
-        this.seen = seen;
+    public void setSeen() {
+        this.seen = true;
     }
 
     /**
@@ -139,9 +133,6 @@ public abstract class Media {
      *
      * @return Uma string representando o tipo de mídia.
      */
-
-
-
     public abstract String getMediaType();
 
     /**

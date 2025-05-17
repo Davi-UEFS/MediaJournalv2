@@ -9,13 +9,13 @@ public class Season implements Comparable<Season> {
     // Avaliação da temporada
     private int rating;
     // Número da temporada
-    private int seasonNumber;
+    private final int seasonNumber;
     // Review da temporada
     private String review;
     // Indica se a temporada foi vista
     private boolean seen;
     // Quantidade de episódios na temporada
-    private int episodeCount;
+    private final int episodeCount;
     // Ano de lançamento da temporada
     private int year;
 
@@ -33,10 +33,6 @@ public class Season implements Comparable<Season> {
         this.seen = false;
         this.rating = 0;
         this.review = null;
-    }
-
-    public Season(){
-
     }
 
     /**
@@ -98,24 +94,19 @@ public class Season implements Comparable<Season> {
     }
 
     /**
-     * Define o status de visualização da temporada.
-     *
-     * @param seen true para marcar como vista, false caso contrário.
+     * Marca a temporada como vista.
      */
-    public void setSeen(boolean seen) {
-        this.seen = seen;
+    public void setSeen() {
+        this.seen = true;
     }
 
+    /**
+     * Atualiza o ano de lançamento da temporada.
+     *
+     * @param year O ano de lançamento da temporada.
+     */
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public void setEpisodeCount(int episodeCount) {
-        this.episodeCount = episodeCount;
-    }
-
-    public void setSeasonNumber(int seasonNumber) {
-        this.seasonNumber = seasonNumber;
     }
 
     /**
@@ -123,9 +114,6 @@ public class Season implements Comparable<Season> {
      *
      * @return true se a temporada foi vista, false caso contrário.
      */
-
-
-
     public boolean isSeen() {
         return seen;
     }
@@ -137,14 +125,5 @@ public class Season implements Comparable<Season> {
      */
     public int getSeasonNumber() {
         return seasonNumber;
-    }
-
-    /**
-     * Obtém o número de episódios da temporada
-     *
-     * @return O número de episódios
-     */
-    public int getEpisodeCount() {
-        return episodeCount;
     }
 }

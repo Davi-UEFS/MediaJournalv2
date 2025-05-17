@@ -13,15 +13,15 @@ import java.util.TreeSet;
  */
 public class Series extends Media {
     // Ano de término da série (9999 indica que está em andamento)
-    private int yearOfEnding;
+    private final int yearOfEnding;
     // Lista com os nomes do elenco da série
-    private List<String> cast;
+    private final List<String> cast;
     // Conjunto ordenado de temporadas da série
-    private TreeSet<Season> seasons;
+    private final TreeSet<Season> seasons;
     // Título original da série
-    private String originalTitle;
+    private final String originalTitle;
     // Lista de plataformas onde a série pode ser assistida
-    private List<String> whereToWatch;
+    private final List<String> whereToWatch;
 
     /**
      * Construtor da classe Series.
@@ -103,24 +103,6 @@ public class Series extends Media {
     }
 
     /**
-     * Obtém o conjunto ordenado de temporadas da série.
-     *
-     * @return O conjunto de temporadas.
-     */
-    public TreeSet<Season> getSeasons() {
-        return seasons;
-    }
-
-    /**
-     * Obtém o número total de temporadas da série.
-     *
-     * @return O número de temporadas.
-     */
-    public int getNumberOfSeasons(){
-        return seasons.size();
-    }
-
-    /**
      * Obtém o tipo de mídia, que neste caso é "Série".
      *
      * @return Uma string representando o tipo de mídia.
@@ -130,45 +112,37 @@ public class Series extends Media {
         return "Série";
     }
 
-    public void setYearOfEnding(int yearOfEnding) {
-        this.yearOfEnding = yearOfEnding;
-    }
-
-    public void setWhereToWatch(List<String> whereToWatch) {
-        this.whereToWatch = whereToWatch;
-    }
-
-    public void setSeasons(TreeSet<Season> seasons) {
-        this.seasons = seasons;
-    }
-
-    public void setCast(List<String> cast) {
-        this.cast = cast;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
     /**
      * Retorna uma representação em string da série, incluindo título, anos de início e término,
      * título original, plataformas onde assistir, elenco e avaliação (se disponível).
      *
      * @return Uma string representando a série.
      */
-
-
-
     @Override
     public String toString() {
         String endingYear = (yearOfEnding == 9999) ? "Em andamento" : Integer.toString(yearOfEnding);
-        String string =
+
+        StringBuilder castString = new StringBuilder(cast.toString());
+        castString.deleteCharAt(0).deleteCharAt(castString.length() - 1);
+
+        StringBuilder watchString = new StringBuilder(whereToWatch.toString());
+        watchString.deleteCharAt(0).deleteCharAt(watchString.length() - 1);
+
+        StringBuilder string = new StringBuilder(
                 "\n" + title + " (" + year + " - "  + endingYear + ")" +
                 "\nTítulo original: " + originalTitle +
-                "\nOnde assistir: " + whereToWatch +
-                "\nElenco: " + cast;
+                "\nOnde assistir: " + watchString +
+                "\nElenco: " + castString
+                );
+
         if (rating != 0)
-            string += "\nAvaliação: " + "★".repeat(rating);
-        return string;
+            string.append("\nAvaliação: ").append("★".repeat(rating));
+
+        string.append("\nTemporadas:");
+
+        for(Season season : seasons)
+            string.append("\n\t").append(season.toString());
+
+        return string.toString();
     }
 }

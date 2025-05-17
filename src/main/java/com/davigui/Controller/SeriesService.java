@@ -147,7 +147,7 @@ public class SeriesService extends CommonService<Series> {
             if(season.isSeen()) {
                 return new Failure("Temporada", "Já marcado como visto");
             }
-            season.setSeen(true);
+            season.setSeen();
             return new Success("Temporada", "Marcado como visto");
 
         }catch (SeasonNotFoundException e){

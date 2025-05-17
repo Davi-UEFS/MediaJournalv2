@@ -6,7 +6,6 @@ import com.davigui.Controller.SeriesService;
 import com.davigui.Model.Enums.Genres;
 import com.davigui.Model.Medias.Book;
 import com.davigui.Model.Medias.Movie;
-import com.davigui.Model.Medias.Season;
 import com.davigui.Model.Medias.Series;
 import com.davigui.View.Prompts.*;
 
@@ -320,10 +319,6 @@ public class SearchMenu {
             System.out.println(Colors.red + "Nenhuma série encontrada!" + Colors.rst);
         for (Series series : seriesList) {
             System.out.println(series);
-            for (Season season : series.getSeasons()) {
-                System.out.print("\t");
-                System.out.println(season);
-            }
             System.out.println("---------------------");
         }
     }

@@ -1,7 +1,6 @@
 package com.davigui.Model.Medias;
 import com.davigui.Model.Enums.Genres;
 
-import java.time.Duration;
 import java.util.List;
 
 /**
@@ -11,17 +10,17 @@ import java.util.List;
  */
 public class Movie extends Media {
     // Lista com os nomes do elenco do filme
-    private List<String> cast;
+    private final List<String> cast;
     // Duração do filme
-    private int duration;
+    private final int duration;
     // Nome do diretor do filme
-    private String direction;
+    private final String direction;
     // Roteiro do filme
-    private String script;
+    private final String script;
     // Título original do filme
-    private String originalTitle;
+    private final String originalTitle;
     // Lista de plataformas onde o filme pode ser assistido
-    private List<String> whereToWatch;
+    private final List<String> whereToWatch;
     // Data em que o filme foi visto
     private String seenDate;
 
@@ -77,38 +76,11 @@ public class Movie extends Media {
         this.seenDate = seenDate;
     }
 
-    public void setCast(List<String> cast) {
-        this.cast = cast;
-    }
-
-    public void setWhereToWatch(List<String> whereToWatch) {
-        this.whereToWatch = whereToWatch;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
-    public void setScript(String script) {
-        this.script = script;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
     /**
      * Obtém o tipo de mídia, que neste caso é "Filme".
      *
      * @return Uma string representando o tipo de mídia.
      */
-
-
-
     @Override
     public String getMediaType(){
         return "Filme";
@@ -122,18 +94,29 @@ public class Movie extends Media {
      */
     @Override
     public String toString() {
-        String string =
+        StringBuilder watchString = new StringBuilder(whereToWatch.toString());
+        watchString.deleteCharAt(0).deleteCharAt(watchString.length() - 1);
+
+        StringBuilder castString = new StringBuilder(cast.toString());
+        castString.deleteCharAt(0).deleteCharAt(castString.length() - 1);
+
+        StringBuilder string = new StringBuilder(
                 "\n" + title + " (" + year + ")" +
                 "\nDuração: " + duration + " minutos" +
                 "\nDireção: " + direction +
                 "\nTítulo original: " + originalTitle +
-                "\nOnde assistir: " + whereToWatch;
+                "\nOnde assistir: " + watchString
+                );
+
         if(seenDate != null)
-            string += "\nVisto em: " + seenDate;
+            string.append("\nVisto em: ").append(seenDate);
+
         if(rating != 0)
-            string += "\nAvaliação: " + "★".repeat(rating);
-        string += "\n\nSinopse: " + script +
-                "\nElenco: " + cast;
-        return string;
+            string.append("\nAvaliação: ").append("★".repeat(rating));
+
+        string.append("\n\nSinopse: ").append(script)
+                .append("\nElenco: ").append(castString);
+
+        return string.toString();
     }
 }

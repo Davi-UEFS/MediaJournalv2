@@ -8,13 +8,13 @@ import com.davigui.Model.Enums.Genres;
  */
 public class Book extends Media {
     // O ISBN do livro
-    private String isbn;
+    private final String isbn;
     // O autor do livro
-    private String author;
+    private final String author;
     // A editora do livro
-    private String publisher;
+    private final String publisher;
     // Indica se o livro é de propriedade do usuário
-    private boolean owned;
+    private final boolean owned;
     // A data em que o livro foi visto
     private String seenDate;
 
@@ -38,10 +38,6 @@ public class Book extends Media {
         this.seenDate = null;
     }
 
-    public Book(){
-
-    }
-
     /**
      * Obtém o ISBN do livro.
      *
@@ -61,15 +57,6 @@ public class Book extends Media {
     }
 
     /**
-     * Obtém a data em que o livro foi visto.
-     *
-     * @return A data em que o livro foi visto, ou null se não foi visto.
-     */
-    public String getSeenDate() {
-        return seenDate;
-    }
-
-    /**
      * Define a data em que o livro foi visto.
      *
      * @param readDate A data em que o livro foi visto.
@@ -78,30 +65,11 @@ public class Book extends Media {
         this.seenDate = readDate;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public void setOwned(boolean owned) {
-        this.owned = owned;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     /**
      * Obtém o identificador único do livro com base no hash do ISBN.
      *
      * @return O identificador único do livro.
      */
-
-
-
     @Override
     public int getId() {
         return isbn.hashCode();
@@ -125,16 +93,20 @@ public class Book extends Media {
      */
     @Override
     public String toString() {
-        String string =
+        StringBuilder string = new StringBuilder(
                 "\n" + title + " (" + this.year + ")" +
                 "\nAutor: " + author +
                 "\nEditora: " + publisher +
                 "\nISBN: " + isbn +
-                "\nPossui? " + (owned ? "Sim" : "Não");
+                "\nPossui? " + (owned ? "Sim" : "Não")
+                );
+
         if (seenDate != null)
-            string += "\nVisto em: " + seenDate;
+            string.append("\nVisto em: ").append(seenDate);
+
         if (rating != 0)
-            string += "\nAvaliação: " + "★".repeat(rating);
-        return string;
+            string.append("\nAvaliação: ").append("★".repeat(rating));
+
+        return string.toString();
     }
 }

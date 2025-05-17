@@ -98,7 +98,7 @@ public class BookService extends CommonService<Book> {
             return new Failure("Livro", "Ano inválido!");
 
         String date = month.toString() + " de " + year;
-        book.setSeen(true);
+        book.setSeen();
         book.setSeenDate(date);
         return new Success("Livro", "Data de leitura registrada.");
     }

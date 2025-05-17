@@ -108,7 +108,7 @@ public class MovieService extends CommonService<Movie> {
             return new Failure("Filme", "Ano inválido!");
 
         String date = month.toString() + " de " + year;
-        movie.setSeen(true);
+        movie.setSeen();
         movie.setSeenDate(date);
         return new Success("Filme", "Marcado como visto e data registrada.");
     }
