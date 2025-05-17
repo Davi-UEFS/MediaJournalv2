@@ -146,12 +146,13 @@ public abstract class CommonService<T extends Media> {
     }
 
     /**
-     * Gera um mapa onde as chaves são os anos e os valores são listas de mídias
-     * correspondentes a cada ano, ordenadas por nota.
+     * Gera um mapa onde as chaves são os anos em ordem crescente e os valores são listas de mídias
+     * correspondentes a cada ano, ordenadas por nota crescente.
      *
-     * @param mediaList     A lista de mídias a ser mapeada.
-     * @return Um mapa contendo as mídias agrupadas por ano.
+     * @param mediaList A lista de mídias a ser mapeada.
+     * @return Um mapa contendo as mídias agrupadas por ano em ordem crescente e ordenadas por nota crescente.
      */
+
     public Map<Integer, List<T>> mapByAscendingYearAscendingRate(List<T> mediaList) {
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
@@ -166,6 +167,13 @@ public abstract class CommonService<T extends Media> {
         return mapYearMedia;
     }
 
+    /**
+     * Gera um mapa onde as chaves são os anos em ordem decrescente e os valores são listas de mídias
+     * correspondentes a cada ano, ordenadas por nota crescente.
+     *
+     * @param mediaList A lista de mídias a ser mapeada.
+     * @return Um mapa contendo as mídias agrupadas por ano em ordem decrescente e ordenadas por nota crescente.
+     */
     public Map<Integer, List<T>> mapByDescendingYearAscendingRate(List<T> mediaList){
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
@@ -180,6 +188,13 @@ public abstract class CommonService<T extends Media> {
         return mapYearMedia;
     }
 
+    /**
+     * Gera um mapa onde as chaves são os anos em ordem crescente e os valores são listas de mídias
+     * correspondentes a cada ano, ordenadas por nota decrescente.
+     *
+     * @param mediaList A lista de mídias a ser mapeada.
+     * @return Um mapa contendo as mídias agrupadas por ano em ordem crescente e ordenadas por nota decrescente.
+     */
     public Map<Integer, List<T>> mapByAscendingYearDescendingRate(List<T> mediaList){
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
@@ -192,6 +207,13 @@ public abstract class CommonService<T extends Media> {
         return mapYearMedia;
     }
 
+    /**
+     * Gera um mapa onde as chaves são os anos em ordem decrescente e os valores são listas de mídias
+     * correspondentes a cada ano, ordenadas por nota decrescente.
+     *
+     * @param mediaList A lista de mídias a ser mapeada.
+     * @return Um mapa contendo as mídias agrupadas por ano em ordem decrescente e ordenadas por nota decrescente.
+     */
     public Map<Integer, List<T>> mapByDescendingYearDescendingRate(List<T> mediaList){
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
@@ -245,7 +267,5 @@ public abstract class CommonService<T extends Media> {
         }
         return mapGenreMedia;
     }
-
-
 
 }

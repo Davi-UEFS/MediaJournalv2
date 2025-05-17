@@ -7,6 +7,7 @@ import com.davigui.Model.Repository.Library;
 import com.davigui.Model.Medias.Book;
 import com.davigui.Model.Result.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +94,7 @@ public class BookService extends CommonService<Book> {
         if (book.isSeen())
             return new Failure("Livro", "Já marcado como lido");
 
-        if (year < book.getYear() || year > 2025)
+        if (year < book.getYear() || year > LocalDate.now().getYear())
             return new Failure("Livro", "Ano inválido!");
 
         String date = month.toString() + " de " + year;
@@ -111,6 +112,12 @@ public class BookService extends CommonService<Book> {
         return journal.getBookList();
     }
 
+    /**
+     * Remove um livro da biblioteca.
+     *
+     * @param book O livro a ser removido.
+     * @return Um resultado indicando sucesso ou falha na remoção.
+     */
     public IResult deleteBook(Book book) {
         if (journal.getBookList().contains(book)) {
             journal.remove(book);

@@ -7,6 +7,7 @@ import com.davigui.Model.Repository.Library;
 import com.davigui.Model.Medias.Movie;
 import com.davigui.Model.Result.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -103,7 +104,7 @@ public class MovieService extends CommonService<Movie> {
         if(movie.isSeen())
             return new Failure("Filme", "Já marcado como visto");
 
-        if(year < movie.getYear() || year > 2025)
+        if(year < movie.getYear() || year > LocalDate.now().getYear())
             return new Failure("Filme", "Ano inválido!");
 
         String date = month.toString() + " de " + year;
@@ -121,6 +122,12 @@ public class MovieService extends CommonService<Movie> {
         return journal.getMovieList();
     }
 
+    /**
+     * Remove um filme da biblioteca.
+     *
+     * @param movie O filme a ser removido.
+     * @return Um resultado indicando sucesso ou falha na remoção.
+     */
     public IResult deleteMovie(Movie movie){
         if(journal.getMovieList().contains(movie)){
             journal.remove(movie);

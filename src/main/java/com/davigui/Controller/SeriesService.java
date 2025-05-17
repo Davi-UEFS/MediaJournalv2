@@ -277,6 +277,12 @@ public class SeriesService extends CommonService<Series> {
         return journal.getSeriesList();
     }
 
+    /**
+     * Remove uma série da biblioteca.
+     *
+     * @param series A série a ser removida.
+     * @return Um resultado indicando sucesso ou falha na remoção.
+     */
     public IResult deleteSeries(Series series) {
         if(journal.getSeriesList().contains(series)) {
             journal.remove(series);
