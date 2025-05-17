@@ -59,6 +59,11 @@ public class DataOperations {
             journal.setSeriesList(series);
             journal.setYearsRegistered(years);
 
+            booksReader.close();
+            moviesReader.close();
+            seriesReader.close();
+            yearReader.close();
+
             return new Success("Biblioteca", "Carregada com sucesso.");
     }
 
@@ -79,4 +84,5 @@ public class DataOperations {
         }
 
     }
+
 }
