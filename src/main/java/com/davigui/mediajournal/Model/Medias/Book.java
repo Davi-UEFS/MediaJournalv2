@@ -8,13 +8,13 @@ import com.davigui.mediajournal.Model.Enums.Genres;
  */
 public class Book extends Media {
     // O ISBN do livro
-    private final String isbn;
+    private String isbn;
     // O autor do livro
-    private final String author;
+    private String author;
     // A editora do livro
-    private final String publisher;
+    private String publisher;
     // Indica se o livro é de propriedade do usuário
-    private final boolean owned;
+    private boolean owned;
     // A data em que o livro foi visto
     private String seenDate;
 

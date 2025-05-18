@@ -10,17 +10,17 @@ import java.util.List;
  */
 public class Movie extends Media {
     // Lista com os nomes do elenco do filme
-    private final List<String> cast;
+    private List<String> cast;
     // Duração do filme
-    private final int duration;
+    private int duration;
     // Nome do diretor do filme
-    private final String direction;
+    private String direction;
     // Roteiro do filme
-    private final String script;
+    private String script;
     // Título original do filme
-    private final String originalTitle;
+    private String originalTitle;
     // Lista de plataformas onde o filme pode ser assistido
-    private final List<String> whereToWatch;
+    private List<String> whereToWatch;
     // Data em que o filme foi visto
     private String seenDate;
 

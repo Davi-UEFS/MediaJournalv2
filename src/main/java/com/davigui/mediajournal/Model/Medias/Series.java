@@ -13,15 +13,15 @@ import java.util.TreeSet;
  */
 public class Series extends Media {
     // Ano de término da série (9999 indica que está em andamento)
-    private final int yearOfEnding;
+    private int yearOfEnding;
     // Lista com os nomes do elenco da série
-    private final List<String> cast;
+    private List<String> cast;
     // Conjunto ordenado de temporadas da série
-    private final TreeSet<Season> seasons;
+    private TreeSet<Season> seasons;
     // Título original da série
-    private final String originalTitle;
+    private String originalTitle;
     // Lista de plataformas onde a série pode ser assistida
-    private final List<String> whereToWatch;
+    private List<String> whereToWatch;
 
     /**
      * Construtor da classe Series.

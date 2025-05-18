@@ -9,13 +9,13 @@ public class Season implements Comparable<Season> {
     // Avaliação da temporada
     private int rating;
     // Número da temporada
-    private final int seasonNumber;
+    private int seasonNumber;
     // Review da temporada
     private String review;
     // Indica se a temporada foi vista
     private boolean seen;
     // Quantidade de episódios na temporada
-    private final int episodeCount;
+    private int episodeCount;
     // Ano de lançamento da temporada
     private int year;
 
