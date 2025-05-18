@@ -116,14 +116,29 @@ public abstract class Media {
         this.review = review;
     }
 
+    /**
+     * Define o título da mídia.
+     *
+     * @param title O título a ser atribuído à mídia.
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Define o gênero da mídia.
+     *
+     * @param genre O gênero a ser atribuído à mídia.
+     */
     public void setGenre(Genres genre) {
         this.genre = genre;
     }
 
+    /**
+     * Define o ano de lançamento da mídia.
+     *
+     * @param year O ano a ser atribuído à mídia.
+     */
     public void setYear(int year) {
         this.year = year;
     }

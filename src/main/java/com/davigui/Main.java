@@ -5,7 +5,6 @@ import com.davigui.Controller.MovieService;
 import com.davigui.Controller.SeriesService;
 import com.davigui.Model.Repository.DataOperations;
 import com.davigui.Model.Repository.Library;
-import com.davigui.Model.Result.IResult;
 import com.davigui.View.Menus.MainMenu;
 
 import java.util.Scanner;
@@ -16,19 +15,20 @@ public class Main {
         //Model (listas de midias)
         Library journal = new Library();
 
-        //TODO: TIRAR ISSO DAQUI
-        //TODO: PRINTAR TEMPORADA AO BUSCAR SERIES (NAO TA PRINTANDO)
-        IResult resultLoad = DataOperations.load(journal);
+        //Carregar biblioteca
+        DataOperations.load(journal);
 
-        System.out.println(resultLoad.getMessage());
         //Controller (add, avaliar, etc)
         BookService bookService = new BookService(journal);
         MovieService movieService = new MovieService(journal);
         SeriesService seriesService = new SeriesService(journal);
+
         //View (print e prompt)
         MainMenu menivis = new MainMenu(bookService, movieService, seriesService, scanner);
         menivis.showMenu();
-        IResult resultSave = DataOperations.save(journal);
-        System.out.println(resultSave.getMessage());
+
+        //Salvar biblioteca
+        DataOperations.save(journal);
+
     }
 }

@@ -113,25 +113,44 @@ public class Library {
         }
     }
 
+    /**
+     * Remove um livro da lista de livros da biblioteca.
+     *
+     * @param book O livro a ser removido.
+     */
     public void remove(Book book) {
         bookList.remove(book);
     }
 
+    /**
+     * Remove um filme da lista de filmes da biblioteca.
+     *
+     * @param movie O filme a ser removido.
+     */
     public void remove(Movie movie) {
         movieList.remove(movie);
     }
 
+    /**
+     * Remove uma série da lista de séries da biblioteca.
+     *
+     * @param series A série a ser removida.
+     */
     public void remove(Series series) {
         seriesList.remove(series);
     }
 
-    public void removeYear(int year){
-
-        if(yearsRegistered.containsKey(year)){
+    /**
+     * Remove um ano do conjunto de anos registrados na biblioteca.
+     * Se o ano não tiver mais associações, ele será completamente removido.
+     *
+     * @param year O ano a ser removido.
+     */
+    public void removeYear(int year) {
+        if (yearsRegistered.containsKey(year)) {
             yearsRegistered.put(year, yearsRegistered.get(year) - 1);
-            if(yearsRegistered.get(year) == 0)
+            if (yearsRegistered.get(year) == 0)
                 yearsRegistered.remove(year);
-
         }
     }
 
@@ -165,24 +184,44 @@ public class Library {
     /**
      * Obtém o conjunto de anos registrados na biblioteca.
      *
-     * @return Um conjunto de anos.
+     * @return Um mapa ordenado contendo os anos registrados e suas respectivas contagens.
      */
     public TreeMap<Integer, Integer> getYearsRegistered() {
         return yearsRegistered;
     }
 
+    /**
+     * Define a lista de livros cadastrados na biblioteca.
+     *
+     * @param bookList A nova lista de livros a ser definida.
+     */
     public void setBookList(ArrayList<Book> bookList) {
         this.bookList = bookList;
     }
 
+    /**
+     * Define a lista de filmes cadastrados na biblioteca.
+     *
+     * @param movieList A nova lista de filmes a ser definida.
+     */
     public void setMovieList(ArrayList<Movie> movieList) {
         this.movieList = movieList;
     }
 
+    /**
+     * Define a lista de séries cadastradas na biblioteca.
+     *
+     * @param seriesList A nova lista de séries a ser definida.
+     */
     public void setSeriesList(ArrayList<Series> seriesList) {
         this.seriesList = seriesList;
     }
 
+    /**
+     * Define o conjunto de anos registrados na biblioteca.
+     *
+     * @param yearsRegistered O novo mapa de anos registrados a ser definido.
+     */
     public void setYearsRegistered(TreeMap<Integer, Integer> yearsRegistered) {
         this.yearsRegistered = yearsRegistered;
     }
