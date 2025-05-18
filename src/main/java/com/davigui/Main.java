@@ -5,6 +5,7 @@ import com.davigui.Controller.MovieService;
 import com.davigui.Controller.SeriesService;
 import com.davigui.Model.Repository.DataOperations;
 import com.davigui.Model.Repository.Library;
+import com.davigui.Model.Result.IResult;
 import com.davigui.View.Menus.MainMenu;
 
 import java.util.Scanner;
@@ -28,7 +29,8 @@ public class Main {
         menivis.showMenu();
 
         //Salvar biblioteca
-        DataOperations.save(journal);
+        IResult saveResult = DataOperations.save(journal);
+        System.out.println(saveResult.getMessage());
 
     }
 }
