@@ -37,6 +37,10 @@ public abstract class Media {
         this.review = null;
     }
 
+    public Media(){
+
+    }
+
     /**
      * Obtém a avaliação da mídia.
      *

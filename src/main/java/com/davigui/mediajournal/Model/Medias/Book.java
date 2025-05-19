@@ -38,6 +38,10 @@ public class Book extends Media {
         this.seenDate = null;
     }
 
+    public Book(){
+
+    }
+
     /**
      * Obtém o ISBN do livro.
      *

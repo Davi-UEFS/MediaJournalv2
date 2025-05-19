@@ -49,6 +49,10 @@ public class Movie extends Media {
         this.seenDate = null;
     }
 
+    public Movie(){
+
+    }
+
     /**
      * Obtém a lista com os nomes do elenco do filme.
      *

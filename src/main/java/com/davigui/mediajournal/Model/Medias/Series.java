@@ -43,6 +43,10 @@ public class Series extends Media {
         this.whereToWatch = whereToWatch;
     }
 
+    public Series(){
+
+    }
+
     /**
      * Adiciona uma temporada à série.
      *
