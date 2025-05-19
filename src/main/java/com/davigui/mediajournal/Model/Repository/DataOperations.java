@@ -108,7 +108,7 @@ public class DataOperations {
      * @param path O caminho do arquivo a ser carregado.
      * @return Um leitor para o conteúdo do arquivo.
      */
-    public static Reader loadFile(String path) {
+    private static Reader loadFile(String path) {
 
         try {
             return new FileReader(path);
