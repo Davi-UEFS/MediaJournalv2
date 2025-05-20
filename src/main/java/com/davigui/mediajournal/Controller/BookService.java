@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A classe BookService fornece serviços relacionados ao gerenciamento de livros.
- * Ela estende a classe CommonService e utiliza a biblioteca para registrar, buscar e manipular livros.
+ * A classe BookService trata do gerenciamento de livros.
+ * Ela herda da classe CommonService e utiliza a biblioteca para registrar, buscar e manipular livros.
  */
 public class BookService extends CommonService<Book> {
 
@@ -27,7 +27,8 @@ public class BookService extends CommonService<Book> {
     }
 
     /**
-     * Registra um novo livro na biblioteca.
+     * Cria um objeto livro e salva na biblioteca, verificando se ele já existe.
+     * Adiciona o ano do livro à lista de anos registrados.
      *
      * @param name O nome do livro.
      * @param year O ano de publicação do livro.
@@ -54,9 +55,10 @@ public class BookService extends CommonService<Book> {
     }
 
     /**
-     * Busca livros pelo ISBN. Filtra os livros que contêm o ISBN, utilizando o metodo filter da biblioteca Stream.
+     * Busca livros pelo ISBN.
+     * Filtra os livros que contêm o ISBN, utilizando o metodo filter da biblioteca Stream.
      *
-     * @param isbn O ISBN a ser buscado.
+     * @param isbn O ISBN do livro a ser buscado.
      * @return Uma lista de livros que correspondem ao ISBN.
      */
     public List<Book> searchBookByIsbn(String isbn) {
@@ -68,7 +70,8 @@ public class BookService extends CommonService<Book> {
     }
 
     /**
-     * Busca livros pelo nome do autor. Filtra os livros que contêm o nome do autor, utilizando o metodo filter da biblioteca Stream.
+     * Busca livros pelo nome do autor.
+     * Filtra os livros que contêm o nome do autor, utilizando o metodo filter da biblioteca Stream.
      *
      * @param author O nome do autor a ser buscado.
      * @return Uma lista de livros que possuem o autor especificado.
@@ -83,6 +86,8 @@ public class BookService extends CommonService<Book> {
 
     /**
      * Marca um livro como lido e registra a data de leitura.
+     * Verifica se o livro já foi lido e se o ano é válido.
+     * Cria uma string com o mês e ano da leitura por extenso.
      *
      * @param book O livro a ser marcado como lido.
      * @param year O ano em que o livro foi lido.
@@ -114,6 +119,8 @@ public class BookService extends CommonService<Book> {
 
     /**
      * Remove um livro da biblioteca.
+     * Verifica se o livro existe na biblioteca antes de removê-lo.
+     * Se o livro for removido, também remove o ano associado a ele.
      *
      * @param book O livro a ser removido.
      * @return Um resultado indicando sucesso ou falha na remoção.

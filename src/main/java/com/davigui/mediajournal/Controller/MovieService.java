@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A classe MovieService fornece serviços relacionados ao gerenciamento de filmes.
- * Ela estende a classe CommonService e utiliza a biblioteca para registrar, buscar e manipular filmes.
+ * A classe MovieService trata do gerenciamento de filmes.
+ * Ela herda da classe CommonService e utiliza a biblioteca para registrar, buscar e manipular filmes.
  */
 public class MovieService extends CommonService<Movie> {
 
@@ -28,7 +28,9 @@ public class MovieService extends CommonService<Movie> {
     }
 
     /**
-     * Registra um novo filme na biblioteca.
+     * Cria um objeto filme e salva na biblioteca, verificando se ele já existe.
+     * Prepara as arraylists de elenco e plataformas.
+     * Adiciona o ano do filme à lista de anos registrados.
      *
      * @param name O nome do filme.
      * @param year O ano de lançamento do filme.
@@ -36,7 +38,7 @@ public class MovieService extends CommonService<Movie> {
      * @param castBuffer O elenco do filme.
      * @param duration A duração do filme.
      * @param direction O diretor do filme.
-     * @param script O roteirista do filme.
+     * @param script O roteiro do filme.
      * @param originalTitle O título original do filme.
      * @param whereToWatchBuffer As plataformas onde o filme pode ser assistido.
      * @return Um resultado indicando sucesso ou falha no registro.
@@ -63,7 +65,8 @@ public class MovieService extends CommonService<Movie> {
     }
 
     /**
-     * Busca filmes pelo nome do diretor. Filtra os filmes que contêm o nome do diretor, utilizando o metodo filter da biblioteca Stream.
+     * Busca filmes pelo nome do diretor.
+     * Filtra os filmes que contêm o nome do diretor, utilizando o metodo filter da biblioteca Stream.
      *
      * @param director O nome do diretor a ser buscado.
      * @return Uma lista de filmes que possuem o diretor especificado.
@@ -77,7 +80,8 @@ public class MovieService extends CommonService<Movie> {
     }
 
     /**
-     * Busca filmes pelo nome de um ator. Filtra os filmes que contêm o nome do ator, utilizando o metodo filter da biblioteca Stream.
+     * Busca filmes pelo nome de um ator.
+     * Filtra os filmes que contêm o nome do ator, utilizando o metodo filter da biblioteca Stream.
      *
      * @param name O nome do ator a ser buscado.
      * @return Uma lista de filmes que possuem o ator no elenco.
@@ -93,6 +97,8 @@ public class MovieService extends CommonService<Movie> {
 
     /**
      * Marca um filme como visto e registra a data de visualização.
+     * Verifica se o livro já foi lido e se o ano é válido.
+     * Cria uma string com o mês e ano da leitura por extenso.
      *
      * @param movie O filme a ser marcado como visto.
      * @param year O ano em que o filme foi visto.
@@ -124,6 +130,8 @@ public class MovieService extends CommonService<Movie> {
 
     /**
      * Remove um filme da biblioteca.
+     * Verifica se o filme existe na biblioteca antes de removê-lo.
+     * Remove o ano do filme da lista de anos registrados.
      *
      * @param movie O filme a ser removido.
      * @return Um resultado indicando sucesso ou falha na remoção.

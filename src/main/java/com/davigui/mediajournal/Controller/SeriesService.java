@@ -14,8 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A classe SeriesService fornece serviços relacionados ao gerenciamento de séries.
- * Ela estende a classe CommonService e utiliza a biblioteca para registrar, buscar e manipular séries.
+ * A classe SeriesService trata do gerenciamento de séries.
+ * Ela herda da classe CommonService e utiliza a biblioteca para registrar, buscar e manipular séries.
  */
 public class SeriesService extends CommonService<Series> {
 
@@ -29,7 +29,10 @@ public class SeriesService extends CommonService<Series> {
     }
 
     /**
-     * Registra uma nova série na biblioteca.
+     * Cria um objeto série e salva na biblioteca, verificando se ele já existe.
+     * Prepara as arraylists de elenco e plataformas.
+     * Adiciona o ano da série à lista de anos registrados.
+     * Adiciona a primeira temporada à série.
      *
      * @param title O título da série.
      * @param year O ano de início da série.
@@ -71,6 +74,8 @@ public class SeriesService extends CommonService<Series> {
 
     /**
      * Registra uma nova temporada para uma série existente.
+     * Verifica se o ano da temporada está dentro do intervalo permitido.
+     * Verifica se a temporada já existe.
      *
      * @param series A série à qual a temporada será adicionada.
      * @param seasonNumber O número da temporada.
@@ -136,6 +141,7 @@ public class SeriesService extends CommonService<Series> {
 
     /**
      * Marca uma temporada como vista.
+     * Verifica se a temporada existe e se já foi vista.
      *
      * @param series A série que contém a temporada.
      * @param seasonNumber O número da temporada a ser marcada como vista.
@@ -157,6 +163,8 @@ public class SeriesService extends CommonService<Series> {
 
     /**
      * Avalia uma temporada específica de uma série.
+     * Verifica se a temporada existe e já foi vista antes de permitir a avaliação.
+     * Atualiza a avaliação geral da série através do metodo updateRate.
      *
      * @param series A série que contém a temporada a ser avaliada.
      * @param seasonNumber O número da temporada a ser avaliada.
@@ -181,6 +189,7 @@ public class SeriesService extends CommonService<Series> {
 
     /**
      * Escreve uma review para uma temporada de uma série.
+     * Verifica se a temporada existe e já foi vista antes de permitir a escrita da review.
      *
      * @param series A série que contém a temporada.
      * @param seasonNumber O número da temporada.
@@ -202,6 +211,7 @@ public class SeriesService extends CommonService<Series> {
 
     /**
      * Lê a review de uma temporada de uma série.
+     * Verifica se a temporada existe e se uma review foi escrita.
      *
      * @param series A série que contém a temporada.
      * @param seasonNumber O número da temporada.
@@ -236,6 +246,7 @@ public class SeriesService extends CommonService<Series> {
 
     /**
      * Exibe a nota de uma temporada específica de uma série.
+     * Verifica se a temporada existe e se uma avaliação foi feita.
      *
      * @param series A série que contém a temporada.
      * @param seasonNumber O número da temporada.
@@ -254,7 +265,8 @@ public class SeriesService extends CommonService<Series> {
     }
 
     /**
-     * Busca séries pelo nome de um ator. Filtra as séries que contêm o nome do ator, utilizando o metodo filter da biblioteca Stream.
+     * Busca séries pelo nome de um ator.
+     * Filtra as séries que contêm o nome do ator, utilizando o metodo filter da biblioteca Stream.
      *
      * @param name O nome do ator a ser buscado.
      * @return Uma lista de séries que possuem o ator no elenco.
@@ -279,6 +291,8 @@ public class SeriesService extends CommonService<Series> {
 
     /**
      * Remove uma série da biblioteca.
+     * Verifica se a série existe na biblioteca antes de removê-la.
+     * Remove o ano da série da lista de anos registrados.
      *
      * @param series A série a ser removida.
      * @return Um resultado indicando sucesso ou falha na remoção.

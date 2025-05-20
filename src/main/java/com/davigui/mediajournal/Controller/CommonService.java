@@ -9,8 +9,8 @@ import java.util.*;
 
 /**
  * A classe abstrata CommonService fornece uma implementação base para serviços que manipulam
- * objetos do tipo Media. Ela implementa a interface IMediaService e define métodos comuns
- * para avaliação, escrita e leitura de reviews, busca e ordenação de mídias.
+ * objetos do tipo Media. Ela define métodos comuns para avaliação,
+ * escrita e leitura de reviews, busca e ordenação de mídias.
  *
  * @param <T> O tipo de mídia que será manipulado, que deve estender a classe Media.
  */
@@ -29,6 +29,8 @@ public abstract class CommonService<T extends Media> {
 
     /**
      * Avalia uma mídia com uma nota.
+     * Verifica se a nota está dentro do intervalo permitido (1 a 5),
+     * e se a mídia foi marcada como vista.
      *
      * @param media  A mídia a ser avaliada.
      * @param rating A nota a ser atribuída (deve ser entre 1 e 5).
@@ -47,6 +49,7 @@ public abstract class CommonService<T extends Media> {
 
     /**
      * Escreve uma review para uma mídia.
+     * Verifica se a mídia foi marcada como vista antes de permitir a escrita da review.
      *
      * @param media  A mídia para a qual a review será escrita.
      * @param review O texto da review.
@@ -62,6 +65,7 @@ public abstract class CommonService<T extends Media> {
 
     /**
      * Lê a review de uma mídia.
+     * Verifica se a review é nula e exibe uma mensagem apropriada.
      *
      * @param media A mídia cuja review será lida.
      * @return Uma string contendo a review ou uma mensagem indicando que não há review.
@@ -73,6 +77,7 @@ public abstract class CommonService<T extends Media> {
 
     /**
      * Mostra a nota de uma mídia.
+     * Verifica se a nota é zero e exibe uma mensagem apropriada.
      *
      * @param media A mídia cuja nota será exibida.
      * @return Uma string contendo a nota ou uma mensagem indicando que não há nota.
@@ -83,7 +88,8 @@ public abstract class CommonService<T extends Media> {
     }
 
     /**
-     * Busca mídias por título. Filtra as obras que contêm o título, utilizando o metodo filter da biblioteca Stream.
+     * Busca mídias por título.
+     * Filtra as obras que contêm o título, utilizando o metodo filter da biblioteca Stream.
      *
      * @param title     O título a ser buscado.
      * @param mediaList A lista de mídias onde a busca será realizada.
@@ -98,7 +104,8 @@ public abstract class CommonService<T extends Media> {
     }
 
     /**
-     * Busca mídias por ano. Filtra as obras que contêm o ano, utilizando o metodo filter da biblioteca Stream.
+     * Busca mídias por ano.
+     * Filtra as obras que contêm o ano, utilizando o metodo filter da biblioteca Stream.
      *
      * @param year      O ano a ser buscado.
      * @param mediaList A lista de mídias onde a busca será realizada.
@@ -112,7 +119,8 @@ public abstract class CommonService<T extends Media> {
     }
 
     /**
-     * Busca mídias por gênero. Filtra as obras que contêm o gênero, utilizando o metodo filter da biblioteca Stream.
+     * Busca mídias por gênero.
+     * Filtra as obras que contêm o gênero, utilizando o metodo filter da biblioteca Stream.
      *
      * @param genre     O gênero a ser buscado.
      * @param mediaList A lista de mídias onde a busca será realizada.
@@ -146,7 +154,7 @@ public abstract class CommonService<T extends Media> {
     }
 
     /**
-     * Gera um mapa onde as chaves são os anos em ordem crescente e os valores são listas de mídias
+     * Gera um map onde as chaves são os anos em ordem crescente e os valores são listas de mídias
      * correspondentes a cada ano, ordenadas por nota crescente.
      *
      * @param mediaList A lista de mídias a ser mapeada.
