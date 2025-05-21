@@ -22,6 +22,7 @@ public class RemoveMenu {
 
     /**
      * Construtor da classe RemoveMenu.
+     * Possui agregação com as classes de serviço.
      *
      * @param bookService Serviço para gerenciamento de livros.
      * @param movieService Serviço para gerenciamento de filmes.
@@ -38,6 +39,8 @@ public class RemoveMenu {
 
     /**
      * Exibe o menu de remoção e gerencia as opções selecionadas pelo usuário.
+     * Cada opção leva a um método auxiliar.
+     * O loop continua até que o usuário escolha a opção de voltar.
      */
     public void show() {
         int option;
@@ -72,7 +75,9 @@ public class RemoveMenu {
 
     /**
      * Gerencia a remoção de um livro selecionado pelo usuário.
+     * A seleção do livro é feita pelo método selectFromList() de AskInput.
      * Apenas exibe uma mensagem caso não existam livros cadastrados.
+     * Exibe o resultado da operação.
      */
     private void handleDeleteBook() {
         if (bookService.getAllBooks().isEmpty()) {
@@ -86,7 +91,9 @@ public class RemoveMenu {
 
     /**
      * Gerencia a remoção de um filme selecionado pelo usuário.
+     * A seleção do filme é feita pelo método selectFromList() de AskInput.
      * Apenas exibe uma mensagem caso não existam filmes cadastrados.
+     * Exibe o resultado da operação.
      */
     private void handleDeleteMovie() {
         if (movieService.getAllMovies().isEmpty()) {
@@ -100,7 +107,9 @@ public class RemoveMenu {
 
     /**
      * Gerencia a remoção de uma série selecionada pelo usuário.
+     * A seleção da série é feita pelo método selectFromList() de AskInput.
      * Apenas exibe uma mensagem caso não existam séries cadastradas.
+     * Exibe o resultado da operação.
      */
     private void handleDeleteSeries() {
         if (seriesService.getAllSeries().isEmpty()) {

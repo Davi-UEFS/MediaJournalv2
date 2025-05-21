@@ -19,6 +19,7 @@ import java.util.Scanner;
  * A classe DisplayMenu é responsável por gerenciar o menu de exibição de mídias.
  * Permite ao usuário visualizar avaliações, reviews e listas de mídias cadastradas,
  * com diferentes critérios de ordenação.
+ * As entradas são validadas pelas classes do pacote Prompts.
  */
 public class DisplayMenu {
     private final Scanner scanner; // Scanner para leitura de entradas do usuário.
@@ -28,6 +29,7 @@ public class DisplayMenu {
 
     /**
      * Construtor da classe DisplayMenu.
+     * Possui agregação com as classes de serviço.
      *
      * @param bookService Serviço para gerenciamento de livros.
      * @param movieService Serviço para gerenciamento de filmes.
@@ -43,7 +45,8 @@ public class DisplayMenu {
     }
 
     /**
-     * Exibe o menu de exibição e gerencia as interações do usuário.
+     * Exibe as opções menu de display e gerencia as interações do usuário.
+     * Cada opção leva a um método auxiliar.
      * O menu permite visualizar avaliações, reviews e listas de mídias cadastradas.
      * O loop continua até que o usuário escolha a opção de voltar.
      */
@@ -98,7 +101,8 @@ public class DisplayMenu {
     }
 
     /**
-     * Exibe as avaliações e reviews de um livro selecionado.
+     * Exibe as avaliações e reviews de um livro existente na lista de livros cadastrados.
+     * A seleção do livro é feita pelo método estático selectFromList() de AskInput.
      * Caso não existam livros cadastrados, exibe uma mensagem de erro.
      */
     private void showBookReviewsAndRatings() {
@@ -112,7 +116,8 @@ public class DisplayMenu {
     }
 
     /**
-     * Exibe as avaliações e reviews de um filme selecionado.
+     * Exibe as avaliações e reviews de um filme existente na lista de filmes cadastrados.
+     * A seleção do filme é feita pelo método estático selectFromList() de AskInput.
      * Caso não existam filmes cadastrados, exibe uma mensagem de erro.
      */
     private void showMovieReviewsAndRatings() {
@@ -126,8 +131,10 @@ public class DisplayMenu {
     }
 
     /**
-     * Exibe as avaliações e reviews de uma temporada de série selecionada.
+     * Exibe as avaliações e reviews de uma temporada de série existente na lista de séries cadastradas.
+     * A seleção é da série feita pelo método estático selectFromList() de AskInput.
      * Caso não existam séries cadastradas, exibe uma mensagem de erro.
+     * Caso a temporada não for encontrada, exibe uma mensagem de erro.
      */
     private void showSeriesReviewsAndRatings() {
         if (seriesService.getAllSeries().isEmpty()) {
@@ -143,6 +150,7 @@ public class DisplayMenu {
 
     /**
      * Exibe todos os livros cadastrados, com opções de ordenação.
+     * As opções são feitas no minimenu de listagem.
      * Caso não existam livros cadastrados, exibe uma mensagem de erro.
      */
     private void showAllBooks() {
@@ -155,6 +163,7 @@ public class DisplayMenu {
 
     /**
      * Exibe todos os filmes cadastrados, com opções de ordenação.
+     * As opções são feitas no minimenu de listagem.
      * Caso não existam filmes cadastrados, exibe uma mensagem de erro.
      */
     private void showAllMovies() {
@@ -167,6 +176,7 @@ public class DisplayMenu {
 
     /**
      * Exibe todas as séries cadastradas, com opções de ordenação.
+     * As opções são feitas no minimenu de listagem.
      * Caso não existam séries cadastradas, exibe uma mensagem de erro.
      */
     private void showAllSeries() {
@@ -179,8 +189,14 @@ public class DisplayMenu {
 
     /**
      * Exibe um menu secundário para listar mídias com diferentes critérios de ordenação.
+     * A listagem consiste iterar o enum de gêneros ou o mapa de anos registrados e
+     * fazer uma busca para cada gênero/ano.
+     * É feita usando os métodos genéricos de CommonService. O parâmetro T
+     * define qual obra estamos listando.
+     * O loop continua até que o usuário escolha a opção de voltar.
      *
      * @param service Serviço responsável pelo gerenciamento das mídias.
+     *                Referente à superclasse abstrata CommonService
      * @param mediaList Lista de mídias a ser exibida.
      * @param <T> Tipo de mídia que estende a classe Media.
      */
@@ -253,7 +269,9 @@ public class DisplayMenu {
     }
 
     /**
-     * Imprime um mapa de mídias agrupadas por gênero.
+     * Imprime um mapa de gènero - lista de mídias.
+     * Itera cada par chave-valor no mapa e na lista desse valor.
+     * Assim, as obras de um gênero X são impressas em sequência.
      *
      * @param mapGenreMedia Mapa contendo gêneros como chave e listas de mídias como valor.
      * @param <T> Tipo de mídia que estende a classe Media.
@@ -270,7 +288,9 @@ public class DisplayMenu {
     }
 
     /**
-     * Imprime um mapa de mídias agrupadas por ano.
+     * Imprime um mapa de ano - lista de mídias.
+     * Itera cada par chave-valor no mapa e na lista desse valor.
+     * Assim, as obras de um ano XXXX são impressas em sequência.
      *
      * @param mapYearMedia Mapa contendo anos como chave e listas de mídias como valor.
      * @param <T> Tipo de mídia que estende a classe Media.

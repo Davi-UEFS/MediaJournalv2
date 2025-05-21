@@ -15,6 +15,7 @@ import java.util.Scanner;
 /**
  * A classe SearchMenu é responsável por gerenciar o menu de busca de mídias.
  * Permite ao usuário buscar livros, filmes e séries com base em diferentes critérios.
+ * As entradas são validadas pelas classes do pacote Prompts.
  */
 public class SearchMenu {
     private final Scanner scanner; // Scanner para leitura de entradas do usuário.
@@ -24,6 +25,7 @@ public class SearchMenu {
 
     /**
      * Construtor da classe SearchMenu.
+     * Possui agregação com as classes de serviço.
      *
      * @param bookService Serviço para gerenciamento de livros.
      * @param movieService Serviço para gerenciamento de filmes.
@@ -41,6 +43,8 @@ public class SearchMenu {
     /**
      * Exibe o menu de busca e gerencia as interações do usuário.
      * O menu permite buscar livros, filmes e séries com base em critérios específicos.
+     * Se a lista de livro/filme/série estiver vazia, exibe uma mensagem de erro. Caso
+     * contrário, chama o devido método auxiliar.
      * O loop continua até que o usuário escolha a opção de voltar.
      */
     public void show() {
@@ -91,6 +95,9 @@ public class SearchMenu {
     /**
      * Exibe o menu de busca de livros e gerencia as interações do usuário.
      * Permite buscar livros por título, ano, gênero, autor ou ISBN.
+     * A entrada do filtro escolhido é feita pelos métodos estáticos de AskInput
+     * e a lista filtrada é impressa.
+     * O loop continua até que o usuário escolha a opção de voltar.
      */
     private void searchBookMiniMenu() {
         int option;
@@ -158,6 +165,9 @@ public class SearchMenu {
     /**
      * Exibe o menu de busca de filmes e gerencia as interações do usuário.
      * Permite buscar filmes por título, ano, gênero, diretor ou ator no elenco.
+     * A entrada do filtro escolhido é feita pelos métodos estáticos de AskInput
+     * e a lista filtrada é impressa.
+     * O loop continua até que o usuário escolha a opção de voltar.
      */
     private void searchMovieMiniMenu() {
         int option;
@@ -225,6 +235,9 @@ public class SearchMenu {
     /**
      * Exibe o menu de busca de séries e gerencia as interações do usuário.
      * Permite buscar séries por título, ano de lançamento, gênero ou ator no elenco.
+     * A entrada do filtro escolhido é feita pelos métodos estáticos de AskInput
+     * e a lista filtrada é impressa.
+     * O loop continua até que o usuário escolha a opção de voltar.
      */
     private void searchSeriesMiniMenu() {
         int option;
@@ -282,7 +295,8 @@ public class SearchMenu {
     }
 
     /**
-     * Imprime a lista de livros encontrados.
+     * Imprime a lista de livros encontrados pela busca.
+     * Se estiver vazia, imprime uma mensagem de nenhum livro encontrado.
      *
      * @param bookList Lista de livros a ser exibida.
      */
@@ -296,7 +310,8 @@ public class SearchMenu {
     }
 
     /**
-     * Imprime a lista de filmes encontrados.
+     * Imprime a lista de filmes encontrados pela busca.
+     * Se estiver vazia, imprime uma mensagem de nenhum filme encontrado.
      *
      * @param movieList Lista de filmes a ser exibida.
      */
@@ -311,6 +326,7 @@ public class SearchMenu {
 
     /**
      * Imprime a lista de séries encontradas, incluindo suas temporadas.
+     * Se estiver vazia, imprime uma mensagem de nenhuma série encontrada.
      *
      * @param seriesList Lista de séries a ser exibida.
      */

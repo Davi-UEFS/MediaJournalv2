@@ -16,6 +16,7 @@ import java.util.Scanner;
  * A classe RateMenu é responsável por gerenciar o menu de avaliação de mídias.
  * Permite ao usuário avaliar livros, filmes e temporadas de séries, escrever reviews
  * e marcar mídias como vistas.
+ * As entradas são validadas pelas classes do pacote Prompts.
  */
 public class RateMenu {
     private final Scanner scanner; // Scanner para leitura de entradas do usuário.
@@ -25,6 +26,7 @@ public class RateMenu {
 
     /**
      * Construtor da classe RateMenu.
+     * Possui agregação com as classes de serviço.
      *
      * @param bookService Serviço para gerenciamento de livros.
      * @param movieService Serviço para gerenciamento de filmes.
@@ -42,6 +44,7 @@ public class RateMenu {
     /**
      * Exibe o menu de avaliação e gerencia as interações do usuário.
      * O menu permite avaliar mídias, escrever reviews e marcar mídias como vistas.
+     * Cada opção leva a um método auxiliar.
      * O loop continua até que o usuário escolha a opção de voltar.
      */
     public void show() {
@@ -100,8 +103,10 @@ public class RateMenu {
 
     /**
      * Gerencia a avaliação de um livro.
-     * Solicita ao usuário selecionar um livro e atribuir uma nota.
+     * A seleção do livro é feita pelo método selectFromList() de AskInput.
+     * A entrada da nota é feita pelo método askForRate() de AskInput.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de livros estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleRateBook() {
         if (bookService.getAllBooks().isEmpty()) {
@@ -116,8 +121,11 @@ public class RateMenu {
 
     /**
      * Gerencia a avaliação de um filme.
+     * A seleção do filme é feita pelo método selectFromList() de AskInput.
+     * A entrada da nota é feita pelo método askForRate() de AskInput.
      * Solicita ao usuário selecionar um filme e atribuir uma nota.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de filmes estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleRateMovie() {
         if (movieService.getAllMovies().isEmpty()) {
@@ -132,8 +140,12 @@ public class RateMenu {
 
     /**
      * Gerencia a avaliação de uma temporada de série.
+     * A seleção da série é feita pelo método selectFromList() de AskInput.
+     * A entrada da nota e do número da temporada é feita pelos
+     * métodos askForRate() e askForSeasonNumber() de AskInput.
      * Solicita ao usuário selecionar uma série, uma temporada e atribuir uma nota.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de séries estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleRateSeason() {
         if (seriesService.getAllSeries().isEmpty()) {
@@ -149,8 +161,10 @@ public class RateMenu {
 
     /**
      * Gerencia a escrita de uma review para um livro.
-     * Solicita ao usuário selecionar um livro e escrever uma review.
+     * A seleção do livro é feita pelo método selectFromList() de AskInput.
+     * A entrada do texto da review é feita pelo método askForReview() de AskInput.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de livros estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleWriteBookReview() {
         if (bookService.getAllBooks().isEmpty()) {
@@ -165,8 +179,10 @@ public class RateMenu {
 
     /**
      * Gerencia a escrita de uma review para um filme.
-     * Solicita ao usuário selecionar um filme e escrever uma review.
+     * A seleção do filme é feita pelo método selectFromList() de AskInput.
+     * A entrada do texto da review é feita pelo método askForReview() de AskInput.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de filmes estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleWriteMovieReview() {
         if (movieService.getAllMovies().isEmpty()) {
@@ -181,8 +197,11 @@ public class RateMenu {
 
     /**
      * Gerencia a escrita de uma review para uma temporada de série.
-     * Solicita ao usuário selecionar uma série, uma temporada e escrever uma review.
+     * A seleção da série é feita pelo método selectFromList() de AskInput.
+     * A entrada do número da temporada e do texto da review é feita pelos
+     * métodos askForSeasonNumber() e askForReview() de AskInput.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de séries estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleWriteSeasonReview() {
         if (seriesService.getAllSeries().isEmpty()) {
@@ -198,8 +217,11 @@ public class RateMenu {
 
     /**
      * Gerencia a marcação de um livro como visto.
-     * Solicita ao usuário selecionar um livro, informar o ano e o mês em que foi visto.
+     * A seleção do livro é feita pelo método selectFromList() de AskInput.
+     * A entrada do ano e mês é feita pelos métodos
+     * askForSeenYear() e askForSeenMonth() de AskInput.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de livros estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleMarkBookAsSeen() {
         if (bookService.getAllBooks().isEmpty()) {
@@ -215,8 +237,11 @@ public class RateMenu {
 
     /**
      * Gerencia a marcação de um filme como visto.
-     * Solicita ao usuário selecionar um filme, informar o ano e o mês em que foi visto.
+     * A seleção do filme é feita pelo método selectFromList() de AskInput.
+     * A entrada do ano e mês é feita pelos métodos
+     * askForSeenYear() e askForSeenMonth() de AskInput.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de filmes estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleMarkMovieAsSeen() {
         if (movieService.getAllMovies().isEmpty()) {
@@ -232,8 +257,11 @@ public class RateMenu {
 
     /**
      * Gerencia a marcação de uma temporada de série como vista.
-     * Solicita ao usuário selecionar uma série e uma temporada.
+     * A seleção da série é feita pelo método selectFromList() de AskInput.
+     * A entrada do número da temporada é feita pelo métodos
+     * askForSeasonNumber() de AskInput.
      * Exibe uma mensagem com o resultado da operação.
+     * Se a lista de séries estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleMarkSeasonAsSeen() {
         if (seriesService.getAllSeries().isEmpty()) {

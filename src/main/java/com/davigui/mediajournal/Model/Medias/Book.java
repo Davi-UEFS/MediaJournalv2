@@ -4,7 +4,7 @@ import com.davigui.mediajournal.Model.Enums.Genres;
 /**
  * A classe Book representa um livro como uma mídia, estendendo a classe base Media.
  * Ela contém informações específicas de livros, como ISBN, autor, editora,
- * se o livro é de propriedade do usuário e a data em que foi visto.
+ * se o usuário possui um exemplar e a data em que foi visto.
  */
 public class Book extends Media {
     // O ISBN do livro
@@ -15,11 +15,14 @@ public class Book extends Media {
     private String publisher;
     // Indica se o livro é de propriedade do usuário
     private boolean owned;
-    // A data em que o livro foi visto
+    // A data em que o livro foi visto (formato: MES de XXXX)
     private String seenDate;
 
     /**
      * Construtor da classe Book.
+     * Os parâmetros são os atributos imutáveis do livro.
+     * Os atributos imutáveis são inicializados pelo construtor
+     * da superclasse.
      *
      * @param title     O título do livro.
      * @param year      O ano de publicação do livro.
@@ -38,6 +41,10 @@ public class Book extends Media {
         this.seenDate = null;
     }
 
+    /**
+     * Construtor no args da classe Book usado na desserialização.
+     * Utiliza o construtor da superclasse.
+     */
     public Book(){
 
     }
@@ -71,6 +78,7 @@ public class Book extends Media {
 
     /**
      * Obtém o identificador único do livro com base no hash do ISBN.
+     * Sobrescreve o método de Media.
      *
      * @return O identificador único do livro.
      */
@@ -90,8 +98,10 @@ public class Book extends Media {
     }
 
     /**
-     * Retorna uma representação em string do livro, incluindo título, ano, autor,
-     * editora, ISBN, data em que foi visto (se disponível) e avaliação (se disponível).
+     * Sobrecarrega o método  de Object.
+     * Retorna uma representação em string do livro, incluindo título, ano,
+     * autor, editora, ISBN, se possui exemplar, data em que foi
+     * visto (se disponível) e avaliação (se disponível).
      *
      * @return Uma string representando o livro.
      */

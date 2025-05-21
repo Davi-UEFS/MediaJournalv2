@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 /**
  * A classe Validate fornece métodos utilitários para validar entradas do usuário.
- * Ela garante que os dados inseridos sejam do tipo esperado, como inteiros, doubles, strings ou booleanos.
+ * Ela garante que os dados inseridos sejam do tipo esperado, como inteiros,
+ * doubles, strings ou booleanos, prevenindo exceções.
  */
 public final class Validate {
 
@@ -34,6 +35,7 @@ public final class Validate {
     /**
      * Valida a entrada do usuário como uma string não vazia.
      * Solicita repetidamente até que uma entrada válida seja fornecida.
+     * Retira os espações em branco no final da String.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return A string validada, sem espaços em branco no início ou no final.
@@ -51,7 +53,7 @@ public final class Validate {
 
     /**
      * Valida a entrada do usuário como um valor booleano.
-     * Aceita "s", "sim", "true" para true e "n", "nao", "false" para false.
+     * Aceita "s", "sim" ou "true" para true e "n", "nao" ou "false" para false.
      * Solicita repetidamente até que uma entrada válida seja fornecida.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.

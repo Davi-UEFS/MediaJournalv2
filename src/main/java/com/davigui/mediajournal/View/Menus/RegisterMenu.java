@@ -13,6 +13,7 @@ import java.util.Scanner;
 /**
  * A classe RegisterMenu é responsável por gerenciar o menu de registro de mídias.
  * Permite ao usuário registrar livros, filmes, séries e temporadas de séries.
+ * As entradas são validadas pelas classes do pacote Prompts.
  */
 public class RegisterMenu {
     private final Scanner scanner; // Scanner para leitura de entradas do usuário.
@@ -22,6 +23,7 @@ public class RegisterMenu {
 
     /**
      * Construtor da classe RegisterMenu.
+     * Possui agregação com as classes de serviço.
      *
      * @param bookService Serviço para gerenciamento de livros.
      * @param movieService Serviço para gerenciamento de filmes.
@@ -39,6 +41,7 @@ public class RegisterMenu {
     /**
      * Exibe o menu de registro e gerencia as interações do usuário.
      * O menu permite registrar livros, filmes, séries e temporadas de séries.
+     * Cada opção leva a um método auxiliar.
      * O loop continua até que o usuário escolha a opção de voltar.
      */
     public void show() {
@@ -77,7 +80,9 @@ public class RegisterMenu {
 
     /**
      * Registra um novo livro no sistema.
-     * Solicita ao usuário informações como título, ano, gênero, ISBN, autor, editora e posse.
+     * Solicita ao usuário informações como título, ano, gênero, ISBN, autor, editora e posse
+     * através dos métodos estáticos de AskInput e, então, exibe o
+     * resultado da operação de registro.
      */
     private void handleRegisterBook() {
         String title = AskInput.askForTitle(scanner);
@@ -96,7 +101,10 @@ public class RegisterMenu {
 
     /**
      * Registra um novo filme no sistema.
-     * Solicita ao usuário informações como título, ano, gênero, elenco, duração, diretor, roteiro, título original e onde assistir.
+     * Solicita ao usuário informações como título, ano, gênero, elenco,
+     * duração, diretor, roteiro, título original e onde assistir
+     * através dos métodos estáticos de AskInput e, então, exibe o
+     * resultado da operação de registro.
      */
     private void handleRegisterMovie() {
         String title = AskInput.askForTitle(scanner);
@@ -118,7 +126,11 @@ public class RegisterMenu {
 
     /**
      * Registra uma nova série no sistema.
-     * Solicita ao usuário informações como título, ano, gênero, ano de término, elenco, título original, onde assistir, número de temporadas, número de episódios e ano da temporada.
+     * Solicita ao usuário informações como título, ano, gênero, ano de
+     * término, elenco, título original, onde assistir, número de
+     * temporadas, número de episódios e ano da temporada através dos métodos
+     * estáticos de AskInput e, então, exibe o
+     * resultado da operação de registro.
      */
     private void handleRegisterSeries() {
         String title = AskInput.askForTitle(scanner);
@@ -141,7 +153,11 @@ public class RegisterMenu {
 
     /**
      * Registra uma nova temporada para uma série existente no sistema.
-     * Solicita ao usuário informações como número da temporada, número de episódios e ano da temporada.
+     * A série é escolhida usando o método selectFromList() de AskInput.
+     * Solicita ao usuário informações como número da temporada, número
+     * de episódios e ano da temporada através dos métodos
+     * estáticos de AskInput e, então, exibe o
+     * resultado da operação de registro.
      * Caso não existam séries cadastradas, exibe uma mensagem de erro.
      */
     private void handleRegisterSeason() {

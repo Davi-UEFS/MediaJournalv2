@@ -28,6 +28,8 @@ public class DataOperations {
 
     /**
      * Salva os dados da biblioteca em arquivos JSON.
+     * Falha se ocorrer uma exceção de IO.
+     * Utiliza o método auxiliar saveFile() para salvar os arquivos.
      *
      * @param journal A biblioteca cujos dados serão salvos.
      * @return Um resultado indicando sucesso ou falha na operação de salvamento.
@@ -52,43 +54,51 @@ public class DataOperations {
 
     /**
      * Carrega os dados da biblioteca a partir de arquivos JSON.
+     * Utiliza o método auxiliar loadFile() para ler os arquivos.
+     * Pode falhar se ocorrer uma exceção de IO.
      *
      * @param journal A biblioteca onde os dados serão carregados.
      * @return Um resultado indicando sucesso na operação de carregamento.
-     * @throws IOException Se ocorrer um erro ao acessar os arquivos.
+
      */
-    public static IResult load(Library journal) throws IOException {
+    public static IResult load(Library journal) {
 
-        Type bookType = new TypeToken<ArrayList<Book>>() {}.getType();
-        Type movieType = new TypeToken<ArrayList<Movie>>() {}.getType();
-        Type seriesType = new TypeToken<ArrayList<Series>>() {}.getType();
-        Type yearType = new TypeToken<TreeMap<Integer, Integer>>() {}.getType();
+        try {
+            Reader booksReader = loadFile(BOOKSPATH);
+            Reader moviesReader = loadFile(MOVIESPATH);
+            Reader seriesReader = loadFile(SERIESPATH);
+            Reader yearReader = loadFile(YEARSPATH);
 
-        Reader booksReader = loadFile(BOOKSPATH);
-        Reader moviesReader = loadFile(MOVIESPATH);
-        Reader seriesReader = loadFile(SERIESPATH);
-        Reader yearReader = loadFile(YEARSPATH);
+            Type bookType = new TypeToken<ArrayList<Book>>() {}.getType();
+            Type movieType = new TypeToken<ArrayList<Movie>>() {}.getType();
+            Type seriesType = new TypeToken<ArrayList<Series>>() {}.getType();
+            Type yearType = new TypeToken<TreeMap<Integer, Integer>>() {}.getType();
 
-        ArrayList<Book> books = gson.fromJson(booksReader, bookType);
-        ArrayList<Movie> movies = gson.fromJson(moviesReader, movieType);
-        ArrayList<Series> series = gson.fromJson(seriesReader, seriesType);
-        TreeMap<Integer, Integer> years = gson.fromJson(yearReader, yearType);
+            ArrayList<Book> books = gson.fromJson(booksReader, bookType);
+            ArrayList<Movie> movies = gson.fromJson(moviesReader, movieType);
+            ArrayList<Series> series = gson.fromJson(seriesReader, seriesType);
+            TreeMap<Integer, Integer> years = gson.fromJson(yearReader, yearType);
 
-        journal.setBookList(books);
-        journal.setMovieList(movies);
-        journal.setSeriesList(series);
-        journal.setYearsRegistered(years);
+            journal.setBookList(books);
+            journal.setMovieList(movies);
+            journal.setSeriesList(series);
+            journal.setYearsRegistered(years);
 
-        booksReader.close();
-        moviesReader.close();
-        seriesReader.close();
-        yearReader.close();
+            booksReader.close();
+            moviesReader.close();
+            seriesReader.close();
+            yearReader.close();
 
-        return new Success("Biblioteca", "Carregada com sucesso.");
+            return new Success("Biblioteca", "Carregada com sucesso.");
+
+        } catch (IOException e){
+            return new Failure("Biblioteca", "Exceção de IO.");
+        }
+
     }
 
     /**
-     * Salva um arquivo JSON no caminho especificado.
+     * Salva um arquivo no formato JSON no caminho especificado.
      *
      * @param path O caminho do arquivo onde os dados serão salvos.
      * @param json O conteúdo JSON a ser salvo.
@@ -102,8 +112,9 @@ public class DataOperations {
     }
 
     /**
-     * Carrega um arquivo JSON do caminho especificado.
-     * Se o arquivo não for encontrado, retorna um leitor com um JSON vazio.
+     * Lê o conteudo do arquivo JSON do caminho especificado.
+     * Se o arquivo não for encontrado, retorna um leitor de
+     * uma String que representa uma lista vazia.
      *
      * @param path O caminho do arquivo a ser carregado.
      * @return Um leitor para o conteúdo do arquivo.

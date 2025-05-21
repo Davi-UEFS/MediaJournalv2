@@ -11,6 +11,7 @@ import java.util.Scanner;
 /**
  * A classe MainMenu é responsável por exibir o menu principal do sistema e gerenciar
  * a navegação entre os diferentes submenus, como registro, avaliação, exibição e busca.
+ * As entradas são validadas pelas classes do pacote Prompts.
  */
 public class MainMenu {
     private final Scanner scanner;  // Scanner para leitura de entradas do usuário.
@@ -42,7 +43,8 @@ public class MainMenu {
     /**
      * Exibe o menu principal e gerencia a navegação entre os submenus.
      * O menu principal oferece opções para registrar, avaliar, visualizar e buscar mídias.
-     * O loop continua até que o usuário escolha a opção de encerrar.
+     * O loop continua até que o usuário escolha a opção de encerrar, que nesse
+     * caso também encerra o programa.
      */
     public void showMenu(){
         int option;

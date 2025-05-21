@@ -11,7 +11,7 @@ import java.util.List;
 public class Movie extends Media {
     // Lista com os nomes do elenco do filme
     private List<String> cast;
-    // Duração do filme
+    // Duração do filme (em minutos)
     private int duration;
     // Nome do diretor do filme
     private String direction;
@@ -21,11 +21,14 @@ public class Movie extends Media {
     private String originalTitle;
     // Lista de plataformas onde o filme pode ser assistido
     private List<String> whereToWatch;
-    // Data em que o filme foi visto
+    // Data em que o filme foi visto (formato: MÊS de XXXX)
     private String seenDate;
 
     /**
      * Construtor da classe Movie.
+     * Os parâmetros são os atributos imutáveis do filme.
+     * Os atributos imutáveis são inicializados pelo construtor
+     * da superclasse.
      *
      * @param name           O nome do filme.
      * @param year           O ano de lançamento do filme.
@@ -49,6 +52,10 @@ public class Movie extends Media {
         this.seenDate = null;
     }
 
+    /**
+     * Construtor no args da classe Movie usado na desserialização.
+     * Utiliza o construtor da superclasse.
+     */
     public Movie(){
 
     }
@@ -91,8 +98,11 @@ public class Movie extends Media {
     }
 
     /**
+     * Sobrecarrega o método  de Object.
      * Retorna uma representação em string do filme, incluindo título, ano, duração,
      * direção, título original, elenco, data em que foi visto (se disponível) e avaliação (se disponível).
+     * Os colchetes que existem no toString() das listas de elenco e onde
+     * assistir são removidos.
      *
      * @return Uma string representando o filme.
      */

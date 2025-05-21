@@ -4,6 +4,7 @@ package com.davigui.mediajournal.Model.Medias;
  * A classe Season representa uma temporada de uma série, contendo informações como
  * número da temporada, quantidade de episódios, ano de lançamento, avaliação, review
  * e status de visualização.
+ * Implementa a interface Comparable para ser organizada num TreeSet.
  */
 public class Season implements Comparable<Season> {
     // Avaliação da temporada
@@ -21,6 +22,8 @@ public class Season implements Comparable<Season> {
 
     /**
      * Construtor da classe Season.
+     * Os parâmetros são os atributos imutáveis da temporada.
+     * Os atributos imutáveis são inicializados em 0/null/false.
      *
      * @param seasonNumber O número da temporada.
      * @param episodeCount A quantidade de episódios na temporada.
@@ -36,6 +39,14 @@ public class Season implements Comparable<Season> {
     }
 
     /**
+     * Construtor no args da classe Season usado na desserialização.
+     */
+    public Season(){
+
+    }
+
+    /**
+     * Sobrescreve o método compareTo da interface Comparable.
      * Compara esta temporada com outra com base no número da temporada.
      *
      * @param other A outra temporada a ser comparada.
@@ -48,6 +59,7 @@ public class Season implements Comparable<Season> {
     }
 
     /**
+     * Sobrecarrega o método  de Object.
      * Retorna uma representação em string da temporada, incluindo o número da temporada,
      * ano de lançamento e quantidade de episódios.
      *
@@ -87,7 +99,7 @@ public class Season implements Comparable<Season> {
     /**
      * Define a review da temporada.
      *
-     * @param review A review a ser atribuída à temporada.
+     * @param review A texto da review a ser atribuída à temporada.
      */
     public void setReview(String review) {
         this.review = review;
@@ -101,7 +113,7 @@ public class Season implements Comparable<Season> {
     }
 
     /**
-     * Atualiza o ano de lançamento da temporada.
+     * Define o ano de lançamento da temporada.
      *
      * @param year O ano de lançamento da temporada.
      */

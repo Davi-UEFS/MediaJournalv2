@@ -1,8 +1,9 @@
 package com.davigui.mediajournal.Model.Enums;
 
 /**
- * O enum Months representa os meses do ano para marcar como visto.
- * Ele inclui todos os meses, de Janeiro a Dezembro.
+ * O enum Months representa os meses do ano, utilizado
+ * para quando o usuário marcar uma obra como vista.
+ * Inclui os meses de Janeiro a Dezembro.
  */
 public enum Months {
     JANEIRO,     // Mês de Janeiro

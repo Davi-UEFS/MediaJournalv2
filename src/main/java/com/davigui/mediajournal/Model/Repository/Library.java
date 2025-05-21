@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
- * A classe Library representa uma biblioteca que gerencia listas de livros, filmes e séries,
- * além de registrar os anos associados às mídias cadastradas.
+ * A classe Library representa uma biblioteca que gerencia listas de livros,
+ * filmes e séries, além de registrar os anos associados às mídias cadastradas.
  */
 public class Library {
     // Lista de livros cadastrados na biblioteca
@@ -20,12 +20,13 @@ public class Library {
     private ArrayList<Movie> movieList;
     // Lista de séries cadastradas na biblioteca
     private ArrayList<Series> seriesList;
-    // Conjunto de anos registrados na biblioteca
+    // Mapa de anos registrados na biblioteca (ordenado pelo número do ano)
     private TreeMap<Integer, Integer> yearsRegistered;
 
     /**
      * Construtor da classe Library.
-     * Inicializa as listas de livros, filmes, séries e o conjunto de anos registrados.
+     * Inicializa as listas de livros, filmes, séries e o
+     * mapa de anos.
      */
     public Library() {
         this.bookList = new ArrayList<>();
@@ -36,6 +37,7 @@ public class Library {
 
     /**
      * Verifica se um livro já está cadastrado na biblioteca.
+     * Não utiliza o equals() de Object. Em vez disso, compara os IDs.
      *
      * @param book O livro a ser verificado.
      * @throws MediaAlreadyExistsException Se o livro já estiver cadastrado.
@@ -49,6 +51,7 @@ public class Library {
 
     /**
      * Verifica se um filme já está cadastrado na biblioteca.
+     * Não utiliza o equals() de Object. Em vez disso, compara os IDs.
      *
      * @param movie O filme a ser verificado.
      * @throws MediaAlreadyExistsException Se o filme já estiver cadastrado.
@@ -62,6 +65,7 @@ public class Library {
 
     /**
      * Verifica se uma série já está cadastrada na biblioteca.
+     * Não utiliza o equals() de Object. Em vez disso, compara os IDs.
      *
      * @param series A série a ser verificada.
      * @throws MediaAlreadyExistsException Se a série já estiver cadastrada.
@@ -101,7 +105,8 @@ public class Library {
     }
 
     /**
-     * Adiciona um ano ao conjunto de anos registrados na biblioteca.
+     * Adiciona um ano ao mapa de anos registrados na biblioteca com ocorrência 1.
+     * Se o ano já existir, sua ocorrência é incrementada em 1.
      *
      * @param year O ano a ser adicionado.
      */
@@ -141,8 +146,8 @@ public class Library {
     }
 
     /**
-     * Remove um ano do conjunto de anos registrados na biblioteca.
-     * Se o ano não tiver mais associações, ele será completamente removido.
+     * Remove uma ocorrência do ano no mapa de anos registrados na biblioteca.
+     * Se após isso ano não tiver mais associações, ele será completamente removido.
      *
      * @param year O ano a ser removido.
      */
@@ -182,7 +187,7 @@ public class Library {
     }
 
     /**
-     * Obtém o conjunto de anos registrados na biblioteca.
+     * Obtém o mapa de anos registrados na biblioteca, ordenado de forma crescente.
      *
      * @return Um mapa ordenado contendo os anos registrados e suas respectivas contagens.
      */
@@ -218,7 +223,7 @@ public class Library {
     }
 
     /**
-     * Define o conjunto de anos registrados na biblioteca.
+     * Define o mapa de anos registrados na biblioteca.
      *
      * @param yearsRegistered O novo mapa de anos registrados a ser definido.
      */

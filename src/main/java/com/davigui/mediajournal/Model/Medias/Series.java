@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 /**
  * A classe Series representa uma série como uma mídia, estendendo a classe base Media.
- * Ela contém informações específicas de séries, como ano de término, elenco, temporadas,
+ * Ela contém informações específicas de séries, como ano de término, elenco, lista de temporadas,
  * título original e plataformas onde assistir.
  */
 public class Series extends Media {
@@ -25,7 +25,9 @@ public class Series extends Media {
 
     /**
      * Construtor da classe Series.
-     *
+     * Os parâmetros são os atributos imutáveis do livro.
+     * Os atributos imutáveis são inicializados pelo construtor
+     * da superclasse.
      * @param name           O nome da série.
      * @param year           O ano de início da série.
      * @param genre          O gênero da série.
@@ -43,12 +45,16 @@ public class Series extends Media {
         this.whereToWatch = whereToWatch;
     }
 
+    /**
+     * Construtor no args da classe Series usado na desserialização.
+     * Utiliza o construtor da superclasse.
+     */
     public Series(){
 
     }
 
     /**
-     * Adiciona uma temporada à série.
+     * Adiciona uma temporada ao conjunto de temporadas da série.
      *
      * @param season A temporada a ser adicionada.
      */
@@ -57,7 +63,8 @@ public class Series extends Media {
     }
 
     /**
-     * Busca uma temporada pelo número da temporada.
+     * Procura uma temporada no conjunto com base no número dela.
+     * Lança exceção caso não encontre.
      *
      * @param seasonNumber O número da temporada a ser buscada.
      * @return A temporada correspondente ao número fornecido.
@@ -73,6 +80,7 @@ public class Series extends Media {
 
     /**
      * Atualiza a avaliação geral da série com base na média das avaliações das temporadas.
+     * Deve ser usado ao adicionar ou avaliar uma temporada.
      * Se não houver temporadas, a avaliação será definida como 0.
      */
     public void updateRate() {
@@ -117,9 +125,13 @@ public class Series extends Media {
     }
 
     /**
+     * Sobrecarrega o método  de Object.
      * Retorna uma representação em string da série, incluindo título, anos de início e término,
-     * título original, plataformas onde assistir, elenco e avaliação (se disponível).
-     *
+     * título original, plataformas onde assistir, elenco e avaliação (se disponível) e temporadas.
+     * Itera e adiciona o toString de cada temporada registrada.
+     * Os colchetes que existem no toString() das listas de elenco e onde
+     * assistir são removidos.
+     * Caso o ano de encerramento seja 9999, exibe-se 'Em andamento' no lugar do ano.
      * @return Uma string representando a série.
      */
     @Override

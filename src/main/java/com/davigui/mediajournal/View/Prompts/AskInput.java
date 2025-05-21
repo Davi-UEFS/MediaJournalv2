@@ -16,6 +16,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o título de uma obra.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O título da obra como uma string.
@@ -27,6 +28,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o nome do autor.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O nome do autor como uma string.
@@ -38,6 +40,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o ISBN de uma obra.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O ISBN da obra como uma string.
@@ -49,6 +52,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o nome da editora.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O nome da editora como uma string.
@@ -60,6 +64,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário a duração de um filme em minutos.
+     * A entrada é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return A duração do filme como um objeto Duration.
@@ -71,6 +76,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o nome do diretor.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O nome do diretor como uma string.
@@ -82,6 +88,9 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o ano de lançamento de uma obra.
+     * A entrada é validada pelo método validateInt() de Validate e o
+     * valor é validado por uma comparação com o ano atual, dado pelo
+     * método now.getYear() de LocalDate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O ano de lançamento como um inteiro.
@@ -98,6 +107,9 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o ano de encerramento de uma série.
+     * A entrada é validada pelo método validateInt() de Validate e o
+     * valor é validado por uma comparação com o ano atual, dado pelo
+     * método now.getYear() de LocalDate e 9999 (em andamento).
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O ano de encerramento como um inteiro.
@@ -114,6 +126,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário se ele possui uma cópia de um livro.
+     * A entrada é validada pelo método ValidateBoolean de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return True se o usuário possui uma cópia, false caso contrário.
@@ -125,6 +138,8 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o elenco de uma obra.
+     * A entrada é validada pelo método validateString() de Validate e, então,
+     * divida por vírgulas e inseridas no array.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return Um array de strings contendo os nomes do elenco.
@@ -136,6 +151,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o nome de um ator ou atriz.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O nome do ator ou atriz como uma string.
@@ -147,6 +163,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o título original de uma obra.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O título original da obra como uma string.
@@ -158,6 +175,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário a sinopse de um filme.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return A sinopse do filme como uma string.
@@ -169,6 +187,8 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário as plataformas onde uma obra está disponível.
+     * A entrada é validada pelo método validateString() de Validate e, então,
+     * divida por vírgulas e inseridas no array.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return Um array de strings contendo os nomes das plataformas.
@@ -180,6 +200,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o número de uma temporada.
+     * A entrada é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O número da temporada como um inteiro.
@@ -191,6 +212,9 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o gênero de uma obra.
+     * Os gêneros são impressos e enumerados em tela e o usuário deve
+     * escolher uma opção entre 1 e 12 (ou o número max. de gêneros).
+     * A entrada da opçao é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O gênero selecionado como um valor do enum Genres.
@@ -208,6 +232,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário uma nota para uma obra.
+     * A entrada é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return A nota como um valor int.
@@ -219,6 +244,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário uma review para uma obra.
+     * A entrada é validada pelo método validateString() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return A review como uma string.
@@ -230,6 +256,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário a quantidade de episódios de uma temporada.
+     * A entrada é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return A quantidade de episódios como um inteiro.
@@ -241,6 +268,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o ano de uma temporada.
+     * A entrada é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O ano da temporada como um inteiro.
@@ -252,6 +280,9 @@ public final class AskInput {
 
     /**
      * Permite ao usuário selecionar uma obra de uma lista.
+     * As mídias são impressas e enumeradas em tela.
+     * O usuário deve escolher uma opção entre 1 e o tamanho da lista.
+     * A entrada da opção é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @param mediaList A lista de mídias disponíveis para seleção.
@@ -277,6 +308,7 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o ano em que uma obra foi lida ou assistida.
+     * A entrada é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O ano como um inteiro.
@@ -288,6 +320,9 @@ public final class AskInput {
 
     /**
      * Solicita ao usuário o mês em que uma obra foi lida ou assistida.
+     * Os meses são impressos e enumerados em tela e o usuário deve
+     * escolher uma opção entre 1 e 12 (jan a dez).
+     * A entrada da opçao é validada pelo método validateInt() de Validate.
      *
      * @param scanner O objeto Scanner para leitura da entrada do usuário.
      * @return O mês como um valor do enum Months.

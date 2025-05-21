@@ -1,5 +1,9 @@
 package com.davigui.mediajournal.View.Prompts;
 
+/**
+ * A classe Colors é uma classe que possui constantes de Strings
+ * usadas para mudar a cor do terminal.
+ */
 public final class Colors{
     public static final String rst = "\u001B[0m";
     public static final String green = "\u001B[32m";

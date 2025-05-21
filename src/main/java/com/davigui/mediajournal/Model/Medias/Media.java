@@ -14,7 +14,7 @@ public abstract class Media {
     protected int year;
     // O gênero da mídia
     protected  Genres genre;
-    // A avaliação da mídia (nota)
+    // A avaliação da mídia (nota de 0 a 5)
     protected int rating;
     // Indica se a mídia foi vista
     protected boolean seen;
@@ -23,6 +23,8 @@ public abstract class Media {
 
     /**
      * Construtor da classe Media.
+     * Os parâmetros são os atributos comuns e imutáveis de uma mídia.
+     * Os atributos mutáveis são inicializados como 0/null/false.
      *
      * @param title O título da mídia.
      * @param year  O ano de lançamento da mídia.
@@ -37,6 +39,10 @@ public abstract class Media {
         this.review = null;
     }
 
+    /**
+     * Construtor no args utilizados pelas subclasses.
+     * As subclasses usam este construtor por um super() implícito.
+     */
     public Media(){
 
     }
@@ -96,7 +102,7 @@ public abstract class Media {
     }
 
     /**
-     * Marca a mídia como vista.
+     * Marca a mídia como vista (true).
      */
     public void setSeen() {
         this.seen = true;
@@ -149,13 +155,15 @@ public abstract class Media {
 
     /**
      * Obtém o tipo de mídia.
+     * Implementada por suas subclasses.
      *
      * @return Uma string representando o tipo de mídia.
      */
     public abstract String getMediaType();
 
     /**
-     * Obtém o identificador único da mídia com base no título e no ano.
+     * Obtém o identificador único da mídia com base no
+     * hash do título e no ano multiplicado por um primo.
      *
      * @return O identificador único da mídia.
      */
