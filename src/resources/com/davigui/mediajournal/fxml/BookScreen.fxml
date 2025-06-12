@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.7495361781076066" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+      <TabPane prefHeight="398.0" prefWidth="456.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Livros">
+               <content>
+                  <AnchorPane prefHeight="369.0" prefWidth="558.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="688.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="216.0" text="Livros Cadastrados">
+                                 <font>
+                                    <Font name="Fira Code Light" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TableView prefHeight="345.0" prefWidth="770.0">
+                                 <columns>
+                                    <TableColumn prefWidth="200.0" text="Título" />
+                                    <TableColumn prefWidth="55.0" text="Ano" />
+                                    <TableColumn prefWidth="115.0" text="ISBN" />
+                                    <TableColumn prefWidth="130.0" text="Autor" />
+                                    <TableColumn prefWidth="123.0" text="Editora" />
+                                    <TableColumn text="Avaliação" />
+                                    <TableColumn prefWidth="105.0" text="Data de Visualização" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab text="Filmes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="688.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="216.0" text="Filmes Cadastrados">
+                                 <font>
+                                    <Font name="Fira Code Light" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TableView prefHeight="345.0" prefWidth="770.0">
+                                 <columns>
+                                    <TableColumn prefWidth="170.0" text="Título" />
+                                    <TableColumn prefWidth="170.0" text="Título Original" />
+                                    <TableColumn prefWidth="55.0" text="Ano" />
+                                    <TableColumn text="Duração" />
+                                    <TableColumn prefWidth="140.0" text="Diretor" />
+                                    <TableColumn prefWidth="94.66668701171875" text="Avaliação" />
+                                    <TableColumn prefWidth="104.33331298828125" text="Data de Visualização" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Series">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="688.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="216.0" text="Séries Cadastradas">
+                                 <font>
+                                    <Font name="Fira Code Light" size="16.0" />
+                                 </font>
+                              </Label>
+                              <TableView prefHeight="345.0" prefWidth="770.0">
+                                 <columns>
+                                    <TableColumn prefWidth="160.0" text="Título" />
+                                    <TableColumn prefWidth="160.0" text="Título Original" />
+                                    <TableColumn prefWidth="75.0" text="Ano" />
+                                    <TableColumn prefWidth="100.0" text="Ano de Enceramento" />
+                                    <TableColumn prefWidth="74.0" text="Temporadas" />
+                                    <TableColumn prefWidth="66.33331298828125" text="Avaliação" />
+                                    <TableColumn minWidth="0.0" prefWidth="173.0" text="Data de Visualização" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <AnchorPane prefHeight="398.0" prefWidth="251.0" />
+  </items>
+</SplitPane>
