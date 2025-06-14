@@ -106,6 +106,19 @@ public class Series extends Media {
     }
 
     /**
+     * Obtém o título original da obra.
+     *
+     * @return O título original.
+     */
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public int getNumberOfSeasons(){
+        return seasons.size();
+    }
+
+    /**
      * Obtém a lista com os nomes do elenco da série.
      *
      * @return A lista com os nomes do elenco.

@@ -88,6 +88,52 @@ public class Movie extends Media {
     }
 
     /**
+     * Obtém a data em que o filme foi visto.
+     *
+     * @return A data em que o filme foi visto.
+     */
+    public String getSeenDate() {
+        return seenDate;
+    }
+
+    /**
+     * Obtém a lista de plataformas onde o filme pode ser assistido.
+     *
+     * @return A lista de plataformas onde assistir.
+     */
+    public List<String> getWhereToWatch() {
+        return whereToWatch;
+    }
+
+    /**
+     * Obtém o título original do filme.
+     *
+     * @return O título original do filme.
+     */
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    /**
+     * Obtém o roteiro do filme.
+     *
+     * @return O roteiro do filme.
+     */
+    public String getScript() {
+        return script;
+    }
+
+
+    /**
+     * Obtém a duração do filme em minutos.
+     *
+     * @return A duração do filme.
+     */
+    public int getDuration() {
+        return duration;
+    }
+
+    /**
      * Obtém o tipo de mídia, que neste caso é "Filme".
      *
      * @return Uma string representando o tipo de mídia.
