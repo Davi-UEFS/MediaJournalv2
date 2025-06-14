@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mediaDetailVbox" alignment="CENTER" prefHeight="700.0" prefWidth="344.0"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.davigui.mediajournal.ViewFXControllers.MediaDetailsScreenController">
+    <ImageView fx:id="mediaImageView" fitHeight="206.0" fitWidth="267.0" preserveRatio="true">
+        <Image url="@../images/placeholder.png"/>
+    </ImageView>
+    <Label fx:id="mediaTitleYear" text="Lorem ipsum dolor (ANO) "/>
+    <Label fx:id="mediaGenre" text="GENERO: Lorem"/>
+    <Label fx:id="mediaRating" text="★★★★★"/>
+    <Label fx:id="mediaReview" prefHeight="191.0" prefWidth="300.0"
+           text="(SCROLL)Resenha: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia consectetur neque. Etiam ac sollicitudin erat. Praesent ut nunc a libero vehicula convallis. Praesent euismod lacus id nulla facilisis, sit amet molestie orci pellentesque. Sed enim metus, commodo ac porta ut, consequat at justo. Nulla neque risus, porta quis facilisis sit amet, sagittis ac nisl. Aliquam aliquet felis eu magna."
+           textAlignment="JUSTIFY" wrapText="true">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <Label fx:id="mediaCast" prefHeight="80.0" prefWidth="300.0"
+           text="(VISIBLE?)Elenco:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis turpis nec sem cursus imperdiet vitae sed libero. Phasellus fermentum"
+           textAlignment="JUSTIFY" wrapText="true">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <Label fx:id="mediaWhereToWatch" prefHeight="40.0" prefWidth="300.0"
+           text="(VISIBLE?)Plataformas: Lorem ipsum dolor sit amet, consectetu" textAlignment="JUSTIFY" wrapText="true">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+    <Label fx:id="mediaSeasons" prefHeight="20.0" prefWidth="300.0" text="(VISIBLE?) Temporadas: "
+           textAlignment="JUSTIFY" wrapText="true">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Label>
+</VBox>
