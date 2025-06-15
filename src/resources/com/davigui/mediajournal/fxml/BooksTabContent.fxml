@@ -14,40 +14,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="BookTabContentPane"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.davigui.mediajournal.ViewFXControllers.BooksTabContentController">
+<AnchorPane fx:id="BookTabContentPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.BooksTabContentController">
 
         <VBox fx:id="bookTabVbox" alignment="CENTER" prefWidth="760.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <HBox alignment="CENTER_RIGHT" spacing="5.0">
                 <VBox.margin>
                     <Insets left="20.0" right="20.0" />
                 </VBox.margin>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="bookEditButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="bookEditButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/edit_icon.png" />
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="bookFilterButton" mnemonicParsing="false" onAction="#onFilterButtonClicked" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="bookFilterButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/funnel_icon.png" />
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="bookRateButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="bookRateButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/star_icon.png" />
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="bookRemoveButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="bookRemoveButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/delete_icon.png" />
                         </ImageView>
                     </graphic>

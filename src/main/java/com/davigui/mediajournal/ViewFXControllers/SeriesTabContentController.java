@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -20,10 +19,44 @@ import java.util.ResourceBundle;
 public class SeriesTabContentController implements Initializable {
 
     @FXML
-    private ImageView seriesEditButton;
+    private VBox seriesTabVbox;
+
+    @FXML
+    private TableView<Series> seriesTableView;
+
+    @FXML
+    private Label seriesTableLabel;
+
+    @FXML
+    private TableColumn<Series, String> seriesTitleColumn;
+
+    @FXML
+    private TableColumn<Series, String> seriesOriginalTitleColumn;
+
+    @FXML
+    private TableColumn<Series, Integer> seriesYearColumn;
 
     @FXML
     private TableColumn<Series, Integer> seriesEndingYearColumn;
+
+    @FXML
+    private TableColumn<Series, Integer> seriesSeasonNumberColumn;
+
+    @FXML
+    private TableColumn<Series, Integer> seriesRatingColumn;
+
+    //TODO: DECIDIR SE VOU IMPLEMENTAR ISSO
+    @FXML
+    private TableColumn<Series, String> seriesSeenDateColumn;
+
+    @FXML
+    private Button seriesEditButton;
+
+    @FXML
+    private Button seriesRemoveButton;
+
+    @FXML
+    private Button seriesRateButton;
 
     @FXML
     private Button seriesFilterButton;
@@ -36,40 +69,6 @@ public class SeriesTabContentController implements Initializable {
 
     @FXML
     private ChoiceBox<Genres> seriesGenreChoiceBox;
-
-    @FXML
-    private TableColumn<Series, String> seriesOriginalTitleColumn;
-
-    @FXML
-    private Button seriesRateButton;
-
-    @FXML
-    private TableColumn<Series, Integer> seriesRatingColumn;
-
-    @FXML
-    private Button seriesRemoveButton;
-
-    @FXML
-    private TableColumn<Series, Integer> seriesSeasonNumberColumn;
-
-    //TODO: DECIDIR SE VOU IMPLEMENTAR ISSO
-    @FXML
-    private TableColumn<Series, String> seriesSeenDateColumn;
-
-    @FXML
-    private VBox seriesTabVbox;
-
-    @FXML
-    private Label seriesTableLabel;
-
-    @FXML
-    private TableView<Series> seriesTableView;
-
-    @FXML
-    private TableColumn<Series, String> seriesTitleColumn;
-
-    @FXML
-    private TableColumn<Series, Integer> seriesYearColumn;
 
     private SeriesService seriesService;
 

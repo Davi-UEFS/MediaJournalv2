@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,8 @@ public class MainFX extends Application {
         MainScreenController mainScreenController = mainLoader.getController();
 
         Scene scene = new Scene(root, 1080, 720);
+        Image icon = new Image(MainFX.class.getResourceAsStream("images/library_icon.png"));
+        stage.getIcons().add(icon);
         stage.setTitle("Diario Cultural");
         stage.setScene(scene);
         stage.show();

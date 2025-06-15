@@ -21,30 +21,30 @@
                 <VBox.margin>
                     <Insets left="20.0" right="20.0" />
                 </VBox.margin>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="movieEditButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="movieEditButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/edit_icon.png" />
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="movieFilterButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="movieFilterButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/funnel_icon.png" />
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="movieRateButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="movieRateButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/star_icon.png" />
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+                <Button fx:id="movieRemoveButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                     <graphic>
-                        <ImageView fx:id="movieRemoveButton" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                             <Image url="@../images/delete_icon.png" />
                         </ImageView>
                     </graphic>
