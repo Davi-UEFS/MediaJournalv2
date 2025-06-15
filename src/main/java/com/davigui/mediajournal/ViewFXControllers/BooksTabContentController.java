@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.List;
@@ -60,13 +61,28 @@ public class BooksTabContentController implements Initializable {
     private Button bookFilterButton;
 
     @FXML
-    private TextField bookFilterTetField;
+    private TextField bookFilterTextField;
 
     @FXML
     private ChoiceBox<String> bookFilterTypeChoiceBox;
 
     @FXML
     private ChoiceBox<Genres> bookGenreChoiceBox;
+
+    @FXML
+    private ImageView bookImageView;
+
+    @FXML
+    private Label bookTitleYear;
+
+    @FXML
+    private Label bookGenre;
+
+    @FXML
+    private Label bookRating;
+
+    @FXML
+    private Label bookReview;
 
     // *********Atributos nao FXMLs******************
 
@@ -113,9 +129,8 @@ public class BooksTabContentController implements Initializable {
 
         //***********BOTOES*************************
 
-        bookFilterTypeChoiceBox.setVisible(false);
-        bookGenreChoiceBox.setVisible(false);
-        bookFilterTetField.setVisible(false);
+        deactivateFilterFields();
+        bookEditButton.setDisable(true);
 
     }
 
@@ -140,8 +155,11 @@ public class BooksTabContentController implements Initializable {
             public void changed(ObservableValue<? extends Book> obs, Book oldBook, Book newBook) {
                 if(newBook == null)
                     disableEditButton();
-                else
+
+                else {
                     enableEditButton();
+                    handleBookInfo(selectedBook.getValue());
+                }
             }
         });
     }
@@ -149,7 +167,7 @@ public class BooksTabContentController implements Initializable {
     @FXML
     public void onFilterButtonClicked(ActionEvent event){
 
-        if(bookFilterTetField.isVisible())
+        if(bookFilterTextField.isVisible())
             deactivateFilterFields();
 
         else
@@ -159,24 +177,42 @@ public class BooksTabContentController implements Initializable {
 
     private void activateFilterFields(){
         bookFilterTypeChoiceBox.setVisible(true);
+        bookFilterTypeChoiceBox.setManaged(true);
         bookGenreChoiceBox.setVisible(true);
-        bookFilterTetField.setVisible(true);
+        bookGenreChoiceBox.setManaged(true);
+        bookFilterTextField.setVisible(true);
+        bookFilterTextField.setManaged(true);
     }
 
     private void deactivateFilterFields(){
         bookFilterTypeChoiceBox.setVisible(false);
+        bookFilterTypeChoiceBox.setManaged(false);
         bookGenreChoiceBox.setVisible(false);
-        bookFilterTetField.setVisible(false);
+        bookGenreChoiceBox.setManaged(false);
+        bookFilterTextField.setVisible(false);
+        bookFilterTextField.setManaged(false);
     }
 
     private void disableEditButton(){
-        bookEditButton.setVisible(true);
+        bookEditButton.setDisable(true);
     }
 
     /// ///TODO PAREI AQUI AQUI
 
     private void enableEditButton(){
-        bookEditButton.setVisible(false);
+        bookEditButton.setDisable(false);
+    }
+
+    public void handleBookInfo(Book book){
+        bookTitleYear.setText(book.getTitle() + " (" + book.getYear() + ")");
+        bookGenre.setText(book.getGenre().toString());
+        bookRating.setText("★".repeat(book.getRating()));
+        if(book.getReview() == null)
+            bookReview.setText("RESENHA: Sem resenha atribuida");
+
+        else
+            bookReview.setText("RESENHA: " + book.getReview());
+
     }
 
 }

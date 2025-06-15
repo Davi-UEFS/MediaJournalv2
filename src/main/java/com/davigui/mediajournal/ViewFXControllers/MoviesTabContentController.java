@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -68,6 +69,21 @@ public class MoviesTabContentController implements Initializable {
 
     @FXML
     private ChoiceBox<Genres> movieGenreChoiceBox;
+
+    @FXML
+    private ImageView movieImageView;
+
+    @FXML
+    private Label movieTitleYear;
+
+    @FXML
+    private Label movieGenre;
+
+    @FXML
+    private Label movieRating;
+
+    @FXML
+    private Label movieReview;
 
     private MovieService movieService;
 

@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
-<SplitPane fx:id="mainSplitPane"
-           dividerPositions="0.7077922077922078"
-           prefHeight="720.0" prefWidth="1080.0"
-           xmlns="http://javafx.com/javafx/23.0.1"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreenController">
 
-    <TabPane fx:id="mediasTabPane" prefHeight="398.0" prefWidth="456.0" tabClosingPolicy="UNAVAILABLE">
-        <Tab fx:id="booksTab" text="Livros">
-            <content>
-                <fx:include fx:id="booksTabContent" source="BooksTabContent.fxml" />
-            </content>
-        </Tab>
-        <Tab fx:id="moviesTab" text="Filmes">
-            <content>
-                <fx:include fx:id="moviesTabContent" source="MoviesTabContent.fxml" />
-            </content>
-        </Tab>
-        <Tab fx:id="seriesTab" text="Series">
-            <content>
-            <fx:include fx:id="seriesTabContent" source="SeriesTabContent.fxml" />
-            </content>
-        </Tab>
-    </TabPane>
-    <fx:include fx:id="mediaInfoVbox" source="MediaDetailsScreen.fxml" />
-</SplitPane>
+
+ <TabPane fx:id="mediasTabPane" prefHeight="720.0" prefWidth="1080.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreenController">
+     <Tab fx:id="booksTab" text="Livros">
+         <fx:include fx:id="booksTabContent" source="BooksTabContent.fxml" />
+     </Tab>
+     <Tab fx:id="moviesTab" text="Filmes">
+         <fx:include fx:id="moviesTabContent" source="MoviesTabContent.fxml" />
+     </Tab>
+     <Tab fx:id="seriesTab" text="Series">
+         <fx:include fx:id="seriesTabContent" source="SeriesTabContent.fxml" />
+     </Tab>
+ </TabPane>

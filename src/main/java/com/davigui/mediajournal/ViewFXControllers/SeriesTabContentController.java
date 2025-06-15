@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -69,6 +70,23 @@ public class SeriesTabContentController implements Initializable {
 
     @FXML
     private ChoiceBox<Genres> seriesGenreChoiceBox;
+
+    @FXML
+    private ImageView seriesImageView;
+
+    @FXML
+    private Label seriesTitleYear;
+
+    @FXML
+    private Label seriesGenre;
+
+    @FXML
+    private Label seriesRating;
+
+    @FXML
+    private Label seriesReview;
+
+    //************ Atributos NAO FXML
 
     private SeriesService seriesService;
 

@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,9 +19,6 @@ public class MainScreenController implements Initializable {
     //*********Atributos FXML ************
     @FXML
     private Tab seriesTab;
-
-    @FXML
-    private VBox mediaInfoVbox;
 
     @FXML
     private Tab booksTab;
@@ -45,30 +41,6 @@ public class MainScreenController implements Initializable {
     @FXML
     private SeriesTabContentController seriesTabContentController;
 
-    public BooksTabContentController getBookController() {
-        return booksTabContentController;
-    }
-
-    public void setBookController(BooksTabContentController bookController) {
-        this.booksTabContentController = bookController;
-    }
-
-    public MoviesTabContentController getMoviesTabContentController() {
-        return moviesTabContentController;
-    }
-
-    public void setMoviesTabContentController(MoviesTabContentController moviesTabContentController) {
-        this.moviesTabContentController = moviesTabContentController;
-    }
-
-    public SeriesTabContentController getSeriesTabContentController() {
-        return seriesTabContentController;
-    }
-
-    public void setSeriesTabContentController(SeriesTabContentController seriesTabContentController) {
-        this.seriesTabContentController = seriesTabContentController;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb){
         Library journal = new Library();
@@ -78,15 +50,14 @@ public class MainScreenController implements Initializable {
         MovieService movieService = new MovieService(journal);
         SeriesService seriesService = new SeriesService(journal);
 
+        booksTabContentController.setBookService(bookService);
+        booksTabContentController.loadBookList();
 
-            booksTabContentController.setBookService(bookService);
-            booksTabContentController.loadBookList();
+        moviesTabContentController.setMovieService(movieService);
+        moviesTabContentController.loadMovieList();
 
-            moviesTabContentController.setMovieService(movieService);
-            moviesTabContentController.loadMovieList();
-
-            seriesTabContentController.setSeriesService(seriesService);
-            seriesTabContentController.loadSeriesList();
+        seriesTabContentController.setSeriesService(seriesService);
+        seriesTabContentController.loadSeriesList();
 
     }
 }
