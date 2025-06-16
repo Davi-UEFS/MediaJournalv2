@@ -21,69 +21,76 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class BooksTabContentController implements Initializable {
+    // *********Atributos FXML******************
 
     @FXML
-    private TableView<Book> bookTableView;
+    private TableView<Book> tableView;
 
     @FXML
-    private Label bookTableLabel;
+    private Label tableLabel;
 
     @FXML
-    private TableColumn<Book, String> bookTitleColumn;
+    private TableColumn<Book, String> titleColumn;
 
     @FXML
-    private TableColumn<Book, String> bookAuthorColumn;
+    private TableColumn<Book, String> authorColumn;
 
     @FXML
-    private TableColumn<Book, String> bookPublisherColumn;
+    private TableColumn<Book, String> publisherColumn;
 
     @FXML
-    private TableColumn<Book, Integer> bookYearColumn;
+    private TableColumn<Book, Integer> yearColumn;
 
     @FXML
-    private TableColumn<Book, String> bookIsbnColumn;
+    private TableColumn<Book, String> isbnColumn;
 
     @FXML
-    private TableColumn<Book, Integer> bookRatingColumn;
+    private TableColumn<Book, Integer> ratingColumn;
 
     @FXML
-    private TableColumn<Book, String> bookSeenDateColumn;
+    private TableColumn<Book, String> seenDateColumn;
 
     @FXML
-    private Button bookEditButton;
+    private Button editButton;
 
     @FXML
-    private Button bookRemoveButton;
+    private Button removeButton;
 
     @FXML
-    private Button bookRateButton;
+    private Button rateButton;
 
     @FXML
-    private Button bookFilterButton;
+    private Button filterButton;
 
     @FXML
-    private TextField bookFilterTextField;
+    private TextField filterTextField;
 
     @FXML
-    private ChoiceBox<String> bookFilterTypeChoiceBox;
+    private ChoiceBox<String> filterTypeChoiceBox;
 
     @FXML
-    private ChoiceBox<Genres> bookFilterGenreChoiceBox;
+    private Label filterTypeLabel;
 
     @FXML
-    private ImageView bookImageView;
+    private ChoiceBox<Genres> genreChoiceBox;
 
     @FXML
-    private Label bookTitleYear;
+    private Button clearSearchButton;
 
     @FXML
-    private Label bookGenre;
+    private ImageView coverViewInfo;
 
     @FXML
-    private Label bookRating;
+    private Label titleYearInfo;
 
     @FXML
-    private Label bookReview;
+    private Label genreInfo;
+
+    @FXML
+    private Label ratingInfo;
+
+    @FXML
+    private Label reviewInfo;
 
     // *********Atributos nao FXMLs******************
 
@@ -93,89 +100,93 @@ public class BooksTabContentController implements Initializable {
 
     private ObservableValue<Book> selectedBook;
 
+    private ObservableValue<Genres> selectedGenre;
+
     private ObservableValue<String> selectedFilter;
+
+    private ObservableValue<String> selectedTitle;
 
     // ***********Metodos*******************
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
 
-        //**************TABELA************************************88
+        //**************TABELA************************************
 
         initTableListener();
 
         //Precisa criar o Property pois nao irei mudar o Model
-        bookTitleColumn.setCellValueFactory(cellData->
+        titleColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getTitle()));
 
         /*Alem do Property, tem que usar asObject porque getYear e getRating retornam
         int e nao Integer (objeto)*/
-        bookYearColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getYear())).asObject());
+        yearColumn.setCellValueFactory(cellData ->
+                (new SimpleIntegerProperty(cellData.getValue().getYear())).asObject());
 
-        bookRatingColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getRating())).asObject());
+        ratingColumn.setCellValueFactory(cellData ->
+                (new SimpleIntegerProperty(cellData.getValue().getRating())).asObject());
 
         //Daqui pra frente e a mesma ideia do titulo, entao nao irei explicar
-        bookAuthorColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getAuthor()));
+        authorColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getAuthor()));
 
-        bookIsbnColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getIsbn()));
+        isbnColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getIsbn()));
 
-        bookPublisherColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getPublisher()));
+        publisherColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getPublisher()));
 
-        bookSeenDateColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getSeenDate()));
+        seenDateColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getSeenDate()));
 
 
         //***********TEXTFIELDS*********************
-        bookFilterTextField.setPromptText("Buscar");
+        filterTextField.setPromptText("Buscar");
+        initTextFieldListener();
 
         //***********CHOICEBOXS*********************
 
         List<String> filterChoices = new ArrayList<>();
         filterChoices.add("Título");
         filterChoices.add("Ano");
+        filterChoices.add("ISBN");
         filterChoices.add("Gênero");
 
-        bookFilterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
+        filterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
         initFilterChoiceBoxListener();
 
         List<Genres> genreChoices = Arrays.asList(Genres.values());
-        bookFilterGenreChoiceBox.setItems(FXCollections.observableList(genreChoices));
+        genreChoiceBox.setItems(FXCollections.observableList(genreChoices));
+        initGenreChoiceBoxListener();
 
         //***********BOTOES*************************
 
         deactivateFilterTypeChoiceBox();
         deactivateFilterTextField();
         deactivateGenreChoiceBox();
-        bookEditButton.setDisable(true);
-
+        deactivateClearSearchButton();
+        editButton.setDisable(true);
     }
 
-    public void loadBookList(){
+    public void loadBookList() {
         List<Book> books = bookService.getAllBooks();
         bookObservableList = FXCollections.observableArrayList(books);
-        bookTableView.setItems(bookObservableList);
+        tableView.setItems(bookObservableList);
     }
 
-    public void setBookService(BookService bookService){
+    public void setBookService(BookService bookService) {
         this.bookService = bookService;
-
     }
 
-    private void initTableListener(){
+    private void initTableListener() {
 
-        selectedBook = bookTableView.getSelectionModel().selectedItemProperty();
+        selectedBook = tableView.getSelectionModel().selectedItemProperty();
 
         selectedBook.addListener(new ChangeListener<Book>() {
-
             @Override
             public void changed(ObservableValue<? extends Book> obs, Book oldValue, Book newValue) {
-                if(newValue == null)
+                if (newValue == null)
                     disableEditButton();
-
                 else {
                     enableEditButton();
                     handleBookInfo(selectedBook.getValue());
@@ -184,22 +195,22 @@ public class BooksTabContentController implements Initializable {
         });
     }
 
-    private void initFilterChoiceBoxListener(){
+    private void initFilterChoiceBoxListener() {
 
-        selectedFilter = bookFilterTypeChoiceBox.getSelectionModel().selectedItemProperty();
+        selectedFilter = filterTypeChoiceBox.getSelectionModel().selectedItemProperty();
 
         selectedFilter.addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
 
-                if(newValue != null) {
+                if (newValue != null) {
                     if (newValue.equals("Gênero")) {
                         activateGenreChoiceBox();
                         deactivateFilterTextField();
                     } else {
                         deactivateGenreChoiceBox();
                         activateFilterTextField();
-
+                        filterTextField.clear();
                     }
                 }
             }
@@ -207,73 +218,165 @@ public class BooksTabContentController implements Initializable {
 
     }
 
-    @FXML
-    public void onFilterButtonClicked(){
+    private void initGenreChoiceBoxListener() {
 
-        if(bookFilterTypeChoiceBox.isVisible()) {
+        selectedGenre = genreChoiceBox.getSelectionModel().selectedItemProperty();
+
+        selectedGenre.addListener(new ChangeListener<Genres>() {
+            @Override
+            public void changed(ObservableValue<? extends Genres> obsValue, Genres oldGenre, Genres newGenre) {
+
+                if (newGenre != null)
+                    genreSearch(newGenre);
+
+            }
+        });
+    }
+
+    private void initTextFieldListener(){
+
+        filterTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> obsValue, String oldValue, String newValue) {
+
+                if(newValue.isEmpty()) return;
+
+                String onlyIntValue = "0";
+
+                if(filterTypeChoiceBox.getValue().equals("Ano")){
+                    if(!newValue.matches("^\\d*")){
+                        onlyIntValue = newValue.replaceAll("[^\\d]", "");
+                        filterTextField.setText(onlyIntValue);
+                    }
+                    if(!onlyIntValue.isEmpty())
+                        yearSearch(Integer.parseInt(onlyIntValue));
+
+                } else{
+                    handleSearch(newValue);
+                }
+            }
+        });
+    }
+
+    private void handleSearch(String filter){
+
+        switch (filterTypeChoiceBox.getValue()){
+            case "Título":
+                titleSearch(filter);
+                break;
+            case "ISBN":
+                isbnSearch(filter);
+                break;
+        }
+
+    }
+
+    private void genreSearch(Genres genre) {
+        List<Book> filteredBooks = bookService.searchByGenre(genre, bookService.getAllBooks());
+        bookObservableList.setAll(filteredBooks);
+    }
+
+    private void titleSearch(String title) {
+        List<Book> filteredBooks = bookService.searchByTitle(title, bookService.getAllBooks());
+        bookObservableList.setAll(filteredBooks);
+    }
+
+    private void isbnSearch(String isbn) {
+        List<Book> filteredBooks = bookService.searchBookByIsbn(isbn);
+        bookObservableList.setAll(filteredBooks);
+    }
+
+    private void yearSearch(int year){
+        List<Book> filteredBooks = bookService.searchByYear(year, bookService.getAllBooks());
+        bookObservableList.setAll(filteredBooks);
+    }
+
+    @FXML
+    public void onFilterButtonClicked() {
+
+        if (filterTypeChoiceBox.isVisible()) {
             deactivateFilterTypeChoiceBox();
+            deactivateClearSearchButton();
             deactivateFilterTextField();
             deactivateGenreChoiceBox();
-        }
-
-        else {
+        } else {
             activateFilterTypeChoiceBox();
+            activateClearSearchButton();
         }
 
     }
 
-
-    private void activateGenreChoiceBox(){
-        bookFilterGenreChoiceBox.setVisible(true);
-        bookFilterGenreChoiceBox.setManaged(true);
+    @FXML
+    private void clearSearch() {
+        bookObservableList.setAll(bookService.getAllBooks());
+        filterTypeChoiceBox.getSelectionModel().clearSelection();
+        deactivateFilterTextField();
+        deactivateGenreChoiceBox();
     }
 
-    private void deactivateGenreChoiceBox(){
-        bookFilterGenreChoiceBox.setVisible(false);
-        bookFilterGenreChoiceBox.setManaged(false);
-        bookFilterGenreChoiceBox.getSelectionModel().clearSelection();
+    private void activateGenreChoiceBox() {
+        genreChoiceBox.setVisible(true);
+        genreChoiceBox.setManaged(true);
     }
 
-    private void activateFilterTypeChoiceBox(){
-        bookFilterTypeChoiceBox.setVisible(true);
-        bookFilterTypeChoiceBox.setManaged(true);
+    private void activateClearSearchButton() {
+        clearSearchButton.setVisible(true);
+        clearSearchButton.setManaged(true);
     }
 
-    private void deactivateFilterTypeChoiceBox(){
-        bookFilterTypeChoiceBox.setVisible(false);
-        bookFilterTypeChoiceBox.setManaged(false);
-        bookFilterTypeChoiceBox.getSelectionModel().clearSelection();
+    private void deactivateClearSearchButton() {
+        clearSearchButton.setVisible(false);
+        clearSearchButton.setManaged(false);
     }
 
-    private void activateFilterTextField(){
-        bookFilterTextField.setVisible(true);
-        bookFilterTextField.setManaged(true);
+    private void deactivateGenreChoiceBox() {
+        genreChoiceBox.setVisible(false);
+        genreChoiceBox.setManaged(false);
+        genreChoiceBox.getSelectionModel().clearSelection();
     }
 
-    private void deactivateFilterTextField(){
-        bookFilterTextField.setVisible(false);
-        bookFilterTextField.setManaged(false);
-        bookFilterTextField.clear();
+    private void activateFilterTypeChoiceBox() {
+        filterTypeChoiceBox.setVisible(true);
+        filterTypeChoiceBox.setManaged(true);
+        filterTypeLabel.setVisible(true);
+        filterTypeLabel.setManaged(true);
     }
 
-    private void disableEditButton(){
-        bookEditButton.setDisable(true);
+    private void deactivateFilterTypeChoiceBox() {
+        filterTypeChoiceBox.setVisible(false);
+        filterTypeChoiceBox.setManaged(false);
+        filterTypeChoiceBox.getSelectionModel().clearSelection();
+        filterTypeLabel.setVisible(false);
+        filterTypeLabel.setManaged(false);
     }
 
-    private void enableEditButton(){
-        bookEditButton.setDisable(false);
+    private void activateFilterTextField() {
+        filterTextField.setVisible(true);
+        filterTextField.setManaged(true);
     }
 
-    public void handleBookInfo(Book book){
-        bookTitleYear.setText(book.getTitle() + " (" + book.getYear() + ")");
-        bookGenre.setText(book.getGenre().toString());
-        bookRating.setText("★".repeat(book.getRating()));
-        if(book.getReview() == null)
-            bookReview.setText("RESENHA: Sem resenha atribuida");
+    private void deactivateFilterTextField() {
+        filterTextField.setVisible(false);
+        filterTextField.setManaged(false);
+        filterTextField.clear();
+    }
 
+    private void disableEditButton() {
+        editButton.setDisable(true);
+    }
+
+    private void enableEditButton() {
+        editButton.setDisable(false);
+    }
+
+    public void handleBookInfo(Book book) {
+        titleYearInfo.setText(book.getTitle() + " (" + book.getYear() + ")");
+        genreInfo.setText(book.getGenre().toString());
+        ratingInfo.setText("★".repeat(book.getRating()));
+        if (book.getReview() == null)
+            reviewInfo.setText("RESENHA: Sem resenha atribuida");
         else
-            bookReview.setText("RESENHA: " + book.getReview());
-
+            reviewInfo.setText("RESENHA: " + book.getReview());
     }
 
 }
