@@ -9,13 +9,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -67,7 +68,7 @@ public class BooksTabContentController implements Initializable {
     private ChoiceBox<String> bookFilterTypeChoiceBox;
 
     @FXML
-    private ChoiceBox<Genres> bookGenreChoiceBox;
+    private ChoiceBox<Genres> bookFilterGenreChoiceBox;
 
     @FXML
     private ImageView bookImageView;
@@ -92,6 +93,7 @@ public class BooksTabContentController implements Initializable {
 
     private ObservableValue<Book> selectedBook;
 
+    private ObservableValue<String> selectedFilter;
 
     // ***********Metodos*******************
     @Override
@@ -99,9 +101,9 @@ public class BooksTabContentController implements Initializable {
 
         //**************TABELA************************************88
 
-        initTableSelectionListener();
+        initTableListener();
 
-        //Precisa criar o Property pois meu nao irei mudar o Model
+        //Precisa criar o Property pois nao irei mudar o Model
         bookTitleColumn.setCellValueFactory(cellData->
                 new SimpleStringProperty(cellData.getValue().getTitle()));
 
@@ -127,16 +129,34 @@ public class BooksTabContentController implements Initializable {
                 new SimpleStringProperty(celldata.getValue().getSeenDate()));
 
 
+        //***********TEXTFIELDS*********************
+        bookFilterTextField.setPromptText("Buscar");
+
+        //***********CHOICEBOXS*********************
+
+        List<String> filterChoices = new ArrayList<>();
+        filterChoices.add("Título");
+        filterChoices.add("Ano");
+        filterChoices.add("Gênero");
+
+        bookFilterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
+        initFilterChoiceBoxListener();
+
+        List<Genres> genreChoices = Arrays.asList(Genres.values());
+        bookFilterGenreChoiceBox.setItems(FXCollections.observableList(genreChoices));
+
         //***********BOTOES*************************
 
-        deactivateFilterFields();
+        deactivateFilterTypeChoiceBox();
+        deactivateFilterTextField();
+        deactivateGenreChoiceBox();
         bookEditButton.setDisable(true);
 
     }
 
     public void loadBookList(){
         List<Book> books = bookService.getAllBooks();
-        this.bookObservableList = FXCollections.observableArrayList(books);
+        bookObservableList = FXCollections.observableArrayList(books);
         bookTableView.setItems(bookObservableList);
     }
 
@@ -145,15 +165,15 @@ public class BooksTabContentController implements Initializable {
 
     }
 
-    void initTableSelectionListener (){
+    private void initTableListener(){
 
         selectedBook = bookTableView.getSelectionModel().selectedItemProperty();
 
         selectedBook.addListener(new ChangeListener<Book>() {
 
             @Override
-            public void changed(ObservableValue<? extends Book> obs, Book oldBook, Book newBook) {
-                if(newBook == null)
+            public void changed(ObservableValue<? extends Book> obs, Book oldValue, Book newValue) {
+                if(newValue == null)
                     disableEditButton();
 
                 else {
@@ -164,40 +184,81 @@ public class BooksTabContentController implements Initializable {
         });
     }
 
-    @FXML
-    public void onFilterButtonClicked(ActionEvent event){
+    private void initFilterChoiceBoxListener(){
 
-        if(bookFilterTextField.isVisible())
-            deactivateFilterFields();
+        selectedFilter = bookFilterTypeChoiceBox.getSelectionModel().selectedItemProperty();
 
-        else
-            activateFilterFields();
+        selectedFilter.addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+
+                if(newValue != null) {
+                    if (newValue.equals("Gênero")) {
+                        activateGenreChoiceBox();
+                        deactivateFilterTextField();
+                    } else {
+                        deactivateGenreChoiceBox();
+                        activateFilterTextField();
+
+                    }
+                }
+            }
+        });
 
     }
 
-    private void activateFilterFields(){
+    @FXML
+    public void onFilterButtonClicked(){
+
+        if(bookFilterTypeChoiceBox.isVisible()) {
+            deactivateFilterTypeChoiceBox();
+            deactivateFilterTextField();
+            deactivateGenreChoiceBox();
+        }
+
+        else {
+            activateFilterTypeChoiceBox();
+        }
+
+    }
+
+
+    private void activateGenreChoiceBox(){
+        bookFilterGenreChoiceBox.setVisible(true);
+        bookFilterGenreChoiceBox.setManaged(true);
+    }
+
+    private void deactivateGenreChoiceBox(){
+        bookFilterGenreChoiceBox.setVisible(false);
+        bookFilterGenreChoiceBox.setManaged(false);
+        bookFilterGenreChoiceBox.getSelectionModel().clearSelection();
+    }
+
+    private void activateFilterTypeChoiceBox(){
         bookFilterTypeChoiceBox.setVisible(true);
         bookFilterTypeChoiceBox.setManaged(true);
-        bookGenreChoiceBox.setVisible(true);
-        bookGenreChoiceBox.setManaged(true);
+    }
+
+    private void deactivateFilterTypeChoiceBox(){
+        bookFilterTypeChoiceBox.setVisible(false);
+        bookFilterTypeChoiceBox.setManaged(false);
+        bookFilterTypeChoiceBox.getSelectionModel().clearSelection();
+    }
+
+    private void activateFilterTextField(){
         bookFilterTextField.setVisible(true);
         bookFilterTextField.setManaged(true);
     }
 
-    private void deactivateFilterFields(){
-        bookFilterTypeChoiceBox.setVisible(false);
-        bookFilterTypeChoiceBox.setManaged(false);
-        bookGenreChoiceBox.setVisible(false);
-        bookGenreChoiceBox.setManaged(false);
+    private void deactivateFilterTextField(){
         bookFilterTextField.setVisible(false);
         bookFilterTextField.setManaged(false);
+        bookFilterTextField.clear();
     }
 
     private void disableEditButton(){
         bookEditButton.setDisable(true);
     }
-
-    /// ///TODO PAREI AQUI AQUI
 
     private void enableEditButton(){
         bookEditButton.setDisable(false);
