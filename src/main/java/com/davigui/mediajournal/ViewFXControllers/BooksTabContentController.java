@@ -151,6 +151,7 @@ public class BooksTabContentController implements Initializable {
         filterChoices.add("Ano");
         filterChoices.add("ISBN");
         filterChoices.add("Gênero");
+        filterChoices.add("Autor");
 
         filterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
         initFilterChoiceBoxListener();
@@ -241,13 +242,16 @@ public class BooksTabContentController implements Initializable {
 
                 if(newValue.isEmpty()) return;
 
-                String onlyIntValue = "0";
+                String onlyIntValue;
 
                 if(filterTypeChoiceBox.getValue().equals("Ano")){
+
                     if(!newValue.matches("^\\d*")){
                         onlyIntValue = newValue.replaceAll("[^\\d]", "");
                         filterTextField.setText(onlyIntValue);
-                    }
+
+                    } else onlyIntValue = newValue;
+
                     if(!onlyIntValue.isEmpty())
                         yearSearch(Integer.parseInt(onlyIntValue));
 
@@ -267,8 +271,15 @@ public class BooksTabContentController implements Initializable {
             case "ISBN":
                 isbnSearch(filter);
                 break;
+            case "Autor":
+                authorSearch(filter);
         }
 
+    }
+
+    private void authorSearch(String author){
+        List<Book> filteredBooks = bookService.searchBookByAuthor(author);
+        bookObservableList.setAll(filteredBooks);
     }
 
     private void genreSearch(Genres genre) {
