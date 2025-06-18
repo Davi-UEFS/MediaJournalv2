@@ -115,7 +115,7 @@ public class MoviesTabContentController implements Initializable {
     }
 
     public void loadMovieList(){
-        List<Movie> movies = movieService.getAllMovies();
+        List<Movie> movies = movieService.getAll();
         this.movieObservableList = FXCollections.observableArrayList(movies);
         movieTableView.setItems(movieObservableList);
     }

@@ -161,12 +161,12 @@ public class RegisterMenu {
      * Caso não existam séries cadastradas, exibe uma mensagem de erro.
      */
     private void handleRegisterSeason() {
-        if (seriesService.getAllSeries().isEmpty()) {
+        if (seriesService.getAll().isEmpty()) {
             System.out.println("Você não possui séries cadastradas");
             return;
         }
 
-        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAll());
         int seasonNumber = AskInput.askForSeasonNumber(scanner);
         int episodeCount = AskInput.askForEpisodeCount(scanner);
         int seasonYear = AskInput.askForSeasonYear(scanner);

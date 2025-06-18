@@ -80,11 +80,11 @@ public class RemoveMenu {
      * Exibe o resultado da operação.
      */
     private void handleDeleteBook() {
-        if (bookService.getAllBooks().isEmpty()) {
+        if (bookService.getAll().isEmpty()) {
             System.out.println("Você não possui livros cadastrados.");
             return;
         }
-        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAll());
         IResult result = bookService.deleteBook(selectedBook);
         System.out.println(result.getMessage());
     }
@@ -96,11 +96,11 @@ public class RemoveMenu {
      * Exibe o resultado da operação.
      */
     private void handleDeleteMovie() {
-        if (movieService.getAllMovies().isEmpty()) {
+        if (movieService.getAll().isEmpty()) {
             System.out.println("Você não possui filmes cadastrados.");
             return;
         }
-        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAll());
         IResult result = movieService.deleteMovie(selectedMovie);
         System.out.println(result.getMessage());
     }
@@ -112,11 +112,11 @@ public class RemoveMenu {
      * Exibe o resultado da operação.
      */
     private void handleDeleteSeries() {
-        if (seriesService.getAllSeries().isEmpty()) {
+        if (seriesService.getAll().isEmpty()) {
             System.out.println("Você não possui séries cadastradas.");
             return;
         }
-        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAll());
         IResult result = seriesService.deleteSeries(selectedSeries);
         System.out.println(result.getMessage());
     }

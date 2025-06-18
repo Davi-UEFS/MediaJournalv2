@@ -115,7 +115,7 @@ public class SeriesTabContentController implements Initializable {
     }
 
     public void loadSeriesList(){
-        List<Series> series = seriesService.getAllSeries();
+        List<Series> series = seriesService.getAll();
         this.seriesObservableList = FXCollections.observableArrayList(series);
         seriesTableView.setItems(seriesObservableList);
     }

@@ -109,11 +109,11 @@ public class RateMenu {
      * Se a lista de livros estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleRateBook() {
-        if (bookService.getAllBooks().isEmpty()) {
+        if (bookService.getAll().isEmpty()) {
             System.out.println("Você não possui livros cadastrados.");
             return;
         }
-        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAll());
         int rating = AskInput.askForRate(scanner);
         IResult result = bookService.rate(selectedBook, rating);
         System.out.println(result.getMessage());
@@ -128,11 +128,11 @@ public class RateMenu {
      * Se a lista de filmes estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleRateMovie() {
-        if (movieService.getAllMovies().isEmpty()) {
+        if (movieService.getAll().isEmpty()) {
             System.out.println("Você não possui filmes cadastrados.");
             return;
         }
-        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAll());
         int rating = AskInput.askForRate(scanner);
         IResult result = movieService.rate(selectedMovie, rating);
         System.out.println(result.getMessage());
@@ -148,11 +148,11 @@ public class RateMenu {
      * Se a lista de séries estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleRateSeason() {
-        if (seriesService.getAllSeries().isEmpty()) {
+        if (seriesService.getAll().isEmpty()) {
             System.out.println("Você não possui séries cadastradas.");
             return;
         }
-        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAll());
         int rating = AskInput.askForRate(scanner);
         int seasonNumber = AskInput.askForSeasonNumber(scanner);
         IResult result = seriesService.rateSeason(selectedSeries, seasonNumber, rating);
@@ -167,11 +167,11 @@ public class RateMenu {
      * Se a lista de livros estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleWriteBookReview() {
-        if (bookService.getAllBooks().isEmpty()) {
+        if (bookService.getAll().isEmpty()) {
             System.out.println("Você não possui livros cadastrados.");
             return;
         }
-        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAll());
         String review = AskInput.askForReview(scanner);
         IResult result = bookService.writeReview(selectedBook, review);
         System.out.println(result.getMessage());
@@ -185,11 +185,11 @@ public class RateMenu {
      * Se a lista de filmes estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleWriteMovieReview() {
-        if (movieService.getAllMovies().isEmpty()) {
+        if (movieService.getAll().isEmpty()) {
             System.out.println("Você não possui filmes cadastrados.");
             return;
         }
-        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAll());
         String review = AskInput.askForReview(scanner);
         IResult result = movieService.writeReview(selectedMovie, review);
         System.out.println(result.getMessage());
@@ -204,11 +204,11 @@ public class RateMenu {
      * Se a lista de séries estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleWriteSeasonReview() {
-        if (seriesService.getAllSeries().isEmpty()) {
+        if (seriesService.getAll().isEmpty()) {
             System.out.println("Você não possui séries cadastradas.");
             return;
         }
-        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAll());
         int seasonNumber = AskInput.askForSeasonNumber(scanner);
         String review = AskInput.askForReview(scanner);
         IResult result = seriesService.writeReviewSeason(selectedSeries, seasonNumber, review);
@@ -224,11 +224,11 @@ public class RateMenu {
      * Se a lista de livros estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleMarkBookAsSeen() {
-        if (bookService.getAllBooks().isEmpty()) {
+        if (bookService.getAll().isEmpty()) {
             System.out.println("Você não possui livros cadastrados.");
             return;
         }
-        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAll());
         int year = AskInput.askForSeenYear(scanner);
         Months month = AskInput.askForSeenMonth(scanner);
         IResult result = bookService.markAsSeen(selectedBook, year, month);
@@ -244,11 +244,11 @@ public class RateMenu {
      * Se a lista de filmes estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleMarkMovieAsSeen() {
-        if (movieService.getAllMovies().isEmpty()) {
+        if (movieService.getAll().isEmpty()) {
             System.out.println("Você não possui filmes cadastrados.");
             return;
         }
-        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAll());
         int year = AskInput.askForSeenYear(scanner);
         Months month = AskInput.askForSeenMonth(scanner);
         IResult result = movieService.markAsSeen(selectedMovie, year, month);
@@ -264,11 +264,11 @@ public class RateMenu {
      * Se a lista de séries estiver vazia, apenas exibe uma mensagem de erro.
      */
     private void handleMarkSeasonAsSeen() {
-        if (seriesService.getAllSeries().isEmpty()) {
+        if (seriesService.getAll().isEmpty()) {
             System.out.println("Você não possui séries cadastradas.");
             return;
         }
-        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAll());
         int seasonNumber = AskInput.askForSeasonNumber(scanner);
         IResult result = seriesService.markAsSeenSeason(selectedSeries, seasonNumber);
         System.out.println(result.getMessage());

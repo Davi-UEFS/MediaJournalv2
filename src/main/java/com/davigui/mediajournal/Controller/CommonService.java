@@ -92,12 +92,11 @@ public abstract class CommonService<T extends Media> {
      * Filtra as obras que contêm o título, utilizando o metodo filter da biblioteca Stream.
      *
      * @param title     O título a ser buscado.
-     * @param mediaList A lista de mídias onde a busca será realizada.
      * @return Uma lista de mídias que correspondem ao título, ordenadas de forma crescente.
      */
-    public List<T> searchByTitle(String title, List<T> mediaList) {
+    public List<T> searchByTitle(String title) {
         String titleLower = title.toLowerCase().trim();
-        List<T> filteredMedia = mediaList.stream().filter
+        List<T> filteredMedia = getAll().stream().filter
                 (media -> media.getTitle().toLowerCase().contains(titleLower)).toList();
 
         return sortAscending(filteredMedia);
@@ -108,11 +107,10 @@ public abstract class CommonService<T extends Media> {
      * Filtra as obras que contêm o ano, utilizando o metodo filter da biblioteca Stream.
      *
      * @param year      O ano a ser buscado.
-     * @param mediaList A lista de mídias onde a busca será realizada.
      * @return Uma lista de mídias que correspondem ao ano, ordenadas de forma crescente.
      */
-    public List<T> searchByYear(int year, List<T> mediaList) {
-        List<T> filteredMedia = mediaList.stream().filter
+    public List<T> searchByYear(int year) {
+        List<T> filteredMedia = getAll().stream().filter
                 (media -> media.getYear() == year).toList();
 
         return sortAscending(filteredMedia);
@@ -123,11 +121,10 @@ public abstract class CommonService<T extends Media> {
      * Filtra as obras que contêm o gênero, utilizando o metodo filter da biblioteca Stream.
      *
      * @param genre     O gênero a ser buscado.
-     * @param mediaList A lista de mídias onde a busca será realizada.
      * @return Uma lista de mídias que correspondem ao gênero, ordenadas de forma crescente.
      */
-    public List<T> searchByGenre(Genres genre, List<T> mediaList) {
-        List<T> filteredMedia = mediaList.stream().filter
+    public List<T> searchByGenre(Genres genre) {
+        List<T> filteredMedia = getAll().stream().filter
                 (media -> media.getGenre() == genre).toList();
 
         return sortAscending(filteredMedia);
@@ -157,17 +154,16 @@ public abstract class CommonService<T extends Media> {
      * Gera um map onde as chaves são os anos em ordem crescente e os valores são listas de mídias
      * correspondentes a cada ano, ordenadas por nota crescente.
      *
-     * @param mediaList A lista de mídias a ser mapeada.
      * @return Um mapa contendo as mídias agrupadas por ano em ordem crescente e ordenadas por nota crescente.
      */
 
-    public Map<Integer, List<T>> mapByAscendingYearAscendingRate(List<T> mediaList) {
+    public Map<Integer, List<T>> mapByAscendingYearAscendingRate() {
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
 
         for (Integer year : years) {
             List<T> filteredMedia;
-            filteredMedia = searchByYear(year, mediaList);
+            filteredMedia = searchByYear(year);
 
             if (!filteredMedia.isEmpty())
                 mapYearMedia.put(year, filteredMedia);
@@ -179,17 +175,16 @@ public abstract class CommonService<T extends Media> {
      * Gera um mapa onde as chaves são os anos em ordem decrescente e os valores são listas de mídias
      * correspondentes a cada ano, ordenadas por nota crescente.
      *
-     * @param mediaList A lista de mídias a ser mapeada.
      * @return Um mapa contendo as mídias agrupadas por ano em ordem decrescente e ordenadas por nota crescente.
      */
-    public Map<Integer, List<T>> mapByDescendingYearAscendingRate(List<T> mediaList){
+    public Map<Integer, List<T>> mapByDescendingYearAscendingRate(){
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
 
         Collections.reverse(years);
 
         for (Integer year : years) {
-            List<T> filteredMedia = searchByYear(year, mediaList);
+            List<T> filteredMedia = searchByYear(year);
             if (!filteredMedia.isEmpty())
                 mapYearMedia.put(year, new ArrayList<>(filteredMedia));
         }
@@ -200,15 +195,14 @@ public abstract class CommonService<T extends Media> {
      * Gera um mapa onde as chaves são os anos em ordem crescente e os valores são listas de mídias
      * correspondentes a cada ano, ordenadas por nota decrescente.
      *
-     * @param mediaList A lista de mídias a ser mapeada.
      * @return Um mapa contendo as mídias agrupadas por ano em ordem crescente e ordenadas por nota decrescente.
      */
-    public Map<Integer, List<T>> mapByAscendingYearDescendingRate(List<T> mediaList){
+    public Map<Integer, List<T>> mapByAscendingYearDescendingRate(){
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
 
         for (Integer year : years) {
-            List<T> filteredMedia = sortDescending(searchByYear(year, mediaList));
+            List<T> filteredMedia = sortDescending(searchByYear(year));
             if (!filteredMedia.isEmpty())
                 mapYearMedia.put(year, new ArrayList<>(filteredMedia));
         }
@@ -219,17 +213,16 @@ public abstract class CommonService<T extends Media> {
      * Gera um mapa onde as chaves são os anos em ordem decrescente e os valores são listas de mídias
      * correspondentes a cada ano, ordenadas por nota decrescente.
      *
-     * @param mediaList A lista de mídias a ser mapeada.
      * @return Um mapa contendo as mídias agrupadas por ano em ordem decrescente e ordenadas por nota decrescente.
      */
-    public Map<Integer, List<T>> mapByDescendingYearDescendingRate(List<T> mediaList){
+    public Map<Integer, List<T>> mapByDescendingYearDescendingRate(){
         Map<Integer, List<T>> mapYearMedia = new LinkedHashMap<>();
         List<Integer> years = new ArrayList<>(journal.getYearsRegistered().keySet());
 
         Collections.reverse(years);
 
         for (Integer year : years) {
-            List<T> filteredMedia = sortDescending(searchByYear(year, mediaList));
+            List<T> filteredMedia = sortDescending(searchByYear(year));
             if (!filteredMedia.isEmpty())
                 mapYearMedia.put(year, new ArrayList<>(filteredMedia));
         }
@@ -240,15 +233,14 @@ public abstract class CommonService<T extends Media> {
      * Gera um mapa onde as chaves são os gêneros e os valores são listas de mídias
      * correspondentes a cada gênero, ordenadas por nota crescente.
      *
-     * @param mediaList     A lista de mídias a ser mapeada.
      * @return Um mapa contendo as mídias agrupadas por gênero.
      */
-    public Map<Genres, List<T>> mapByGenreAscendingRate(List<T> mediaList) {
+    public Map<Genres, List<T>> mapByGenreAscendingRate() {
         Map<Genres, List<T>> mapGenreMedia = new EnumMap<>(Genres.class);
 
         for (Genres genre : Genres.values()) {
             List<T> filteredMedia;
-            filteredMedia = searchByGenre(genre, mediaList);
+            filteredMedia = searchByGenre(genre);
 
             if (!filteredMedia.isEmpty())
                 mapGenreMedia.put(genre, filteredMedia);
@@ -260,20 +252,27 @@ public abstract class CommonService<T extends Media> {
      * Gera um mapa onde as chaves são os gêneros e os valores são listas de mídias
      * correspondentes a cada gênero, ordenadas por nota decrescente.
      *
-     * @param mediaList     A lista de mídias a ser mapeada.
      * @return Um mapa contendo as mídias agrupadas por gênero.
      */
-    public Map<Genres, List<T>> mapByGenreDescendingRate(List<T> mediaList) {
+    public Map<Genres, List<T>> mapByGenreDescendingRate() {
         Map<Genres, List<T>> mapGenreMedia = new EnumMap<>(Genres.class);
 
         for (Genres genre : Genres.values()) {
             List<T> filteredMedia;
-            filteredMedia = sortDescending(searchByGenre(genre, mediaList));
+            filteredMedia = sortDescending(searchByGenre(genre));
 
             if (!filteredMedia.isEmpty())
                 mapGenreMedia.put(genre, filteredMedia);
         }
         return mapGenreMedia;
     }
+
+
+    /**
+     * Obtém a lista de mídias do controlador correspondente por sobrecarga.
+     *
+     * @return A lista de livros/filmes/séries cadastrados na biblioteca.
+     */
+    public abstract List<T> getAll();
 
 }

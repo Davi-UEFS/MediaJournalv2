@@ -140,7 +140,7 @@ public class BooksTabContentController implements Initializable {
     }
 
     public void loadBookList() {
-        List<Book> books = bookService.getAllBooks();
+        List<Book> books = bookService.getAll();
         bookObservableList = FXCollections.observableArrayList(books);
         tableView.setItems(bookObservableList);
     }
@@ -269,11 +269,11 @@ public class BooksTabContentController implements Initializable {
     }
 
     private void genreSearch(Genres genre) {
-        bookObservableList.setAll(bookService.searchByGenre(genre, bookService.getAllBooks()));
+        bookObservableList.setAll(bookService.searchByGenre(genre));
     }
 
     private void titleSearch(String title) {
-        bookObservableList.setAll(bookService.searchByTitle(title, bookService.getAllBooks()));
+        bookObservableList.setAll(bookService.searchByTitle(title));
     }
 
     private void isbnSearch(String isbn) {
@@ -281,7 +281,7 @@ public class BooksTabContentController implements Initializable {
     }
 
     private void yearSearch(int year){
-        bookObservableList.setAll(bookService.searchByYear(year, bookService.getAllBooks()));
+        bookObservableList.setAll(bookService.searchByYear(year));
     }
 
     private void setVisibleAndManaged(Control control, boolean active){
@@ -303,7 +303,7 @@ public class BooksTabContentController implements Initializable {
 
     @FXML
     private void clearSearch() {
-        bookObservableList.setAll(bookService.getAllBooks());
+        bookObservableList.setAll(bookService.getAll());
         filterTypeChoiceBox.getSelectionModel().clearSelection();
         toggleFilterTextField(false);
         toggleGenreChoiceBox(false);
