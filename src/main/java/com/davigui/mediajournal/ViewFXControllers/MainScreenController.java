@@ -50,11 +50,11 @@ public class MainScreenController implements Initializable {
         MovieService movieService = new MovieService(journal);
         SeriesService seriesService = new SeriesService(journal);
 
-        booksTabContentController.setBookService(bookService);
-        booksTabContentController.loadBookList();
+        booksTabContentController.setService(bookService);
+        booksTabContentController.loadMediaList();
 
-        moviesTabContentController.setMovieService(movieService);
-        moviesTabContentController.loadMovieList();
+        moviesTabContentController.setService(movieService);
+        moviesTabContentController.loadMediaList();
 
         seriesTabContentController.setSeriesService(seriesService);
         seriesTabContentController.loadSeriesList();

@@ -20,73 +20,73 @@ public abstract class MediaContentController<T extends Media> implements Initial
     // *********Atributos FXML******************
 
     @FXML
-    private TableView<T> tableView;
+    protected TableView<T> tableView;
 
     @FXML
-    private Label tableLabel;
+    protected Label tableLabel;
 
     @FXML
-    private TableColumn<T, String> titleColumn;
+    protected TableColumn<T, String> titleColumn;
 
     @FXML
-    private TableColumn<T, Integer> yearColumn;
+    protected TableColumn<T, Integer> yearColumn;
 
     @FXML
-    private TableColumn<T, Integer> ratingColumn;
+    protected TableColumn<T, Integer> ratingColumn;
 
     @FXML
-    private Button editButton;
+    protected Button editButton;
 
     @FXML
-    private Button removeButton;
+    protected Button removeButton;
 
     @FXML
-    private Button rateButton;
+    protected Button rateButton;
 
     @FXML
-    private Button filterButton;
+    protected Button filterButton;
 
     @FXML
-    private TextField filterTextField;
+    protected TextField filterTextField;
 
     @FXML
-    private ChoiceBox<String> filterTypeChoiceBox;
+    protected ChoiceBox<String> filterTypeChoiceBox;
 
     @FXML
-    private Label filterTypeLabel;
+    protected Label filterTypeLabel;
 
     @FXML
-    private ChoiceBox<Genres> genreChoiceBox;
+    protected ChoiceBox<Genres> genreChoiceBox;
 
     @FXML
-    private Button clearSearchButton;
+    protected Button clearSearchButton;
 
     @FXML
-    private ImageView coverViewInfo;
+    protected ImageView coverViewInfo;
 
     @FXML
-    private Label titleYearInfo;
+    protected Label titleYearInfo;
 
     @FXML
-    private Label genreInfo;
+    protected Label genreInfo;
 
     @FXML
-    private Label ratingInfo;
+    protected Label ratingInfo;
 
     @FXML
-    private Label reviewInfo;
+    protected Label reviewInfo;
 
     // *********Atributos nao FXMLs******************
 
-    private CommonService<T> service;
+    protected CommonService<T> service;
 
-    private ObservableList<T> mediaObservableList;
+    protected ObservableList<T> mediaObservableList;
 
-    private ObservableValue<T> selectedItem;
+    protected ObservableValue<T> selectedItem;
 
-    private ObservableValue<Genres> selectedGenre;
+    protected ObservableValue<Genres> selectedGenre;
 
-    private ObservableValue<String> selectedFilter;
+    protected ObservableValue<String> selectedFilter;
 
     // ***********Metodos*******************
     @Override
@@ -113,10 +113,6 @@ public abstract class MediaContentController<T extends Media> implements Initial
         toggleFilterTextField(false);
         toggleGenreChoiceBox(false);
         updateActionButtons();
-    }
-
-    public void setMediaService(CommonService<T> service) {
-        this.service = service;
     }
 
     protected void loadMediaList(){
@@ -240,7 +236,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     @FXML
-    public void onFilterButtonClicked() {
+    protected void onFilterButtonClicked() {
 
         if (filterTypeChoiceBox.isVisible()) {
             toggleFilterTypeComponents(false);
@@ -276,6 +272,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
         if(!active) filterTextField.clear();
     }
 
+    protected abstract void setService(CommonService<T> service);
     protected abstract void configureFilterChoices();
     protected abstract void configureTable();
     protected abstract void handleSpecificSearch(String filter);

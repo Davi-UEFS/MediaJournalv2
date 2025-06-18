@@ -1,127 +1,129 @@
 package com.davigui.mediajournal.ViewFXControllers;
 
+import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.Controller.MovieService;
-import com.davigui.mediajournal.Model.Enums.Genres;
 import com.davigui.mediajournal.Model.Medias.Movie;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class MoviesTabContentController implements Initializable {
+public class MoviesTabContentController extends MediaContentController<Movie> implements Initializable {
+
+    // *********Atributos FXML******************
+    @FXML
+    private TableColumn<Movie, String> originalTitleColumn;
 
     @FXML
-    private VBox moviesTabVbox;
+    private TableColumn<Movie, String> directionColumn;
 
     @FXML
-    private TableView<Movie> movieTableView;
+    private TableColumn<Movie, Integer> durationColumn;
 
     @FXML
-    private Label movieTableLabel;
+    private TableColumn<Movie, String> seenDateColumn;
 
     @FXML
-    private TableColumn<Movie, String> movieTitleColumn;
+    private Label whereToWatchInfo;
 
     @FXML
-    private TableColumn<Movie, String> movieOriginalTitleColumn;
+    private Label castInfo;
 
     @FXML
-    private TableColumn<Movie, String> movieDirectorColumn;
+    private Label scriptInfo;
 
     @FXML
-    private TableColumn<Movie, Integer> movieYearColumn;
+    private Label durationInfo;
 
-    @FXML
-    private TableColumn<Movie, Integer> movieDurationColumn;
+    //*********Atributos NAO FXML***********
+    //TODO: EXPLICITAR POSSIVEL ERRO DE CAST NO JAVADOC
+    private MovieService movieService = (MovieService) service;
 
-    @FXML
-    private TableColumn<Movie, Integer> movieRatingColumn;
+    //***********Metodos*********************
 
-    @FXML
-    private TableColumn<Movie, String> movieSeenDateColumn;
-
-    @FXML
-    private Button movieEditButton;
-
-    @FXML
-    private Button movieRemoveButton;
-
-    @FXML
-    private Button movieRateButton;
-
-    @FXML
-    private Button movieFilterButton;
-
-    @FXML
-    private TextField movieFilterTextField;
-
-    @FXML
-    private ChoiceBox<String> movieFilterTypeChoiceBox;
-
-    @FXML
-    private ChoiceBox<Genres> movieGenreChoiceBox;
-
-    @FXML
-    private ImageView movieImageView;
-
-    @FXML
-    private Label movieTitleYear;
-
-    @FXML
-    private Label movieGenre;
-
-    @FXML
-    private Label movieRating;
-
-    @FXML
-    private Label movieReview;
-
-    private MovieService movieService;
-
-    private ObservableList<Movie> movieObservableList;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    protected void setService(CommonService<Movie> service) {
+        this.service = service;
+        this.movieService = (MovieService) service;
+    }
 
-        movieTitleColumn.setCellValueFactory(cellData->
+    @Override
+    protected void configureTable() {
+        titleColumn.setCellValueFactory(cellData->
                 new SimpleStringProperty(cellData.getValue().getTitle()));
 
-        movieYearColumn.setCellValueFactory(celldata->
+        yearColumn.setCellValueFactory(celldata->
                 (new SimpleIntegerProperty(celldata.getValue().getYear())).asObject());
 
-        movieRatingColumn.setCellValueFactory(celldata->
+        ratingColumn.setCellValueFactory(celldata->
                 (new SimpleIntegerProperty(celldata.getValue().getRating())).asObject());
 
-        movieDirectorColumn.setCellValueFactory(celldata->
+        directionColumn.setCellValueFactory(celldata->
                 new SimpleStringProperty(celldata.getValue().getDirection()));
 
-        movieDurationColumn.setCellValueFactory(celldata->
+        durationColumn.setCellValueFactory(celldata->
                 (new SimpleIntegerProperty(celldata.getValue().getDuration()).asObject())); // Assumindo getDuration() retorna String
 
-        movieOriginalTitleColumn.setCellValueFactory(celldata->
+        originalTitleColumn.setCellValueFactory(celldata->
                 new SimpleStringProperty(celldata.getValue().getOriginalTitle()));
 
-        movieSeenDateColumn.setCellValueFactory(celldata->
+        seenDateColumn.setCellValueFactory(celldata->
                 new SimpleStringProperty(celldata.getValue().getSeenDate()));
     }
 
-    public void loadMovieList(){
-        List<Movie> movies = movieService.getAll();
-        this.movieObservableList = FXCollections.observableArrayList(movies);
-        movieTableView.setItems(movieObservableList);
+    private void actorSearch(String filter){
+        mediaObservableList.setAll(movieService.searchByActor(filter));
     }
 
-    public void setMovieService(MovieService movieService){
-        this.movieService = movieService;
+    private void directorSearch(String filter){
+        mediaObservableList.setAll(movieService.searchByDirector(filter));
+    }
 
+    @Override
+    protected void configureFilterChoices() {
+        List<String> filterChoices = new ArrayList<>();
+        filterChoices.add("Título");
+        filterChoices.add("Ano");
+        filterChoices.add("Gênero");
+        filterChoices.add("Diretor");
+        filterChoices.add("Ator");
+
+        filterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
+    }
+
+    @Override
+    protected void handleSpecificSearch(String filter) {
+        switch (selectedFilter.getValue()){
+            case "Ator":
+                actorSearch(filter);
+                break;
+
+            case "Diretor":
+                directorSearch(filter);
+                break;
+        }
+    }
+
+    @Override
+    protected void handleMediaInfo(Movie movie) {
+        titleYearInfo.setText(movie.getTitle() + " (" + movie.getYear() + ")");
+        genreInfo.setText(movie.getGenre().toString());
+        ratingInfo.setText("★".repeat(movie.getRating()));
+        if (movie.getReview() == null)
+            reviewInfo.setText("RESENHA: Sem resenha atribuida");
+        else
+            reviewInfo.setText("RESENHA: " + movie.getReview());
+
+        durationInfo.setText("Duração: " + movie.getDuration() + "min");
+        castInfo.setText("Elenco: " + movie.getCast().toString());
+        scriptInfo.setText("Roteiro: " + movie.getScript());
+        whereToWatchInfo.setText("Plataformas: " + movie.getWhereToWatch().toString());
     }
 }

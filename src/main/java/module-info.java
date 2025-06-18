@@ -9,6 +9,7 @@ module journal {
     opens com.davigui.mediajournal.Model.Enums to com.google.gson;
 
     exports com.davigui.mediajournal.Model.Medias;
+    exports com.davigui.mediajournal.Model.Enums;
     exports com.davigui.mediajournal.Model.Repository;
     exports com.davigui.mediajournal.Controller;
     exports com.davigui.mediajournal.ViewFXControllers;
