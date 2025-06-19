@@ -49,31 +49,26 @@
                 </graphic>
             </Button>
         </HBox>
-      <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="20.0">
-         <children>
-            <TextField fx:id="filterTextField" prefHeight="25.0" prefWidth="300.0" />
-            <ChoiceBox fx:id="genreChoiceBox" prefWidth="150.0" />
+        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="20.0">
+            <TextField fx:id="filterTextField" prefHeight="25.0" prefWidth="300.0"/>
+            <ChoiceBox fx:id="genreChoiceBox" prefWidth="150.0"/>
             <VBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="88.0">
-               <children>
-                  <Label fx:id="filterTypeLabel" text="Tipo de Filtro">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ChoiceBox fx:id="filterTypeChoiceBox" prefWidth="150.0" />
-               </children>
+                <Label fx:id="filterTypeLabel" text="Tipo de Filtro">
+                   <font>
+                       <Font size="14.0"/>
+                   </font>
+                </Label>
+                <ChoiceBox fx:id="filterTypeChoiceBox" prefWidth="150.0"/>
             </VBox>
-            <Button fx:id="clearSearchButton" mnemonicParsing="false" onAction="#clearSearch" prefHeight="20.0" prefWidth="20.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/eraser_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="clearSearchButton" mnemonicParsing="false" onAction="#clearSearch" prefHeight="20.0"
+                    prefWidth="20.0">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../images/eraser_icon.png"/>
+                    </ImageView>
+                </graphic>
             </Button>
-         </children>
-      </HBox>
+        </HBox>
         <Label fx:id="tableLabel" prefHeight="40.0" prefWidth="216.0" text="Filmes Cadastrados">
             <font>
                 <Font name="Fira Code Light" size="16.0" />
@@ -97,7 +92,10 @@
             </padding>
         </TableView>
     </VBox>
-    <VBox alignment="CENTER" prefHeight="700.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="mediaInfoVbox"
+          alignment="CENTER" prefHeight="700.0" prefWidth="344.0"
+          xmlns="http://javafx.com/javafx/23.0.1"
+          xmlns:fx="http://javafx.com/fxml/1">
 
         <ImageView fx:id="coverViewInfo" fitHeight="206.0" fitWidth="267.0" preserveRatio="true">
             <Image url="@../images/placeholder.png" />

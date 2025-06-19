@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -60,6 +61,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     @FXML
     protected Button clearSearchButton;
+
+    @FXML
+    protected VBox mediaInfoVbox;
 
     @FXML
     protected ImageView coverViewInfo;
@@ -126,8 +130,11 @@ public abstract class MediaContentController<T extends Media> implements Initial
         selectedItem = tableView.getSelectionModel().selectedItemProperty();
 
         selectedItem.addListener((obs, oldValue, newValue) -> {
-            if (newValue != null)
+            if (newValue != null) {
+                mediaInfoVbox.setVisible(true);
                 handleMediaInfo(newValue);
+            }else
+                resetMediaInfo();
             updateActionButtons();
         });
     }
@@ -251,6 +258,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected void clearSearch() {
         mediaObservableList.setAll(service.getAll());
         filterTypeChoiceBox.getSelectionModel().clearSelection();
+        tableView.getSelectionModel().clearSelection();
         toggleFilterTextField(false);
         toggleGenreChoiceBox(false);
     }
@@ -270,6 +278,10 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected void toggleFilterTextField(boolean active){
         setVisibleAndManaged(filterTextField, active);
         if(!active) filterTextField.clear();
+    }
+
+    protected void resetMediaInfo(){
+        mediaInfoVbox.setVisible(false);
     }
 
     protected abstract void setService(CommonService<T> service);
