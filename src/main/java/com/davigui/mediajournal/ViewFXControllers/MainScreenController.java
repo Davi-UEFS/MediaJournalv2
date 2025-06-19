@@ -56,8 +56,8 @@ public class MainScreenController implements Initializable {
         moviesTabContentController.setService(movieService);
         moviesTabContentController.loadMediaList();
 
-        seriesTabContentController.setSeriesService(seriesService);
-        seriesTabContentController.loadSeriesList();
+        seriesTabContentController.setService(seriesService);
+        seriesTabContentController.loadMediaList();
 
     }
 }
