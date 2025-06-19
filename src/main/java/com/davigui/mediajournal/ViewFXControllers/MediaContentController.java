@@ -21,6 +21,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
     // *********Atributos FXML******************
 
     @FXML
+    protected SplitPane splitPane;
+
+    @FXML
     protected TableView<T> tableView;
 
     @FXML
@@ -117,6 +120,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
         toggleFilterTextField(false);
         toggleGenreChoiceBox(false);
         updateActionButtons();
+
+        //**********VBOXES************
+        hideMediaInfo();
     }
 
     protected void loadMediaList(){
@@ -131,10 +137,10 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
         selectedItem.addListener((obs, oldValue, newValue) -> {
             if (newValue != null) {
-                mediaInfoVbox.setVisible(true);
+                showMediaInfo();
                 handleMediaInfo(newValue);
             }else
-                resetMediaInfo();
+                hideMediaInfo();
             updateActionButtons();
         });
     }
@@ -280,8 +286,17 @@ public abstract class MediaContentController<T extends Media> implements Initial
         if(!active) filterTextField.clear();
     }
 
-    protected void resetMediaInfo(){
+    protected void hideMediaInfo(){
         mediaInfoVbox.setVisible(false);
+        mediaInfoVbox.setManaged(false);
+        splitPane.setDividerPosition(0, 1);
+
+    }
+
+    protected void showMediaInfo(){
+        mediaInfoVbox.setVisible(true);
+        mediaInfoVbox.setManaged(true);
+        splitPane.setDividerPosition(0, 0.7);
     }
 
     protected abstract void setService(CommonService<T> service);

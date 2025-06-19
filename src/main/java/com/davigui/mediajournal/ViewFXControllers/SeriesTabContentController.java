@@ -35,6 +35,9 @@ public class SeriesTabContentController extends MediaContentController<Series> i
     @FXML
     private Label whereToWatchInfo;
 
+    @FXML
+    private Label seasonsInfo;
+
     /*TODO: DECIDIR SE VOU IMPLEMENTAR ISSO
     @FXML
     private TableColumn<Series, String> seenDateColumn;
@@ -115,5 +118,11 @@ public class SeriesTabContentController extends MediaContentController<Series> i
 
         castInfo.setText("Elenco: " + series.getCast().toString());
         whereToWatchInfo.setText("Plataformas: " + series.getWhereToWatch().toString());
+
+        StringBuffer seasonsString = new StringBuffer();
+        series.getSeasons().forEach(season ->
+                seasonsString.append("\n\t").append(season.toString()));
+        seasonsInfo.setText(seasonsString.toString());
+
     }
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.7" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MoviesTabContentController">
+<SplitPane fx:id="splitPane" dividerPositions="0.7" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MoviesTabContentController">
     <VBox alignment="CENTER" spacing="20.0">
         <HBox alignment="CENTER_RIGHT" spacing="5.0">
             <VBox.margin>
@@ -50,21 +50,20 @@
             </Button>
         </HBox>
         <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="20.0">
-            <TextField fx:id="filterTextField" prefHeight="25.0" prefWidth="300.0"/>
-            <ChoiceBox fx:id="genreChoiceBox" prefWidth="150.0"/>
+            <TextField fx:id="filterTextField" prefHeight="25.0" prefWidth="300.0" />
+            <ChoiceBox fx:id="genreChoiceBox" prefWidth="150.0" />
             <VBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="88.0">
                 <Label fx:id="filterTypeLabel" text="Tipo de Filtro">
                    <font>
-                       <Font size="14.0"/>
+                       <Font size="14.0" />
                    </font>
                 </Label>
-                <ChoiceBox fx:id="filterTypeChoiceBox" prefWidth="150.0"/>
+                <ChoiceBox fx:id="filterTypeChoiceBox" prefWidth="150.0" />
             </VBox>
-            <Button fx:id="clearSearchButton" mnemonicParsing="false" onAction="#clearSearch" prefHeight="20.0"
-                    prefWidth="20.0">
+            <Button fx:id="clearSearchButton" mnemonicParsing="false" onAction="#clearSearch" prefHeight="20.0" prefWidth="20.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../images/eraser_icon.png"/>
+                        <Image url="@../images/eraser_icon.png" />
                     </ImageView>
                 </graphic>
             </Button>
@@ -92,29 +91,41 @@
             </padding>
         </TableView>
     </VBox>
-    <VBox fx:id="mediaInfoVbox"
-          alignment="CENTER" prefHeight="700.0" prefWidth="344.0"
-          xmlns="http://javafx.com/javafx/23.0.1"
-          xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="mediaInfoVbox" alignment="CENTER" prefHeight="700.0" prefWidth="344.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
         <ImageView fx:id="coverViewInfo" fitHeight="206.0" fitWidth="267.0" preserveRatio="true">
             <Image url="@../images/placeholder.png" />
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
         </ImageView>
         <Label fx:id="titleYearInfo" text="Lorem ipsum dolor (ANO) ">
             <font>
                 <Font size="15.0" />
             </font>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
         </Label>
         <Label fx:id="durationInfo" text="Duracao" textAlignment="JUSTIFY">
          <font>
             <Font size="14.0" />
-         </font></Label>
+         </font>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin></Label>
         <Label fx:id="genreInfo" text="GENERO: Lorem">
             <font>
                 <Font size="14.0" />
             </font>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
         </Label>
-        <Label fx:id="ratingInfo" text="★★★★★" />
+        <Label fx:id="ratingInfo" text="★★★★★">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin></Label>
         <Label fx:id="reviewInfo" text="(SCROLL)Resenha: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia consectetur neque. Etiam ac sollicitudin erat. Praesent ut nunc a libero vehicula convallis. Praesent euismod lacus id nulla facilisis, sit amet molestie orci pellentesque. Sed enim metus, commodo ac porta ut, consequat at justo. Nulla neque risus, porta quis facilisis sit amet, sagittis ac nisl. Aliquam aliquet felis eu magna." textAlignment="JUSTIFY" wrapText="true">
             <font>
                 <Font size="14.0" />
@@ -127,16 +138,25 @@
             <font>
                 <Font size="14.0" />
             </font>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
         </Label>
         <Label fx:id="castInfo" text="Elenco" textAlignment="JUSTIFY">
             <font>
                 <Font size="14.0" />
             </font>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
         </Label>
         <Label fx:id="whereToWatchInfo" text="Plataformas:" textAlignment="JUSTIFY">
             <font>
                 <Font size="14.0" />
             </font>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
         </Label>
     </VBox>
 </SplitPane>

@@ -137,6 +137,15 @@ public class Series extends Media {
     }
 
     /**
+     * Obtém as temporadas de uma série.
+     *
+     * @return Um TreeSet de Season.
+     */
+    public TreeSet<Season> getSeasons() {
+        return seasons;
+    }
+
+    /**
      * Obtém o tipo de mídia, que neste caso é "Série".
      *
      * @return Uma string representando o tipo de mídia.
