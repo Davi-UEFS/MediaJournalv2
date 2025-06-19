@@ -61,21 +61,21 @@ public class SearchMenu {
 
             switch (option) {
                 case 1:
-                    if (bookService.getAllBooks().isEmpty())
+                    if (bookService.getAll().isEmpty())
                         System.out.println("Você não possui livros cadastrados.");
                     else
                         searchBookMiniMenu();
                     break;
 
                 case 2:
-                    if (movieService.getAllMovies().isEmpty())
+                    if (movieService.getAll().isEmpty())
                         System.out.println("Você não possui filmes cadastrados");
                     else
                         searchMovieMiniMenu();
                     break;
 
                 case 3:
-                    if (seriesService.getAllSeries().isEmpty())
+                    if (seriesService.getAll().isEmpty())
                         System.out.println("Você não possui séries cadastradas");
                     else
                         searchSeriesMiniMenu();
@@ -107,7 +107,6 @@ public class SearchMenu {
         String author;
         String isbn;
         List<Book> filteredBookList;
-        List<Book> allBooks = bookService.getAllBooks();
 
         do {
             System.out.println(Colors.green + "--== BUSCAR LIVRO ==--" + Colors.rst);
@@ -123,19 +122,19 @@ public class SearchMenu {
             switch (option) {
                 case 1:
                     title = AskInput.askForTitle(scanner);
-                    filteredBookList = bookService.searchByTitle(title, allBooks);
+                    filteredBookList = bookService.searchByTitle(title);
                     printBookList(filteredBookList);
                     break;
 
                 case 2:
                     year = AskInput.askForYear(scanner);
-                    filteredBookList = bookService.searchByYear(year, allBooks);
+                    filteredBookList = bookService.searchByYear(year);
                     printBookList(filteredBookList);
                     break;
 
                 case 3:
                     genre = AskInput.askForGenre(scanner);
-                    filteredBookList = bookService.searchByGenre(genre, allBooks);
+                    filteredBookList = bookService.searchByGenre(genre);
                     printBookList(filteredBookList);
                     break;
 
@@ -177,7 +176,6 @@ public class SearchMenu {
         String director;
         String actor;
         List<Movie> filteredMovieList;
-        List<Movie> allMovies = movieService.getAllMovies();
 
         do {
             System.out.println(Colors.green + "--== BUSCAR FILME ==--" + Colors.rst);
@@ -193,19 +191,19 @@ public class SearchMenu {
             switch (option) {
                 case 1:
                     title = AskInput.askForTitle(scanner);
-                    filteredMovieList = movieService.searchByTitle(title, allMovies);
+                    filteredMovieList = movieService.searchByTitle(title);
                     printMovieList(filteredMovieList);
                     break;
 
                 case 2:
                     year = AskInput.askForYear(scanner);
-                    filteredMovieList = movieService.searchByYear(year, allMovies);
+                    filteredMovieList = movieService.searchByYear(year);
                     printMovieList(filteredMovieList);
                     break;
 
                 case 3:
                     genre = AskInput.askForGenre(scanner);
-                    filteredMovieList = movieService.searchByGenre(genre, allMovies);
+                    filteredMovieList = movieService.searchByGenre(genre);
                     printMovieList(filteredMovieList);
                     break;
 
@@ -245,7 +243,6 @@ public class SearchMenu {
         int year;
         Genres genre;
         String actor;
-        List<Series> allSeries = seriesService.getAllSeries();
         List<Series> filteredSeriesList;
 
         do {
@@ -261,19 +258,19 @@ public class SearchMenu {
             switch (option) {
                 case 1:
                     title = AskInput.askForTitle(scanner);
-                    filteredSeriesList = seriesService.searchByTitle(title, allSeries);
+                    filteredSeriesList = seriesService.searchByTitle(title);
                     printSeriesList(filteredSeriesList);
                     break;
 
                 case 2:
                     year = AskInput.askForYear(scanner);
-                    filteredSeriesList = seriesService.searchByYear(year, allSeries);
+                    filteredSeriesList = seriesService.searchByYear(year);
                     printSeriesList(filteredSeriesList);
                     break;
 
                 case 3:
                     genre = AskInput.askForGenre(scanner);
-                    filteredSeriesList = seriesService.searchByGenre(genre, allSeries);
+                    filteredSeriesList = seriesService.searchByGenre(genre);
                     printSeriesList(filteredSeriesList);
                     break;
 

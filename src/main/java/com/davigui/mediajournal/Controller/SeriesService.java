@@ -285,7 +285,8 @@ public class SeriesService extends CommonService<Series> {
      *
      * @return Uma lista contendo todas as séries.
      */
-    public ArrayList<Series> getAllSeries(){
+    @Override
+    public ArrayList<Series> getAll(){
         return journal.getSeriesList();
     }
 

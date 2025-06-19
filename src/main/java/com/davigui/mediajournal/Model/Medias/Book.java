@@ -68,6 +68,33 @@ public class Book extends Media {
     }
 
     /**
+     * Obtém a editora do livro.
+     *
+     * @return A editora
+     */
+    public String getPublisher() {
+        return publisher;
+    }
+
+    /**
+     * Verifica se o usuário possui um exemplar do livro.
+     *
+     * @return O booleano
+     */
+    public boolean isOwned() {
+        return owned;
+    }
+
+    /**
+     * Obtém a data de visualização.
+     *
+     * @return A data de visualização em extenso
+     */
+    public String getSeenDate() {
+        return seenDate;
+    }
+
+    /**
      * Define a data em que o livro foi visto.
      *
      * @param readDate A data em que o livro foi visto.

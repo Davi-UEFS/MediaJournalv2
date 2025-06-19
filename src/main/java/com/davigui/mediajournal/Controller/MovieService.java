@@ -124,7 +124,8 @@ public class MovieService extends CommonService<Movie> {
      *
      * @return Uma lista contendo todos os filmes.
      */
-    public ArrayList<Movie> getAllMovies(){
+    @Override
+    public ArrayList<Movie> getAll(){
         return journal.getMovieList();
     }
 

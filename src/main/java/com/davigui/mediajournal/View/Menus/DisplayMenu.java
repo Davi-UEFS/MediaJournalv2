@@ -106,11 +106,11 @@ public class DisplayMenu {
      * Caso não existam livros cadastrados, exibe uma mensagem de erro.
      */
     private void showBookReviewsAndRatings() {
-        if (bookService.getAllBooks().isEmpty()) {
+        if (bookService.getAll().isEmpty()) {
             System.out.println("Você não possui livros cadastrados.");
             return;
         }
-        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAllBooks());
+        Book selectedBook = AskInput.selectFromList(scanner, bookService.getAll());
         System.out.println(bookService.readReview(selectedBook));
         System.out.println(bookService.showRating(selectedBook));
     }
@@ -121,11 +121,11 @@ public class DisplayMenu {
      * Caso não existam filmes cadastrados, exibe uma mensagem de erro.
      */
     private void showMovieReviewsAndRatings() {
-        if (movieService.getAllMovies().isEmpty()) {
+        if (movieService.getAll().isEmpty()) {
             System.out.println("Você não possui filmes cadastrados");
             return;
         }
-        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAllMovies());
+        Movie selectedMovie = AskInput.selectFromList(scanner, movieService.getAll());
         System.out.println(movieService.readReview(selectedMovie));
         System.out.println(movieService.showRating(selectedMovie));
     }
@@ -137,11 +137,11 @@ public class DisplayMenu {
      * Caso a temporada não for encontrada, exibe uma mensagem de erro.
      */
     private void showSeriesReviewsAndRatings() {
-        if (seriesService.getAllSeries().isEmpty()) {
+        if (seriesService.getAll().isEmpty()) {
             System.out.println("Você não possui séries cadastradas");
             return;
         }
-        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAllSeries());
+        Series selectedSeries = AskInput.selectFromList(scanner, seriesService.getAll());
         int seasonNumber = AskInput.askForSeasonNumber(scanner);
         System.out.println(seriesService.readReviewSeason(selectedSeries, seasonNumber));
         System.out.println(seriesService.showRatingSeason(selectedSeries, seasonNumber));
@@ -154,11 +154,11 @@ public class DisplayMenu {
      * Caso não existam livros cadastrados, exibe uma mensagem de erro.
      */
     private void showAllBooks() {
-        if (bookService.getAllBooks().isEmpty()) {
+        if (bookService.getAll().isEmpty()) {
             System.out.println("Você não possui livros cadastrados.");
             return;
         }
-        listByMiniMenu(bookService, bookService.getAllBooks());
+        listByMiniMenu(bookService, bookService.getAll());
     }
 
     /**
@@ -167,11 +167,11 @@ public class DisplayMenu {
      * Caso não existam filmes cadastrados, exibe uma mensagem de erro.
      */
     private void showAllMovies() {
-        if (movieService.getAllMovies().isEmpty()) {
+        if (movieService.getAll().isEmpty()) {
             System.out.println("Você não possui filmes cadastrados");
             return;
         }
-        listByMiniMenu(movieService, movieService.getAllMovies());
+        listByMiniMenu(movieService, movieService.getAll());
     }
 
     /**
@@ -180,11 +180,11 @@ public class DisplayMenu {
      * Caso não existam séries cadastradas, exibe uma mensagem de erro.
      */
     private void showAllSeries() {
-        if (seriesService.getAllSeries().isEmpty()) {
+        if (seriesService.getAll().isEmpty()) {
             System.out.println("Você não possui séries cadastradas");
             return;
         }
-        listByMiniMenu(seriesService, seriesService.getAllSeries());
+        listByMiniMenu(seriesService, seriesService.getAll());
     }
 
     /**
@@ -228,32 +228,32 @@ public class DisplayMenu {
                     break;
 
                 case 3:
-                    mapGenreMedia = service.mapByGenreAscendingRate(mediaList);
+                    mapGenreMedia = service.mapByGenreAscendingRate();
                     printMapGenreMedia(mapGenreMedia);
                     break;
 
                 case 4:
-                    mapGenreMedia = service.mapByGenreDescendingRate(mediaList);
+                    mapGenreMedia = service.mapByGenreDescendingRate();
                     printMapGenreMedia(mapGenreMedia);
                     break;
 
                 case 5:
-                    mapIntMedia = service.mapByAscendingYearAscendingRate(mediaList);
+                    mapIntMedia = service.mapByAscendingYearAscendingRate();
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 6:
-                    mapIntMedia = service.mapByAscendingYearDescendingRate(mediaList);
+                    mapIntMedia = service.mapByAscendingYearDescendingRate();
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 7:
-                    mapIntMedia = service.mapByDescendingYearAscendingRate(mediaList);
+                    mapIntMedia = service.mapByDescendingYearAscendingRate();
                     printMapYearMedia(mapIntMedia);
                     break;
 
                 case 8:
-                    mapIntMedia = service.mapByDescendingYearDescendingRate(mediaList);
+                    mapIntMedia = service.mapByDescendingYearDescendingRate();
                     printMapYearMedia(mapIntMedia);
                     break;
 

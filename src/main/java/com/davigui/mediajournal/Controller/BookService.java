@@ -113,7 +113,8 @@ public class BookService extends CommonService<Book> {
      *
      * @return Uma lista contendo todos os livros.
      */
-    public ArrayList<Book> getAllBooks() {
+    @Override
+    public ArrayList<Book> getAll() {
         return journal.getBookList();
     }
 

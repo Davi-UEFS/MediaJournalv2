@@ -106,6 +106,28 @@ public class Series extends Media {
     }
 
     /**
+     * Obtém as plataformas nas quais a série está disponível.
+     *
+     * @return Uma lista contendo o nome das plataformas.
+     */
+    public List<String> getWhereToWatch() {
+        return whereToWatch;
+    }
+
+    /**
+     * Obtém o título original da obra.
+     *
+     * @return O título original.
+     */
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public int getNumberOfSeasons(){
+        return seasons.size();
+    }
+
+    /**
      * Obtém a lista com os nomes do elenco da série.
      *
      * @return A lista com os nomes do elenco.
