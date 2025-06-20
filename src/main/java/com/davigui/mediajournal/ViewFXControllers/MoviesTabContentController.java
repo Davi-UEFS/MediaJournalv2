@@ -63,7 +63,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
                 (new SimpleIntegerProperty(celldata.getValue().getYear())).asObject());
 
         ratingColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getRating())).asObject());
+                new SimpleStringProperty("★".repeat(celldata.getValue().getRating())));
 
         directionColumn.setCellValueFactory(celldata->
                 new SimpleStringProperty(celldata.getValue().getDirection()));

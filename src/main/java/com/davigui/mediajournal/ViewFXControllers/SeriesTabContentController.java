@@ -64,7 +64,7 @@ public class SeriesTabContentController extends MediaContentController<Series> i
                         celldata.getValue().getYearOfEnding() == 9999? "Em andamento" : Integer.toString(celldata.getValue().getYearOfEnding()))));
 
         ratingColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getRating())).asObject());
+                new SimpleStringProperty("★".repeat(celldata.getValue().getRating())));
 
         originalTitleColumn.setCellValueFactory(celldata->
                 new SimpleStringProperty(celldata.getValue().getOriginalTitle()));

@@ -36,7 +36,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected TableColumn<T, Integer> yearColumn;
 
     @FXML
-    protected TableColumn<T, Integer> ratingColumn;
+    protected TableColumn<T, String> ratingColumn;
 
     @FXML
     protected Button editButton;

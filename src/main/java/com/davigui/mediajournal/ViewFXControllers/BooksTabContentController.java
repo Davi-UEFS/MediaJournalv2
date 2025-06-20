@@ -52,7 +52,7 @@ public class BooksTabContentController extends MediaContentController<Book> impl
                 (new SimpleIntegerProperty(cellData.getValue().getYear())).asObject());
 
         ratingColumn.setCellValueFactory(cellData ->
-                (new SimpleIntegerProperty(cellData.getValue().getRating())).asObject());
+                new SimpleStringProperty("★".repeat(cellData.getValue().getRating())));
 
         //Daqui pra frente e a mesma ideia do titulo, entao nao irei explicar
         authorColumn.setCellValueFactory(cellData ->
