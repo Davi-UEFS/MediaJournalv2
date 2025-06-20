@@ -19,7 +19,7 @@ public class MainFX extends Application {
         MainScreenController mainScreenController = mainLoader.getController();
 
         Scene scene = new Scene(root, 1080, 720);
-        Image icon = new Image(MainFX.class.getResourceAsStream("images/library_icon.png"));
+        Image icon = new Image(MainFX.class.getResourceAsStream("images/library_icon_G.png"));
         stage.getIcons().add(icon);
         stage.setTitle("Diario Cultural");
         stage.setScene(scene);
