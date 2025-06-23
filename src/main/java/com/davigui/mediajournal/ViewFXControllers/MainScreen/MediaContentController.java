@@ -1,4 +1,4 @@
-package com.davigui.mediajournal.ViewFXControllers;
+package com.davigui.mediajournal.ViewFXControllers.MainScreen;
 
 import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.Model.Enums.Genres;
@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane fx:id="splitPane" dividerPositions="0.7" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.BooksTabContentController">
+<SplitPane fx:id="splitPane" dividerPositions="0.7" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreen.BooksTabContentController">
     <VBox alignment="CENTER" prefWidth="760.0" spacing="20.0">
         <HBox alignment="CENTER_RIGHT" spacing="5.0">
             <VBox.margin>

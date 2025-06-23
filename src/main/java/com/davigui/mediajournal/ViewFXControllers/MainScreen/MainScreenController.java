@@ -1,4 +1,4 @@
-package com.davigui.mediajournal.ViewFXControllers;
+package com.davigui.mediajournal.ViewFXControllers.MainScreen;
 
 import com.davigui.mediajournal.Controller.BookService;
 import com.davigui.mediajournal.Controller.MovieService;

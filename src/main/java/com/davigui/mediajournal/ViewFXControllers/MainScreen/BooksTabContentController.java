@@ -1,17 +1,28 @@
-package com.davigui.mediajournal.ViewFXControllers;
+package com.davigui.mediajournal.ViewFXControllers.MainScreen;
 
 import com.davigui.mediajournal.Controller.BookService;
 import com.davigui.mediajournal.Controller.CommonService;
+import com.davigui.mediajournal.MainFX;
 import com.davigui.mediajournal.Model.Medias.Book;
+import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterBookScreenController;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BooksTabContentController extends MediaContentController<Book> implements Initializable {
 

@@ -1,6 +1,6 @@
 package com.davigui.mediajournal;
 
-import com.davigui.mediajournal.ViewFXControllers.MainScreenController;
+import com.davigui.mediajournal.ViewFXControllers.MainScreen.MainScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
