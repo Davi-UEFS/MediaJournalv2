@@ -23,6 +23,9 @@ public class MainFX extends Application {
         stage.getIcons().add(icon);
         stage.setTitle("Diario Cultural");
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            mainScreenController.saveLibrary();
+        });
         stage.show();
 
     }
