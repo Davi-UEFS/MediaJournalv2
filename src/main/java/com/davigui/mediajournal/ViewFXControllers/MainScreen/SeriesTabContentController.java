@@ -48,6 +48,9 @@ public class SeriesTabContentController extends MediaContentController<Series> i
     @FXML
     private Label seasonsInfo;
 
+    @FXML
+    private Button addSeasonButton;
+
     /*TODO: DECIDIR SE VOU IMPLEMENTAR ISSO
     @FXML
     private TableColumn<Series, String> seenDateColumn;
@@ -134,5 +137,58 @@ public class SeriesTabContentController extends MediaContentController<Series> i
                 seasonsString.append("\n\t").append(season.toString()));
         seasonsInfo.setText(seasonsString.toString());
 
+    }
+
+    @Override
+    public void onAddButtonClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterSeriesScreen.fxml"));
+        Parent root = loader.load();
+
+        RegisterSeriesScreenController controller = loader.getController();
+        controller.setService(seriesService);
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 600, 380);
+        stage.setTitle("Registro de Série");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/series_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
+    }
+
+    @Override
+    public void updateActionButtons() {
+        super.updateActionButtons();
+        boolean isSelected = (selectedItem.getValue()!=null);
+        addSeasonButton.setDisable(!isSelected);
+    }
+
+    @FXML
+    public void onAddSeasonButtonClicked() throws IOException {
+        //TODO: Implementar a tela de adicionar temporada
+    }
+
+    @Override
+    public void onRemoveButtonClicked() {
+        // Implementação do método para remover um livro
+        Series selectedSeries = selectedItem.getValue();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Remoção");
+        alert.setHeaderText("Deseja realmente remover a série " + selectedSeries.getTitle() + " ?");
+        alert.setContentText("A série será permanentemente removida.");
+        ButtonType buttonContinuar = new ButtonType("Continuar");
+        ButtonType buttonCancelar = ButtonType.CANCEL;
+
+        alert.getButtonTypes().setAll(buttonContinuar, buttonCancelar);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == buttonContinuar) {
+            seriesService.deleteSeries(selectedSeries);
+            loadMediaList(); // Recarrega a lista de mídias após a remoção
+            System.out.println("Série removida: " + selectedSeries.getTitle());
+        }
+        // Se o usuário cancelar, não faz nada
     }
 }

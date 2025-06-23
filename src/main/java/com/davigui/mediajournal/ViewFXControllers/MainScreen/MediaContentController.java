@@ -40,6 +40,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected TableColumn<T, String> ratingColumn;
 
     @FXML
+    protected Button addButton;
+
+    @FXML
     protected Button editButton;
 
     @FXML
@@ -305,5 +308,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected abstract void configureTable();
     protected abstract void handleSpecificSearch(String filter);
     protected abstract void handleMediaInfo(T media);
+    @FXML abstract void onAddButtonClicked() throws IOException;
+    @FXML abstract void onRemoveButtonClicked();
 
 }

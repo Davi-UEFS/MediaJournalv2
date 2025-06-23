@@ -138,4 +138,45 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
         scriptInfo.setText("Roteiro: " + movie.getScript());
         whereToWatchInfo.setText("Plataformas: " + movie.getWhereToWatch().toString());
     }
+
+    @FXML
+    public void onAddButtonClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterMovieScreen.fxml"));
+        Parent root = loader.load();
+
+        RegisterMovieScreenController controller = loader.getController();
+        controller.setService(movieService);
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 300, 660);
+        stage.setTitle("Registro de Filme");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/movie_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
+    }
+
+    @Override
+    public void onRemoveButtonClicked() {
+        // Implementação do método para remover um livro
+        Movie selectedMovie = selectedItem.getValue();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Remoção");
+        alert.setHeaderText("Deseja realmente remover o filme " + selectedMovie.getTitle() + " ?");
+        alert.setContentText("O filme será permanentemente removido.");
+        ButtonType buttonContinuar = new ButtonType("Continuar");
+        ButtonType buttonCancelar = ButtonType.CANCEL;
+
+        alert.getButtonTypes().setAll(buttonContinuar, buttonCancelar);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == buttonContinuar) {
+            movieService.deleteMovie(selectedMovie);
+            loadMediaList(); // Recarrega a lista de mídias após a remoção
+            System.out.println("Filme removido: " + selectedMovie.getTitle());
+        }
+        // Se o usuário cancelar, não faz nada
+    }
 }

@@ -12,6 +12,20 @@
             <VBox.margin>
                 <Insets left="20.0" right="20.0" />
             </VBox.margin>
+            <Button fx:id="addSeasonButton" mnemonicParsing="false" onAction="#onAddSeasonButtonClicked" prefHeight="28.0" prefWidth="74.0" text="Temp.">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <Image url="@../images/plus_icon_G.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" prefHeight="20.0" prefWidth="20.0">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <Image url="@../images/plus_icon_G.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
             <Button fx:id="editButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
@@ -33,7 +47,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="removeButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onRemoveButtonClicked" prefHeight="20.0" prefWidth="20.0">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                         <Image url="@../images/delete_icon_G.png" />

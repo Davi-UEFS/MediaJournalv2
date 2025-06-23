@@ -122,4 +122,45 @@ public class BooksTabContentController extends MediaContentController<Book> impl
             reviewInfo.setText("RESENHA: " + book.getReview());
     }
 
+    @Override
+    public void onAddButtonClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterBookScreen.fxml"));
+        Parent root = loader.load();
+
+        RegisterBookScreenController controller = loader.getController();
+        controller.setService(bookService);
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 300, 400);
+        stage.setTitle("Registro de Livro");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/book_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
+    }
+
+    @Override
+    public void onRemoveButtonClicked() {
+        // Implementação do método para remover um livro
+        Book selectedBook = selectedItem.getValue();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Remoção");
+        alert.setHeaderText("Deseja realmente remover o livro " + selectedBook.getTitle() + " ?");
+        alert.setContentText("O livro será permanentemente removido.");
+        ButtonType buttonContinuar = new ButtonType("Continuar");
+        ButtonType buttonCancelar = ButtonType.CANCEL;
+
+        alert.getButtonTypes().setAll(buttonContinuar, buttonCancelar);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == buttonContinuar) {
+            bookService.deleteBook(selectedBook);
+            loadMediaList(); // Recarrega a lista de mídias após a remoção
+            System.out.println("Livro removido: " + selectedBook.getTitle());
+        }
+        // Se o usuário cancelar, não faz nada
+    }
+
 }
