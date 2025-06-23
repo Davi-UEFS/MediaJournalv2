@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeriesScreenController">
+
+    <TextField fx:id="field_title" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
+    <TextField fx:id="field_author" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
+    <TextField fx:id="field_endingYear" layoutX="237.0" layoutY="279.0" prefHeight="26.0" prefWidth="70.0" promptText="ano de encerramento" />
+    <TextField fx:id="field_year" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
+    <TextField fx:id="field_direction" layoutX="14.0" layoutY="238.0" prefWidth="200.0" promptText="direção" />
+    <TextField fx:id="field_ogTitle" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="título original" />
+
+    <ComboBox fx:id="genreBox" layoutX="14.0" layoutY="180.0" prefWidth="150.0" promptText="Select one" />
+
+    <Button fx:id="registerButton" layoutX="13.0" layoutY="328.0" onAction="#onRegisterButtonClicked" prefHeight="37.0" prefWidth="118.0" text="Registrar">
+        <font>
+            <Font size="16.0" />
+        </font></Button>
+
+    <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+
+    <Text layoutX="14.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+
+    <Text layoutX="237.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano de Encerramento:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+
+    <Text layoutX="14.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano de Publicação:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+
+    <Text layoutX="14.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direção:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+
+    <Text layoutX="237.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elenco:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+
+    <Text layoutX="237.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Onde Assistir:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+
+    <Text layoutX="14.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título Original:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Text>
+    <TextArea fx:id="field_where" layoutX="233.0" layoutY="37.0" prefHeight="50.0" prefWidth="275.0" promptText="Streaming1, Streaming2..." />
+    <TextArea fx:id="field_cast" layoutX="233.0" layoutY="115.0" prefHeight="50.0" prefWidth="275.0" promptText="Ator1, Ator2..." />
+
+    <Label layoutX="237.0" layoutY="235.0" text="Série em andamento?">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Label>
+    <Label layoutX="409.0" layoutY="235.0" text="Sim">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Label>
+    <CheckBox fx:id="andamentoCheckBox" layoutX="389.0" layoutY="236.0" onAction="#onCheckBoxMarked" />
+
+    <Label layoutX="237.0" layoutY="177.0" text="Número de Episódios da 1ª Temporada:">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Label>
+   <TextField fx:id="field_episodeCount" layoutX="233.0" layoutY="196.0" prefHeight="26.0" prefWidth="70.0" promptText="N° Ep." />
+
+</AnchorPane>
