@@ -12,35 +12,35 @@
             <VBox.margin>
                 <Insets left="20.0" right="20.0" />
             </VBox.margin>
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" prefHeight="20.0" prefWidth="20.0">
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" prefHeight="20.0" prefWidth="100.0" text="Add. Filme">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                         <Image url="@../images/plus_icon_G.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="editButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
-                <graphic>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
-                        <Image url="@../images/edit_icon_G.png" />
-                    </ImageView>
-                </graphic>
-            </Button>
-            <Button fx:id="filterButton" mnemonicParsing="false" onAction="#onFilterButtonClicked" prefHeight="20.0" prefWidth="20.0">
+            <Button fx:id="filterButton" mnemonicParsing="false" onAction="#onFilterButtonClicked" prefHeight="20.0" prefWidth="100.0" text="Filtrar">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                         <Image url="@../images/funnel_icon_G.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="rateButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0">
+            <Button fx:id="seenButton" mnemonicParsing="false" onAction="#onSeenButtonClicked" prefHeight="20.0" prefWidth="100.0" text="Visto">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <Image url="@../images/seen_icon_G.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="rateButton" mnemonicParsing="false" onAction="#onRateButtonClicked" prefHeight="20.0" prefWidth="100.0" text="Avaliar">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                         <Image url="@../images/star_icon_G.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onRemoveButtonClicked" prefHeight="20.0" prefWidth="20.0">
+            <Button fx:id="removeButton" mnemonicParsing="false" onAction="#onRemoveButtonClicked" prefHeight="20.0" prefWidth="100.0" text="Excluir">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                         <Image url="@../images/delete_icon_G.png" />
@@ -80,7 +80,7 @@
                 <TableColumn fx:id="durationColumn" text="Duração" />
                 <TableColumn fx:id="directionColumn" prefWidth="140.0" text="Diretor" />
                 <TableColumn fx:id="ratingColumn" prefWidth="94.66668701171875" text="Avaliação" />
-                <TableColumn fx:id="seenDateColumn" prefWidth="49.0" text="Data de Visualização" />
+                <TableColumn fx:id="seenDateColumn" prefWidth="120.0" text="Data de Visualização" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -90,7 +90,7 @@
             </padding>
         </TableView>
     </VBox>
-    <VBox fx:id="mediaInfoVbox" alignment="CENTER" prefHeight="700.0" prefWidth="344.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="mediaInfoVbox" alignment="CENTER" prefHeight="703.0" prefWidth="130.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
         <ImageView fx:id="coverViewInfo" fitHeight="206.0" fitWidth="267.0" preserveRatio="true">
             <Image url="@../images/movie_icon_G.png" />
