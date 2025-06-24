@@ -13,7 +13,10 @@ module journal {
     exports com.davigui.mediajournal.Model.Repository;
     exports com.davigui.mediajournal.Controller;
     exports com.davigui.mediajournal.ViewFXControllers.MainScreen;
+    exports com.davigui.mediajournal.ViewFXControllers.RateScreens to javafx.fxml;
     opens com.davigui.mediajournal.ViewFXControllers.MainScreen to javafx.fxml;
     exports com.davigui.mediajournal.ViewFXControllers.RegisterScreens;
     opens com.davigui.mediajournal.ViewFXControllers.RegisterScreens to javafx.fxml;
+    opens com.davigui.mediajournal.ViewFXControllers.RateScreens to javafx.fxml;
+
 }

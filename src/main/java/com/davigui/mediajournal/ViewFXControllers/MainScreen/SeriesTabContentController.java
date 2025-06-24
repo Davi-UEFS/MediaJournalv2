@@ -200,6 +200,46 @@ public class SeriesTabContentController extends MediaContentController<Series> i
         // Se o usuário cancelar, não faz nada
     }
 
+    @Override public void onRateButtonClicked() throws IOException {
+        Series selectedSeries = selectedItem.getValue();
+        Season selectedSeason;
+
+        if (selectedSeries.getNumberOfSeasons() == 1) {
+            selectedSeason = selectedSeries.findSeason(1);
+        }else {
+            selectedSeason = askForSeason(selectedSeries);
+        }
+
+        if (!selectedSeason.isSeen()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação");
+            alert.setHeaderText("Temporada não vista");
+            alert.setContentText("Você ainda não marcou esta temporada como vista.");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RateScreen.fxml"));
+        loader.setController(new RateSeasonScreenController());
+        Parent root = loader.load();
+
+        RateSeasonScreenController controllerRate = loader.getController();
+        controllerRate.setService(seriesService);
+        controllerRate.setSeries(selectedSeries);
+        controllerRate.setSeason(selectedSeason);
+        controllerRate.initFields();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Avaliação de Temporada");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/series_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
+
+    }
+
     @Override
     public void onSeenButtonClicked() {
         Series selectedSeries = selectedItem.getValue();

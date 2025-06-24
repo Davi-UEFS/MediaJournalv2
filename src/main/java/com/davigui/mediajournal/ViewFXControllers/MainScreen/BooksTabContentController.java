@@ -167,6 +167,28 @@ public class BooksTabContentController extends MediaContentController<Book> impl
         // Se o usuário cancelar, não faz nada
     }
 
+    @Override public void onRateButtonClicked() throws IOException{
+        Book selectedBook = selectedItem.getValue();
+
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RateScreen.fxml"));
+        loader.setController(new RateScreenController<Book>());
+        Parent root = loader.load();
+
+        RateScreenController<Book> controllerRate = loader.getController();
+        controllerRate.setService(bookService);
+        controllerRate.setMedia(selectedBook);
+        controllerRate.initFields();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Avaliação de Livro");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/book_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
+    }
+
     @Override
     public void onSeenButtonClicked() throws IOException {
         Book selectedBook = selectedItem.getValue();

@@ -4,6 +4,7 @@ import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.Controller.MovieService;
 import com.davigui.mediajournal.MainFX;
 import com.davigui.mediajournal.Model.Medias.Movie;
+import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RateScreens.SeenMovieScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -181,6 +182,29 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
         }
         // Se o usuário cancelar, não faz nada
     }
+
+    @Override public void onRateButtonClicked() throws IOException {
+        Movie selectedMovie = selectedItem.getValue();
+
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RateScreen.fxml"));
+        loader.setController(new RateScreenController<Movie>());
+        Parent root = loader.load();
+
+        RateScreenController<Movie> controllerRate = loader.getController();
+        controllerRate.setService(movieService);
+        controllerRate.setMedia(selectedMovie);
+        controllerRate.initFields();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Avaliação de Filme");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/movie_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
+    }
+
     @Override
     public void onSeenButtonClicked() throws IOException {
         Movie selectedMovie = selectedItem.getValue();
