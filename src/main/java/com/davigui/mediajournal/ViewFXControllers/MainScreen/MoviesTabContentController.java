@@ -148,7 +148,8 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
         controller.setService(movieService);
 
         Stage stage = new Stage();
-        Scene scene = new Scene(root, 660, 430);
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Registro de Filme");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/movie_icon_G.png")));
         stage.setScene(scene);

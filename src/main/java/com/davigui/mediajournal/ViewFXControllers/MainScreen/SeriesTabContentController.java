@@ -148,7 +148,8 @@ public class SeriesTabContentController extends MediaContentController<Series> i
         controller.setService(seriesService);
 
         Stage stage = new Stage();
-        Scene scene = new Scene(root, 600, 380);
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Registro de Série");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/series_icon_G.png")));
         stage.setScene(scene);

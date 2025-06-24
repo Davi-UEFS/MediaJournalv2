@@ -127,11 +127,12 @@ public class BooksTabContentController extends MediaContentController<Book> impl
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterBookScreen.fxml"));
         Parent root = loader.load();
 
-        RegisterBookScreenController controller = loader.getController();
-        controller.setService(bookService);
+        RegisterBookScreenController controllerAdd = loader.getController();
+        controllerAdd.setService(bookService);
 
         Stage stage = new Stage();
-        Scene scene = new Scene(root, 300, 400);
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Registro de Livro");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/book_icon_G.png")));
         stage.setScene(scene);
