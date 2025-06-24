@@ -43,9 +43,6 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected Button addButton;
 
     @FXML
-    protected Button editButton;
-
-    @FXML
     protected Button removeButton;
 
     @FXML
@@ -53,6 +50,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     @FXML
     protected Button filterButton;
+
+    @FXML
+    protected Button seenButton;
 
     @FXML
     protected TextField filterTextField;
@@ -151,9 +151,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     protected void updateActionButtons(){
         boolean isSelected = (selectedItem.getValue()!=null);
-        editButton.setDisable(!isSelected);
         rateButton.setDisable(!isSelected);
         removeButton.setDisable(!isSelected);
+        seenButton.setDisable(!isSelected);
     }
 
     protected void initFilterChoiceBoxListener() {
@@ -310,5 +310,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected abstract void handleMediaInfo(T media);
     @FXML abstract void onAddButtonClicked() throws IOException;
     @FXML abstract void onRemoveButtonClicked();
+    @FXML abstract void onRateButtonClicked() throws IOException;
+    @FXML abstract void onSeenButtonClicked() throws IOException;
 
 }

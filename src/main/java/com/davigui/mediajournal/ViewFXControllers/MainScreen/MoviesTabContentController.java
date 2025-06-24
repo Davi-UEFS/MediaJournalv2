@@ -3,8 +3,8 @@ package com.davigui.mediajournal.ViewFXControllers.MainScreen;
 import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.Controller.MovieService;
 import com.davigui.mediajournal.MainFX;
-import com.davigui.mediajournal.Model.Medias.Book;
 import com.davigui.mediajournal.Model.Medias.Movie;
+import com.davigui.mediajournal.ViewFXControllers.RateScreens.SeenMovieScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,6 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -179,5 +180,38 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
             System.out.println("Filme removido: " + selectedMovie.getTitle());
         }
         // Se o usuário cancelar, não faz nada
+    }
+    @Override
+    public void onSeenButtonClicked() throws IOException {
+        Movie selectedMovie = selectedItem.getValue();
+        System.out.println("Filme selecionado: " + selectedMovie.getTitle());
+        System.out.println("Data de visto: " + selectedMovie.getSeenDate());
+        System.out.println("Visto: " + selectedMovie.isSeen());
+
+        if (selectedMovie.isSeen()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação");
+            alert.setHeaderText("Filme já visto");
+            alert.setContentText("Você já marcou este filme como visto.");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/SeenScreen.fxml"));
+        loader.setController(new SeenMovieScreenController());
+        Parent root = loader.load();
+
+        SeenMovieScreenController controllerSeen = loader.getController();
+        controllerSeen.setService(movieService);
+        controllerSeen.setMedia(selectedMovie);
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Marcar Filme como Visto");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/seen_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
     }
 }

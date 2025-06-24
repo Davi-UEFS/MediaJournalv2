@@ -3,8 +3,13 @@ package com.davigui.mediajournal.ViewFXControllers.MainScreen;
 import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.Controller.SeriesService;
 import com.davigui.mediajournal.MainFX;
+import com.davigui.mediajournal.Model.Exceptions.SeasonNotFoundException;
 import com.davigui.mediajournal.Model.Medias.Book;
+import com.davigui.mediajournal.Model.Medias.Season;
 import com.davigui.mediajournal.Model.Medias.Series;
+import com.davigui.mediajournal.Model.Result.IResult;
+import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateScreenController;
+import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateSeasonScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeriesScreenController;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,6 +22,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -189,6 +196,74 @@ public class SeriesTabContentController extends MediaContentController<Series> i
             seriesService.deleteSeries(selectedSeries);
             loadMediaList(); // Recarrega a lista de mídias após a remoção
             System.out.println("Série removida: " + selectedSeries.getTitle());
+        }
+        // Se o usuário cancelar, não faz nada
+    }
+
+    @Override
+    public void onSeenButtonClicked() {
+        Series selectedSeries = selectedItem.getValue();
+        Season season;
+
+        if (selectedSeries.getNumberOfSeasons() == 1) {
+            season = selectedSeries.findSeason(1);
+        }else {
+            season = askForSeason(selectedSeries);
+        }
+
+        if (season.isSeen()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação");
+            alert.setHeaderText("Temporada já vista");
+            alert.setContentText("Você já marcou esta temporada como vista.");
+            alert.showAndWait();
+        } else {
+            askForSeen(selectedSeries, season);
+        }
+
+    }
+
+    private static Season askForSeason(Series series) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Selecionar Temporada");
+        dialog.setHeaderText("Selecione a temporada para " + series.getTitle());
+        dialog.setContentText("Digite o número da temporada (1 a " + series.getNumberOfSeasons() + "):");
+
+        Optional<String> resultado = dialog.showAndWait();
+        if (resultado.isPresent()) {
+            try {
+                int num = Integer.parseInt(resultado.get());
+                return series.findSeason(num);
+            } catch (NumberFormatException e) {
+                // Se o número não for um inteiro válido, continua para exibir o alerta
+            } catch (SeasonNotFoundException e) {
+                // Se a temporada não for encontrada, continua para exibir o alerta
+            }
+        }
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText("Número de temporada inválido");
+        alert.setContentText("Por favor, insira um número válido entre 1 e " + series.getNumberOfSeasons() + ".");
+        alert.showAndWait();
+        return askForSeason(series); // Chama recursivamente até obter um número válido
+    }
+
+    private void askForSeen(Series series, Season season) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Marcar como Visto");
+        alert.setHeaderText("Deseja realmente marcar a temporada " + season.getSeasonNumber() +
+                " de " + series.getTitle() + " como vista?");
+        alert.setContentText("Essa mudança é irreversível.");
+        ButtonType buttonContinuar = new ButtonType("Continuar");
+        ButtonType buttonCancelar = ButtonType.CANCEL;
+
+        alert.getButtonTypes().setAll(buttonContinuar, buttonCancelar);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == buttonContinuar) {
+            seriesService.markAsSeenSeason(series, season.getSeasonNumber());
+            loadMediaList(); // Recarrega a lista de mídias após a remoção
         }
         // Se o usuário cancelar, não faz nada
     }

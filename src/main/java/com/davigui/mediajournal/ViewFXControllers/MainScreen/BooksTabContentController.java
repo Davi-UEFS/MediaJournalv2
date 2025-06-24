@@ -4,6 +4,8 @@ import com.davigui.mediajournal.Controller.BookService;
 import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.MainFX;
 import com.davigui.mediajournal.Model.Medias.Book;
+import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateScreenController;
+import com.davigui.mediajournal.ViewFXControllers.RateScreens.SeenBookScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterBookScreenController;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -162,6 +165,37 @@ public class BooksTabContentController extends MediaContentController<Book> impl
             System.out.println("Livro removido: " + selectedBook.getTitle());
         }
         // Se o usuário cancelar, não faz nada
+    }
+
+    @Override
+    public void onSeenButtonClicked() throws IOException {
+        Book selectedBook = selectedItem.getValue();
+
+        if (selectedBook.getSeenDate() != null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação");
+            alert.setHeaderText("Livro já visto");
+            alert.setContentText("Você já marcou este livro como visto.");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/SeenScreen.fxml"));
+        loader.setController(new SeenBookScreenController());
+        Parent root = loader.load();
+
+        SeenBookScreenController controllerSeen = loader.getController();
+        controllerSeen.setService(bookService);
+        controllerSeen.setMedia(selectedBook);
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Marcar Livro como Visto");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/seen_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
     }
 
 }
