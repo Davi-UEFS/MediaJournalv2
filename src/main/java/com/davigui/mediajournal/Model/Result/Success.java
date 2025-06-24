@@ -30,6 +30,6 @@ public class Success implements IResult {
      * @return Uma string representando a mensagem de sucesso formatada.
      */
     public String getMessage() {
-        return Colors.green + objectType + " : " + message + " ✔" + Colors.rst;
+        return objectType + " : " + message + " ✔";
     }
 }
