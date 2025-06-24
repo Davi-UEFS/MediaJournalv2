@@ -37,8 +37,8 @@ public abstract class CommonService<T extends Media> {
      * @return Um objeto IResult indicando sucesso ou falha da operação.
      */
     public IResult rate(T media, int rating) {
-        if (rating <= 0 || rating > 5) {
-            return new Failure(media.getMediaType(), "Avaliação deve ser maior que 0 e menor ou igual a 5.");
+        if (rating < 0 || rating > 5) {
+            return new Failure(media.getMediaType(), "Avaliação deve ser maior ou igual a 0 e menor ou igual a 5.");
         } else if (!media.isSeen()) {
             return new Failure(media.getMediaType(), "Marque como visto antes de avaliar");
         } else {
