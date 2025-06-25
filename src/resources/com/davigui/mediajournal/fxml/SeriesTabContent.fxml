@@ -40,7 +40,14 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="rateButton" mnemonicParsing="false" onAction="#onRateButtonClicked" prefHeight="20.0" prefWidth="100.0" text="Avaliar">
+            <Button fx:id="seeSeasonButton" mnemonicParsing="false" onAction="#onSeeSeasonButtonClicked" prefHeight="20.0" prefWidth="95.0" text="Ver Temp">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                        <Image url="@../images/seen_icon_G.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="rateButton" mnemonicParsing="false" onAction="#onRateButtonClicked" prefHeight="20.0" prefWidth="80.0" text="Avaliar">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                         <Image url="@../images/star_icon_G.png" />

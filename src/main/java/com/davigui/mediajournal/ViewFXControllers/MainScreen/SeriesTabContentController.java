@@ -11,6 +11,7 @@ import com.davigui.mediajournal.Model.Result.IResult;
 import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateSeasonScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController;
+import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeasonScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeriesScreenController;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -175,11 +176,6 @@ public class SeriesTabContentController extends MediaContentController<Series> i
         seeSeasonButton.setDisable(!isSelected);
     }
 
-    @FXML
-    public void onAddSeasonButtonClicked() throws IOException {
-        //TODO: Implementar a tela de adicionar temporada
-    }
-
     @Override
     public void onRemoveButtonClicked() {
         // Implementação do método para remover um livro
@@ -262,7 +258,6 @@ public class SeriesTabContentController extends MediaContentController<Series> i
 
     }
 
-    private static Season askForSeason(Series series) {
     @FXML
     public void onSeeSeasonButtonClicked() {
         Series selectedSeries = selectedItem.getValue();
@@ -277,6 +272,28 @@ public class SeriesTabContentController extends MediaContentController<Series> i
                     "\nResenha: " + (season.getReview() != null ? season.getReview() : "Nenhuma resenha"));
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    public void onAddSeasonButtonClicked() throws IOException {
+        Series selectedSeries = selectedItem.getValue();
+
+        FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterSeasonScreen.fxml"));
+        Parent root = loader.load();
+
+        RegisterSeasonScreenController controllerAddSeason = loader.getController();
+        controllerAddSeason.setService(seriesService);
+        controllerAddSeason.setSeries(selectedSeries);
+        controllerAddSeason.initFields();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Registro de Temporada");
+        stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/series_icon_G.png")));
+        stage.setScene(scene);
+        stage.setOnHidden(e -> loadMediaList());
+        stage.show();
     }
 
     private static Season askForSeason(Series series, String s) {
