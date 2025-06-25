@@ -5,6 +5,7 @@ import com.davigui.mediajournal.Model.Medias.Media;
 import com.davigui.mediajournal.Model.Result.IResult;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
@@ -49,6 +50,9 @@ public class RateScreenController<T extends Media> implements Initializable {
         System.out.println(result1.getMessage());
         IResult result2 = service.writeReview(media, reviewField.getText());
         System.out.println(result2.getMessage());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(result1.getMessage() + "\n" + result2.getMessage());
+        alert.showAndWait();
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
     }
