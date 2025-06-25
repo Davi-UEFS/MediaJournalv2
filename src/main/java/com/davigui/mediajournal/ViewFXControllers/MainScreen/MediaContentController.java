@@ -18,88 +18,197 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Classe abstrata que contém os métodos compartilhados entre as cenas de mídias.
+ * Deve ser parametrizada com o tipo de mídia a ser trabalhada. Implementa a interface
+ * Initializable e o método initialize() passa a ser um Template Method e sua
+ * implementação se dá pela sobrecarga dos Hook Methods.
+ * Os atributos comuns referentes à tela são injetados por FXML.
+ *
+ * @param <T> O tipo de mídia utilizada pelo controlador.
+ */
 public abstract class MediaContentController<T extends Media> implements Initializable {
     // *********Atributos FXML******************
 
+    /**
+     * Painel principal. À esquerda têm-se a tabela e as funcionalidades e à
+     * direita as informações da mídia.
+     */
     @FXML
     protected SplitPane splitPane;
 
+    /**
+     * A tabela da mídia parametrizada.
+     */
     @FXML
     protected TableView<T> tableView;
 
+    /**
+     * O título da tabela.
+     */
     @FXML
     protected Label tableLabel;
 
+    /**
+     * Coluna de título da mídia parametrizada.
+     */
     @FXML
     protected TableColumn<T, String> titleColumn;
 
+    /**
+     * Coluna de ano da mídia parametrizada.
+     */
     @FXML
     protected TableColumn<T, Integer> yearColumn;
 
+    /**
+     * Coluna de avaliação/nota da mídia parametrizada.
+     */
     @FXML
     protected TableColumn<T, String> ratingColumn;
 
+    /**
+     * Botão de adicionar.
+     */
     @FXML
     protected Button addButton;
 
+    /**
+     * Botão de remover.
+     */
     @FXML
     protected Button removeButton;
 
+    /**
+     * Botão de avaliar/escrever review.
+     */
     @FXML
     protected Button rateButton;
 
+    /**
+     * Botão de filtro/busca.
+     */
     @FXML
     protected Button filterButton;
 
+    /**
+     * Botão de marcar como visto.
+     */
     @FXML
     protected Button seenButton;
 
+    /**
+     * Campo de texto para filtrar mídias.
+     */
     @FXML
     protected TextField filterTextField;
 
+    /**
+     * Caixa de escolha para escolher o critério de busca (título, ano, etc.).
+     */
     @FXML
     protected ChoiceBox<String> filterTypeChoiceBox;
 
+    /**
+     * Título da caixa de escolha de busca.
+     */
     @FXML
     protected Label filterTypeLabel;
 
+    /**
+     * Caixa de escolha do gênero desejado para busca.
+     */
     @FXML
     protected ChoiceBox<Genres> genreChoiceBox;
 
+    /**
+     * Botão de limpar filtros.
+     */
     @FXML
     protected Button clearSearchButton;
 
+    /**
+     * Vbox contendo os nodes com as informações de mídia.
+     */
     @FXML
     protected VBox mediaInfoVbox;
 
+    /**
+     * Imagem/capa da mídia.
+     */
     @FXML
     protected ImageView coverViewInfo;
 
+    /**
+     * As informações de título e ano da obra selecionada na tabela.
+     */
     @FXML
     protected Label titleYearInfo;
 
+    /**
+     * O gênero da obra selecionada na tabela.
+     */
     @FXML
     protected Label genreInfo;
 
+    /**
+     * A nota da obra selecionada na tabela.
+     */
     @FXML
     protected Label ratingInfo;
 
+    /**
+     * A resenha da obra selecionada na tabela.
+     */
     @FXML
     protected Label reviewInfo;
 
     // *********Atributos nao FXMLs******************
 
+    /**
+     * O controlador de modelo do tipo de mídia parametrizado. Utiliza os métodos
+     * da classe abstrata CommonService por composição.
+     */
     protected CommonService<T> service;
 
+    /**
+     * Lista observável da mídia parametrizada usada na tabela. A atualização
+     * dos items se dá pelo método setAll().
+     */
     protected ObservableList<T> mediaObservableList;
 
+    /**
+     * A mídia selecionada na tabela. A seleção não é apagada ao clicar em um
+     * elemento fora da tabela ou ao alternar entre abas.
+     */
     protected ObservableValue<T> selectedItem;
 
+    /**
+     * O gênero selecionado na caixa de escolha de busca por gênero.
+     */
     protected ObservableValue<Genres> selectedGenre;
 
+    /**
+     * O filtro selecionado na caixa de escolha de critério de busca.
+     */
     protected ObservableValue<String> selectedFilter;
 
     // ***********Metodos*******************
+
+    /**
+     * O método de inicialização dos elementos do GUI. É um Template Method que
+     * utiliza os Hook Methods: configureFilterChoices() e configureTable().
+     * As subclasses devem implementar esses métodos de suas maneiras. Dessa forma,
+     * o método initialize não precisa ser implementado pelas subclasses, sendo usado
+     * o desta superclasse ao carregar o FXML.
+     * <p>
+     * O método começa configurando a tabela e seu listener. Em seguida, define
+     * o texto padrão do campo de busca e inicializa seu listener.
+     * Depois, configura as opções das caixas de escolha de filtro e de gênero,
+     * também iniciando seus respectivos listeners. Por fim, desativa os
+     * componentes relacionados à busca, oculta a Vbox de informações de mídia
+     * e desabilita os botões de ação (avaliar, remover, etc.).
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -107,6 +216,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
         configureTable();
         initTableListener();
+
         //***********TEXTFIELDS*********************
         filterTextField.setPromptText("Buscar");
         initTextFieldListener();
@@ -129,12 +239,23 @@ public abstract class MediaContentController<T extends Media> implements Initial
         hideMediaInfo();
     }
 
+    /**
+     * Carrega a lista observável de mídias e a atribui à tabela.
+     * A lista original de mídias é obtida a partir do controlador
+     * e convertida em uma lista observável utilizando o método
+     * estático {@code FXCollections.observableArrayList()}.
+     */
     protected void loadMediaList(){
         mediaObservableList = FXCollections.observableArrayList(service.getAll());
         tableView.setItems(mediaObservableList);
         //TODO: PASSAR O  SET PARA O CONFIGURETABLE
     }
 
+    //TODO: PAREI AQUI NA DOCUMENTACAO.
+
+    /**
+     * Init table listener.
+     */
     protected void initTableListener() {
 
         selectedItem = tableView.getSelectionModel().selectedItemProperty();
@@ -149,6 +270,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
         });
     }
 
+    /**
+     * Update action buttons.
+     */
     protected void updateActionButtons(){
         boolean isSelected = (selectedItem.getValue()!=null);
         rateButton.setDisable(!isSelected);
@@ -156,6 +280,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
         seenButton.setDisable(!isSelected);
     }
 
+    /**
+     * Init filter choice box listener.
+     */
     protected void initFilterChoiceBoxListener() {
 
         selectedFilter = filterTypeChoiceBox.getSelectionModel().selectedItemProperty();
@@ -175,6 +302,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
         });
     }
 
+    /**
+     * Init genre choice box listener.
+     */
     protected void initGenreChoiceBoxListener() {
 
         selectedGenre = genreChoiceBox.getSelectionModel().selectedItemProperty();
@@ -187,6 +317,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
         });
     }
 
+    /**
+     * Init text field listener.
+     */
     protected void initTextFieldListener(){
 
         filterTextField.textProperty().addListener((obsValue, oldValue, newValue) -> {
@@ -203,6 +336,11 @@ public abstract class MediaContentController<T extends Media> implements Initial
         });
     }
 
+    /**
+     * Handle search.
+     *
+     * @param filter the filter
+     */
     protected void handleSearch(String filter){
 
         //Se o filtro não for por gênero e for vazio, apenas recarrega a tabela
@@ -235,23 +373,47 @@ public abstract class MediaContentController<T extends Media> implements Initial
         }
     }
 
+    /**
+     * Title search.
+     *
+     * @param title the title
+     */
     protected void titleSearch(String title){
         mediaObservableList.setAll(service.searchByTitle(title));
     }
 
+    /**
+     * Genre search.
+     *
+     * @param genre the genre
+     */
     protected void genreSearch(Genres genre) {
         mediaObservableList.setAll(service.searchByGenre(genre));
     }
 
+    /**
+     * Year search.
+     *
+     * @param year the year
+     */
     protected void yearSearch(int year){
         mediaObservableList.setAll(service.searchByYear(year));
     }
 
+    /**
+     * Set visible and managed.
+     *
+     * @param control the control
+     * @param active  the active
+     */
     protected void setVisibleAndManaged(Control control, boolean active){
         control.setVisible(active);
         control.setManaged(active);
     }
 
+    /**
+     * On filter button clicked.
+     */
     @FXML
     protected void onFilterButtonClicked() {
 
@@ -264,6 +426,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
         }
     }
 
+    /**
+     * Clear search.
+     */
     @FXML
     protected void clearSearch() {
         mediaObservableList.setAll(service.getAll());
@@ -273,11 +438,21 @@ public abstract class MediaContentController<T extends Media> implements Initial
         toggleGenreChoiceBox(false);
     }
 
+    /**
+     * Toggle genre choice box.
+     *
+     * @param active the active
+     */
     protected void toggleGenreChoiceBox(boolean active){
         setVisibleAndManaged(genreChoiceBox, active);
         if(!active) genreChoiceBox.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Toggle filter type components.
+     *
+     * @param active the active
+     */
     protected void toggleFilterTypeComponents(boolean active){
         setVisibleAndManaged(filterTypeChoiceBox, active);
         setVisibleAndManaged(filterTypeLabel, active);
@@ -285,11 +460,19 @@ public abstract class MediaContentController<T extends Media> implements Initial
         if(!active) filterTypeChoiceBox.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Toggle filter text field.
+     *
+     * @param active the active
+     */
     protected void toggleFilterTextField(boolean active){
         setVisibleAndManaged(filterTextField, active);
         if(!active) filterTextField.clear();
     }
 
+    /**
+     * Hide media info.
+     */
     protected void hideMediaInfo(){
         mediaInfoVbox.setVisible(false);
         mediaInfoVbox.setManaged(false);
@@ -297,20 +480,70 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     }
 
+    /**
+     * Show media info.
+     */
     protected void showMediaInfo(){
         mediaInfoVbox.setVisible(true);
         mediaInfoVbox.setManaged(true);
         splitPane.setDividerPosition(0, 0.7);
     }
 
+    /**
+     * Sets service.
+     *
+     * @param service the service
+     */
     protected abstract void setService(CommonService<T> service);
+
+    /**
+     * Configure filter choices.
+     */
     protected abstract void configureFilterChoices();
+
+    /**
+     * Configure table.
+     */
     protected abstract void configureTable();
+
+    /**
+     * Handle specific search.
+     *
+     * @param filter the filter
+     */
     protected abstract void handleSpecificSearch(String filter);
+
+    /**
+     * Handle media info.
+     *
+     * @param media the media
+     */
     protected abstract void handleMediaInfo(T media);
+
+    /**
+     * On add button clicked.
+     *
+     * @throws IOException the io exception
+     */
     @FXML abstract void onAddButtonClicked() throws IOException;
+
+    /**
+     * On remove button clicked.
+     */
     @FXML abstract void onRemoveButtonClicked();
+
+    /**
+     * On rate button clicked.
+     *
+     * @throws IOException the io exception
+     */
     @FXML abstract void onRateButtonClicked() throws IOException;
+
+    /**
+     * On seen button clicked.
+     *
+     * @throws IOException the io exception
+     */
     @FXML abstract void onSeenButtonClicked() throws IOException;
 
 }
