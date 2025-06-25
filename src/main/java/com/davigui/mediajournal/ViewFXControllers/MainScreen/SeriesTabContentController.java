@@ -58,6 +58,9 @@ public class SeriesTabContentController extends MediaContentController<Series> i
     @FXML
     private Button addSeasonButton;
 
+    @FXML
+    private Button seeSeasonButton;
+
     /*TODO: DECIDIR SE VOU IMPLEMENTAR ISSO
     @FXML
     private TableColumn<Series, String> seenDateColumn;
@@ -169,6 +172,7 @@ public class SeriesTabContentController extends MediaContentController<Series> i
         super.updateActionButtons();
         boolean isSelected = (selectedItem.getValue()!=null);
         addSeasonButton.setDisable(!isSelected);
+        seeSeasonButton.setDisable(!isSelected);
     }
 
     @FXML
@@ -202,12 +206,11 @@ public class SeriesTabContentController extends MediaContentController<Series> i
 
     @Override public void onRateButtonClicked() throws IOException {
         Series selectedSeries = selectedItem.getValue();
-        Season selectedSeason;
+        Season selectedSeason = askForSeason(selectedSeries, "avaliar");
 
-        if (selectedSeries.getNumberOfSeasons() == 1) {
-            selectedSeason = selectedSeries.findSeason(1);
-        }else {
-            selectedSeason = askForSeason(selectedSeries);
+        if (selectedSeason == null) {
+            // Usuário cancelou a seleção da temporada
+            return;
         }
 
         if (!selectedSeason.isSeen()) {
@@ -243,49 +246,77 @@ public class SeriesTabContentController extends MediaContentController<Series> i
     @Override
     public void onSeenButtonClicked() {
         Series selectedSeries = selectedItem.getValue();
-        Season season;
+        Season season = askForSeason(selectedSeries, "marcar como vista");
 
-        if (selectedSeries.getNumberOfSeasons() == 1) {
-            season = selectedSeries.findSeason(1);
-        }else {
-            season = askForSeason(selectedSeries);
-        }
-
-        if (season.isSeen()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Informação");
-            alert.setHeaderText("Temporada já vista");
-            alert.setContentText("Você já marcou esta temporada como vista.");
-            alert.showAndWait();
-        } else {
-            askForSeen(selectedSeries, season);
+        if (season != null) {
+            if (season.isSeen()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informação");
+                alert.setHeaderText("Temporada já vista");
+                alert.setContentText("Você já marcou esta temporada como vista.");
+                alert.showAndWait();
+            } else {
+                askForSeen(selectedSeries, season);
+            }
         }
 
     }
 
     private static Season askForSeason(Series series) {
+    @FXML
+    public void onSeeSeasonButtonClicked() {
+        Series selectedSeries = selectedItem.getValue();
+        Season season = askForSeason(selectedSeries, "ver");
+
+        if (season != null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informação da Temporada");
+            alert.setHeaderText("Informações da Temporada " + season.getSeasonNumber() + " de " + selectedSeries.getTitle());
+            alert.setContentText(season +
+                    "\nAvaliação: " + (season.getRating() > 0 ? "★".repeat(season.getRating()) : "Nenhuma avaliação") +
+                    "\nResenha: " + (season.getReview() != null ? season.getReview() : "Nenhuma resenha"));
+            alert.showAndWait();
+        }
+    }
+
+    private static Season askForSeason(Series series, String s) {
+        // Se a série tiver apenas uma temporada, retorna essa temporada
+        if (series.getNumberOfSeasons() == 1) {
+           return series.findSeason(1);
+        }
+        // Se a série tiver mais de uma temporada, pede ao usuário para selecionar uma
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Selecionar Temporada");
-        dialog.setHeaderText("Selecione a temporada para " + series.getTitle());
+        dialog.setHeaderText("Selecione a temporada para " + series.getTitle() + " que deseja " + s);
         dialog.setContentText("Digite o número da temporada (1 a " + series.getNumberOfSeasons() + "):");
 
         Optional<String> resultado = dialog.showAndWait();
-        if (resultado.isPresent()) {
-            try {
-                int num = Integer.parseInt(resultado.get());
-                return series.findSeason(num);
-            } catch (NumberFormatException e) {
-                // Se o número não for um inteiro válido, continua para exibir o alerta
-            } catch (SeasonNotFoundException e) {
-                // Se a temporada não for encontrada, continua para exibir o alerta
-            }
+
+        if (resultado.isEmpty()) {
+            // Usuário clicou em cancelar ou fechou a janela
+            return null;
         }
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Número de temporada inválido");
-        alert.setContentText("Por favor, insira um número válido entre 1 e " + series.getNumberOfSeasons() + ".");
-        alert.showAndWait();
-        return askForSeason(series); // Chama recursivamente até obter um número válido
+
+        String input = resultado.get().trim();
+
+        if (input.isEmpty()) {
+            // Usuário clicou OK sem digitar nada
+            return askForSeason(series, s);
+        }
+
+        try {
+            int num = Integer.parseInt(resultado.get());
+            return series.findSeason(num);
+        } catch (NumberFormatException | SeasonNotFoundException e) {
+            // Se a temporada não for encontrada, continua para exibir o alerta
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Número de temporada inválido");
+            alert.setContentText("Por favor, insira um número válido entre 1 e " + series.getNumberOfSeasons() + ".");
+            alert.showAndWait();
+            return askForSeason(series, s); // Chama recursivamente até obter um número válido
+        }
+
     }
 
     private void askForSeen(Series series, Season season) {
