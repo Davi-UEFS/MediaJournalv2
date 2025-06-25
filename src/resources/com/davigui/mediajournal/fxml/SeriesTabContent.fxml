@@ -146,14 +146,6 @@
             <Insets left="10.0" right="10.0" />
          </VBox.margin>
       </Label>
-        <Label fx:id="reviewInfo" text="(SCROLL)Resenha: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia consectetur neque. Etiam ac sollicitudin erat. Praesent ut nunc a libero vehicula convallis. Praesent euismod lacus id nulla facilisis, sit amet molestie orci pellentesque. Sed enim metus, commodo ac porta ut, consequat at justo. Nulla neque risus, porta quis facilisis sit amet, sagittis ac nisl. Aliquam aliquet felis eu magna." textAlignment="JUSTIFY" wrapText="true">
-            <font>
-                <Font size="14.0" />
-            </font>
-            <VBox.margin>
-                <Insets left="10.0" right="10.0" />
-            </VBox.margin>
-        </Label>
         <Label fx:id="castInfo" text="Elenco" textAlignment="JUSTIFY" wrapText="true">
             <font>
                 <Font size="14.0" />
@@ -169,6 +161,14 @@
          <VBox.margin>
             <Insets left="10.0" right="10.0" />
          </VBox.margin>
+        </Label>
+        <Label fx:id="reviewInfo" text="(SCROLL)Resenha: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia consectetur neque. Etiam ac sollicitudin erat. Praesent ut nunc a libero vehicula convallis. Praesent euismod lacus id nulla facilisis, sit amet molestie orci pellentesque. Sed enim metus, commodo ac porta ut, consequat at justo. Nulla neque risus, porta quis facilisis sit amet, sagittis ac nisl. Aliquam aliquet felis eu magna." textAlignment="JUSTIFY" wrapText="true">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <VBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </VBox.margin>
         </Label>
     </VBox>
 </SplitPane>
