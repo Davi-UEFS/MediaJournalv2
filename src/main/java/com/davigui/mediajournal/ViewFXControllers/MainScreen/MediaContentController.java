@@ -1,4 +1,4 @@
-package com.davigui.mediajournal.ViewFXControllers;
+package com.davigui.mediajournal.ViewFXControllers.MainScreen;
 
 import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.Model.Enums.Genres;
@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +40,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected TableColumn<T, String> ratingColumn;
 
     @FXML
-    protected Button editButton;
+    protected Button addButton;
 
     @FXML
     protected Button removeButton;
@@ -49,6 +50,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     @FXML
     protected Button filterButton;
+
+    @FXML
+    protected Button seenButton;
 
     @FXML
     protected TextField filterTextField;
@@ -147,9 +151,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     protected void updateActionButtons(){
         boolean isSelected = (selectedItem.getValue()!=null);
-        editButton.setDisable(!isSelected);
         rateButton.setDisable(!isSelected);
         removeButton.setDisable(!isSelected);
+        seenButton.setDisable(!isSelected);
     }
 
     protected void initFilterChoiceBoxListener() {
@@ -304,5 +308,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
     protected abstract void configureTable();
     protected abstract void handleSpecificSearch(String filter);
     protected abstract void handleMediaInfo(T media);
+    @FXML abstract void onAddButtonClicked() throws IOException;
+    @FXML abstract void onRemoveButtonClicked();
+    @FXML abstract void onRateButtonClicked() throws IOException;
+    @FXML abstract void onSeenButtonClicked() throws IOException;
 
 }

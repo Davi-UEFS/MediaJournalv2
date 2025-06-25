@@ -1,6 +1,6 @@
 package com.davigui.mediajournal;
 
-import com.davigui.mediajournal.ViewFXControllers.MainScreenController;
+import com.davigui.mediajournal.ViewFXControllers.MainScreen.MainScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,11 +18,14 @@ public class MainFX extends Application {
         Parent root = mainLoader.load();
         MainScreenController mainScreenController = mainLoader.getController();
 
-        Scene scene = new Scene(root, 1080, 720);
+        Scene scene = new Scene(root);
         Image icon = new Image(MainFX.class.getResourceAsStream("images/library_icon_G.png"));
         stage.getIcons().add(icon);
         stage.setTitle("Diario Cultural");
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            mainScreenController.saveLibrary();
+        });
         stage.show();
 
     }

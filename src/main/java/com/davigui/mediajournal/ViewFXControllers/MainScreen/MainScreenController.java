@@ -1,4 +1,4 @@
-package com.davigui.mediajournal.ViewFXControllers;
+package com.davigui.mediajournal.ViewFXControllers.MainScreen;
 
 import com.davigui.mediajournal.Controller.BookService;
 import com.davigui.mediajournal.Controller.MovieService;
@@ -41,9 +41,12 @@ public class MainScreenController implements Initializable {
     @FXML
     private SeriesTabContentController seriesTabContentController;
 
+    //*********Atributos NAO FXML ************
+    private Library journal;
+
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        Library journal = new Library();
+        this.journal = new Library();
         DataOperations.load(journal);
 
         BookService bookService = new BookService(journal);
@@ -59,5 +62,9 @@ public class MainScreenController implements Initializable {
         seriesTabContentController.setService(seriesService);
         seriesTabContentController.loadMediaList();
 
+    }
+
+    public void saveLibrary() {
+        DataOperations.save(journal);
     }
 }

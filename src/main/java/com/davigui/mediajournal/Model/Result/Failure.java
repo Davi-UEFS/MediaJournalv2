@@ -30,6 +30,6 @@ public class Failure implements IResult {
      * @return Uma string representando a mensagem de erro formatada.
      */
     public String getMessage() {
-        return Colors.red + objectType + " : " + "ERRO. " + message + Colors.rst;
+        return objectType + " : " + "ERRO. " + message;
     }
 }
