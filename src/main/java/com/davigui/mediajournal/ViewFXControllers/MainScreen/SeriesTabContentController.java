@@ -4,13 +4,9 @@ import com.davigui.mediajournal.Controller.CommonService;
 import com.davigui.mediajournal.Controller.SeriesService;
 import com.davigui.mediajournal.MainFX;
 import com.davigui.mediajournal.Model.Exceptions.SeasonNotFoundException;
-import com.davigui.mediajournal.Model.Medias.Book;
 import com.davigui.mediajournal.Model.Medias.Season;
 import com.davigui.mediajournal.Model.Medias.Series;
-import com.davigui.mediajournal.Model.Result.IResult;
-import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RateScreens.RateSeasonScreenController;
-import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeasonScreenController;
 import com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeriesScreenController;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -18,12 +14,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -32,71 +26,142 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SeriesTabContentController extends MediaContentController<Series> implements Initializable {
+/**
+ * Controlador da aba de séries na tela principal.
+ * </p>
+ * Estende {@code MediaContentController<Series>}. Esta classe é responsável por
+ * configurar a tabela, os filtros e as buscas específicos para séries.
+ */
+public class SeriesTabContentController extends MediaContentController<Series> {
 
     //**********Atributos FXML***************
+
+    /**
+     * Rótulo do título da tabela.
+     */
     @FXML
     private Label tableLabel;
 
+    /**
+     * Coluna do título original da série.
+     */
     @FXML
     private TableColumn<Series, String> originalTitleColumn;
 
+    /**
+     * Coluna do ano de encerramento da série.
+     */
     @FXML
     private TableColumn<Series, String> endingYearColumn;
 
+    /**
+     * Coluna com a quantidade de temporadas da série.
+     */
     @FXML
     private TableColumn<Series, Integer> seasonNumberColumn;
 
+    /**
+     * Rótulo que exibe o elenco da série no painel lateral.
+     */
     @FXML
     private Label castInfo;
 
+    /**
+     * Rótulo que exibe as plataformas onde a série pode ser assistida no painel lateral.
+     */
     @FXML
     private Label whereToWatchInfo;
 
+    /**
+     * Rótulo que exibe as informações das temporadas da série no painel lateral.
+     */
     @FXML
     private Label seasonsInfo;
 
+    /**
+     * Botão para adicionar uma nova temporada.
+     */
     @FXML
     private Button addSeasonButton;
 
+    /**
+     * Botão para visualizar temporadas.
+     */
     @FXML
     private Button seeSeasonButton;
 
-    /*TODO: DECIDIR SE VOU IMPLEMENTAR ISSO
-    @FXML
-    private TableColumn<Series, String> seenDateColumn;
-    */
+    //************ Atributos NÃO FXML **************
 
-    //************ Atributos NAO FXML *****************8
-
+    /**
+     * Serviço específico para operações com séries.
+     * </p>
+     * Este atributo é obtido via downcast de {@code CommonService<Series>} e
+     * pode gerar {@code ClassCastException} caso o serviço fornecido
+     * não seja do tipo esperado.
+     */
     private SeriesService seriesService;
 
-    //************ Metodos *****************
+    //************ Métodos *****************
+
+    /**
+     * Define o serviço específico de séries a ser utilizado pelo controlador.
+     * O serviço herdado da classe abstrata utiliza upcasting com o controlador
+     * de modelo de séries.
+     * <p>
+     * Este método realiza um downcast de {@code CommonService<Series>} para {@code SeriesService}
+     * para permitir acesso a métodos específicos do serviço de séries e, portanto,
+     * pode lançar {@code ClassCastException}.
+     *
+     * @param service O serviço a ser atribuído
+     * @throws ClassCastException Se o serviço fornecido não for uma instância de {@code SeriesService}
+     */
     @Override
-    protected void configureTable() {
-        titleColumn.setCellValueFactory(cellData->
-                new SimpleStringProperty(cellData.getValue().getTitle()));
-
-        yearColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getYear())).asObject());
-
-        /*Aqui o ano de encerramento é tratado como um String. Dessa forma, podemos
-        utilizar um ternário dentro da função lambda para retornar "Em andamento"
-        se a série ainda não foi concluída*/
-        endingYearColumn.setCellValueFactory(celldata->
-                (new SimpleStringProperty(
-                        celldata.getValue().getYearOfEnding() == 9999? "Em andamento" : Integer.toString(celldata.getValue().getYearOfEnding()))));
-
-        ratingColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty("★".repeat(celldata.getValue().getRating())));
-
-        originalTitleColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getOriginalTitle()));
-
-        seasonNumberColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getNumberOfSeasons())).asObject());
+    protected void setService(CommonService<Series> service) {
+        this.service = service;
+        this.seriesService = (SeriesService) service;
     }
 
+    /**
+     * Configura as colunas da tabela de séries.
+     * <p>
+     * Define como cada coluna extrai os dados dos objetos {@code Series},
+     * incluindo propriedades como título, ano de início, ano de encerramento,
+     * avaliação, título original e quantidade de temporadas.
+     * </p>
+     * Caso a série ainda esteja em andamento (valor 9999), o ano de encerramento
+     * é exibido como "Em andamento".
+     */
+    @Override
+    protected void configureTable() {
+        titleColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getTitle()));
+
+        yearColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getYear()).asObject());
+
+        endingYearColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(
+                        cellData.getValue().getYearOfEnding() == 9999 ?
+                                "Em andamento" :
+                                Integer.toString(cellData.getValue().getYearOfEnding())
+                ));
+
+        ratingColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty("★".repeat(cellData.getValue().getRating())));
+
+        originalTitleColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getOriginalTitle()));
+
+        seasonNumberColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getNumberOfSeasons()).asObject());
+    }
+
+    /**
+     * Configura os critérios disponíveis para filtragem de séries.
+     * <p>
+     * As opções devem ser inseridas em uma {@code ArrayList}, convertidas em uma
+     * lista observável e atribuídas ao {@code ChoiceBox} de filtros.
+     */
     @Override
     protected void configureFilterChoices() {
         List<String> filterChoices = new ArrayList<>();
@@ -108,33 +173,56 @@ public class SeriesTabContentController extends MediaContentController<Series> i
         filterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
     }
 
-    private void actorSearch(String filter){
+    /**
+     * Realiza a busca por ator.
+     * </p>
+     * A busca é realizada pelo serviço de séries com base no nome do ator,
+     * e a lista retornada é atribuída à lista observável de mídias.
+     *
+     * @param filter O nome do ator
+     */
+    private void actorSearch(String filter) {
         mediaObservableList.setAll(seriesService.searchByActor(filter));
     }
 
-    @Override
-    protected void setService(CommonService<Series> service) {
-        this.service = service;
-        this.seriesService = (SeriesService) service;
-    }
-
+    /**
+     * Executa buscas específicas para o critério "Ator".
+     * <p>
+     * Este método é chamado quando o filtro selecionado não pertence aos tipos
+     * genéricos tratados na superclasse (título, ano, gênero). O bloco switch,
+     * embora possua apenas um case, foi mantido para possíveis adições.
+     *
+     * @param filter O filtro digitado no campo de busca
+     */
     @Override
     protected void handleSpecificSearch(String filter) {
-        switch (selectedFilter.getValue()){
+        switch (selectedFilter.getValue()) {
             case "Ator":
                 actorSearch(filter);
-
-            /*So tem um case no switch, mas vou deixar assim para
-            caso for adicionar mais tipos de buscas*/
+                break;
+            // Mantido como switch para facilitar extensões futuras
         }
     }
 
+    /**
+     * Exibe as informações detalhadas de uma série selecionada na interface.
+     * <p>
+     * Preenche os campos visuais com dados da série, como título, anos de início e fim,
+     * gênero, avaliação, elenco, plataformas de exibição e temporadas.
+     * Caso não haja resenha cadastrada, uma mensagem padrão é exibida.
+     *
+     * @param series A série atualmente selecionada na tabela
+     */
     @Override
     protected void handleMediaInfo(Series series) {
-        String endingYear = (series.getYearOfEnding() == 9999) ? "Em andamento" : Integer.toString(series.getYearOfEnding());
+        String endingYear = (series.getYearOfEnding() == 9999)
+                ? "Em andamento"
+                : Integer.toString(series.getYearOfEnding());
+
         titleYearInfo.setText(series.getTitle() + " (" + series.getYear() + " - " + endingYear + ")");
         genreInfo.setText(series.getGenre().toString());
         ratingInfo.setText("★".repeat(series.getRating()));
+
         if (series.getReview() == null)
             reviewInfo.setText("RESENHA: Sem resenha atribuida");
         else
@@ -147,7 +235,6 @@ public class SeriesTabContentController extends MediaContentController<Series> i
         series.getSeasons().forEach(season ->
                 seasonsString.append("\n\t").append(season.toString()));
         seasonsInfo.setText(seasonsString.toString());
-
     }
 
     @Override
