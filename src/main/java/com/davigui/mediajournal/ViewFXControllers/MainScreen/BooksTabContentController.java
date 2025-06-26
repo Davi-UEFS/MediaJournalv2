@@ -69,15 +69,15 @@ public class BooksTabContentController extends MediaContentController<Book> {
      */
     private BookService bookService;
 
-    // ***********Metodos*******************
+    // ***********Métodos*******************
 
     /**
      * Define o serviço específico de livros a ser utilizado pelo controlador.
      * O service herdado da classe abstrata utiliza upcasting com o controlador
      * de modelo de livros.
      * <p>
-     * Este metodo realiza um downcast de {@code CommonService<Book>} para {@code BookService}
-     * para permitir acesso a metodos específicos do serviço de livros e, portanto,
+     * Este método realiza um downcast de {@code CommonService<Book>} para {@code BookService}
+     * para permitir acesso a métodos específicos do serviço de livros e, portanto,
      * pode lançar {@code ClassCastException}.
      *
      * @param bookService O serviço a ser atribuído
@@ -95,7 +95,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
      * Define como cada coluna da tabela extrai os dados dos objetos {@code Book},
      * incluindo propriedades como título, ano, avaliação, autor, ISBN, editora
      * e data de leitura.
-     * Como os metodos do modelo retornam tipos comuns (e não propriedades observáveis),
+     * Como os métodos do modelo retornam tipos comuns (e não propriedades observáveis),
      * é necessário encapsular os valores em {@code Property} ao configurar as colunas,
      */
     @Override
@@ -170,7 +170,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
     /**
      * Executa buscas específicas para os critérios "Autor" e "ISBN".
      * <p>
-     * Este metodo é chamado quando o critério de filtro selecionado não
+     * Este método é chamado quando o critério de filtro selecionado não
      * pertence aos tipos genéricos na superclasse (título, ano e gênero).
      *
      * @param filter O filtro inserido no campo de texto

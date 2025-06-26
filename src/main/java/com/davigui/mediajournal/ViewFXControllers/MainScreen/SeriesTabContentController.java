@@ -101,15 +101,15 @@ public class SeriesTabContentController extends MediaContentController<Series> {
      */
     private SeriesService seriesService;
 
-    //************ metodos *****************
+    //************ Métodos *****************
 
     /**
      * Define o serviço específico de séries a ser utilizado pelo controlador.
      * O serviço herdado da classe abstrata utiliza upcasting com o controlador
      * de modelo de séries.
      * <p>
-     * Este metodo realiza um downcast de {@code CommonService<Series>} para {@code SeriesService}
-     * para permitir acesso a metodos específicos do serviço de séries e, portanto,
+     * Este método realiza um downcast de {@code CommonService<Series>} para {@code SeriesService}
+     * para permitir acesso a métodos específicos do serviço de séries e, portanto,
      * pode lançar {@code ClassCastException}.
      *
      * @param service O serviço a ser atribuído
@@ -188,7 +188,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
     /**
      * Executa buscas específicas para o critério "Ator".
      * <p>
-     * Este metodo é chamado quando o filtro selecionado não pertence aos tipos
+     * Este método é chamado quando o filtro selecionado não pertence aos tipos
      * genéricos tratados na superclasse (título, ano, gênero). O bloco switch,
      * embora possua apenas um case, foi mantido para possíveis adições.
      *
@@ -309,7 +309,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
     /**
      * Abre a tela de avaliação de temporada ao clicar no botão "Avaliar".
      * <p>
-     * Utiliza o metodo {@code askForSeason} para solicitar ao usuário qual
+     * Utiliza o método {@code askForSeason} para solicitar ao usuário qual
      * temporada deseja avaliar.
      * Se a temporada selecionada não estiver marcada como vista, exibe um alerta.
      * Cria uma nova janela para registrar a avaliação da temporada, desativando a
@@ -360,10 +360,10 @@ public class SeriesTabContentController extends MediaContentController<Series> {
     /**
      * Marca uma temporada como vista ao clicar no botão "Marcar Visto".
      * <p>
-     * Utiliza o metodo {@code askForSeason} para solicitar ao usuário qual
+     * Utiliza o método {@code askForSeason} para solicitar ao usuário qual
      * temporada deseja marcar como vista.
      * Se a temporada já estiver marcada como vista, exibe um alerta informando.
-     * Caso contrário, chama o metodo {@code askForSeen} para confirmar a ação.
+     * Caso contrário, chama o método {@code askForSeen} para confirmar a ação.
      * Ao fechar a janela de confirmação, a tabela de mídias é recarregada.
      */
     @Override
@@ -389,7 +389,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
     /**
      * Exibe as informações de uma temporada ao clicar no botão "Ver Temp".
      * <p>
-     * Utiliza o metodo {@code askForSeason} para solicitar ao usuário qual
+     * Utiliza o método {@code askForSeason} para solicitar ao usuário qual
      * temporada deseja ver.
      * Se a temporada selecionada existir, exibe um diálogo com as
      * informações da temporada, incluindo avaliação e resenha, se disponíveis.
@@ -498,7 +498,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
      * Solicita confirmação do usuário antes de marcar uma temporada como vista.
      * <p>
      * Exibe um diálogo de confirmação com a opção de continuar ou cancelar a
-     * ação. Se o usuário confirmar, chama o metodo do serviço para marcar a
+     * ação. Se o usuário confirmar, chama o método do serviço para marcar a
      * temporada como vista e recarrega a lista de mídias.
      *
      * @param series A série que contém a temporada

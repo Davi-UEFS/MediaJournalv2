@@ -60,7 +60,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
      */
     private SeriesService seriesService;
 
-    //***********Metodos*********************
+    //***********Métodos*********************
 
     /**
      * Define o serviço de séries a ser utilizado pelo controlador.
@@ -77,9 +77,6 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
      * Chama a inicialização da classe pai e configura os textos temporários adicionais
      * dos campos de texto específicos para o registro de séries.
      * Quando a série está em andamento, o campo de ano de encerramento é desabilitado.
-     *
-     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
-     * @param rb O recurso usado para localizar o objeto raiz.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -93,7 +90,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
     }
 
     /**
-     * Metodo chamado quando o botão de registro é clicado.
+     * Método chamado quando o botão de registro é clicado.
      * <p>
      * Valida os campos de entrada e registra a série usando o serviço de séries.
      * Exibe mensagens de erro ou sucesso conforme necessário.
@@ -157,7 +154,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
     }
 
     /**
-     * Metodo chamado quando o CheckBox de andamento é marcado.
+     * Método chamado quando o CheckBox de andamento é marcado.
      * <p>
      * Limpa o campo de ano de encerramento quando a série está em andamento.
      */

@@ -31,9 +31,9 @@ public class RegisterBookScreenController extends RegisterScreenController {
     @FXML private TextField field_isbn;
 
     /**
-     * ChechkBox para marcar se possui ou não o livro.
+     * CheckBox para marcar se possui ou não o livro.
      */
-    @FXML private CheckBox possuiLivroCheckBox;
+    @FXML private CheckBox ownBookCheckBox;
 
     //*********Atributos NAO FXML***********
 
@@ -42,7 +42,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
      */
     private BookService service;
 
-    //***********Metodos*********************
+    //***********Métodos*********************
 
     /**
      * Define o serviço de livros a ser utilizado pelo controlador.
@@ -58,9 +58,6 @@ public class RegisterBookScreenController extends RegisterScreenController {
      * <p>
      * Chama a inicialização da classe pai e configura os textos temporários adicionais
      * dos campos de texto específicos para o registro de livros.
-     *
-     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
-     * @param rb O recurso usado para localizar o objeto raiz.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,7 +67,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
     }
 
     /**
-     * Metodo chamado quando o botão de registro é clicado.
+     * Método chamado quando o botão de registro é clicado.
      * <p>
      * Valida os campos de entrada e tenta registrar o livro através da classe serviço.
      * Exibe mensagens de sucesso ou erro conforme o resultado da operação.
@@ -99,7 +96,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
         Genres genreE = Genres.valueOf(genre.toUpperCase());
 
         IResult result = service.register(title, yearInt, genreE,
-                isbn, author, publisher, possuiLivroCheckBox.isSelected());
+                isbn, author, publisher, ownBookCheckBox.isSelected());
         if (result.getClass().equals(Success.class)) {
             showAlert(Alert.AlertType.INFORMATION, "Registrado com sucesso!");
             Stage stage = (Stage) registerButton.getScene().getWindow();

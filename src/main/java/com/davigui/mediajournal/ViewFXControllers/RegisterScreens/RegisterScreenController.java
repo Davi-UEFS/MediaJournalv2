@@ -1,5 +1,6 @@
 package com.davigui.mediajournal.ViewFXControllers.RegisterScreens;
 
+import com.davigui.mediajournal.Model.Enums.Genres;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -45,16 +46,13 @@ public abstract class RegisterScreenController implements Initializable {
      */
     @FXML protected Button registerButton;
 
-    //***********Metodos Comuns e Assinaturas*********************
+    //***********Métodos Comuns e Assinaturas*********************
 
     /**
      * Inicializa os componentes da interface gráfica.
      * <p>
      * Configura os textos temporários dos campos de texto e preenche o
      * ComboBox de gêneros com os gêneros disponíveis.
-     *
-     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
-     * @param rb O recurso usado para localizar o objeto raiz.
      */
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,20 +60,20 @@ public abstract class RegisterScreenController implements Initializable {
         field_author.setPromptText("Autor");
         field_year.setPromptText("Ano");
 
-        genreBox.getItems().addAll("- Gênero -", "Terror", "Ação", "Aventura",
-                "Suspense", "Romance", "Ficção", "Esportes", "Comédia",
-                "Mistério", "Criminal", "Infantil", "Outros"
-        );
+        genreBox.getItems().add("- Gênero -");
+        for (Genres genre : Genres.values()) {
+            genreBox.getItems().add(genre.toString());
+        }
         genreBox.getSelectionModel().selectFirst();
     }
 
     /**
-     * Assinatura do metodo para lidar com o clique no botão de registro.
+     * Assinatura do método para lidar com o clique no botão de registro.
      * Deve ser implementado pelas classes concretas que herdam desta.
      */
     @FXML abstract public void onRegisterButtonClicked();
 
-    //**********Metodos de Validaçãp*************
+    //**********Métodos de Validaçãp*************
 
     /**
      * Valida se uma string pode ser convertida em um inteiro válido, e
@@ -97,7 +95,7 @@ public abstract class RegisterScreenController implements Initializable {
     }
 
     /**
-     * Metodo estático para exibir um alerta com o tipo e a mensagem fornecidos.
+     * Método estático para exibir um alerta com o tipo e a mensagem fornecidos.
      *
      * @param alertType O tipo de alerta a ser exibido (INFORMATION, ERROR, etc.).
      * @param message A mensagem a ser exibida no alerta.

@@ -16,31 +16,77 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para a tela de marcação de filmes como vistos.
+ * <p>
+ * Este controlador é responsável por gerenciar a interface de marcação de um filme como visto,
+ * permitindo ao usuário selecionar uma data e salvar essa informação.
+ */
 public class SeenMovieScreenController implements Initializable {
 
     // *********Atributos FXML******************
+
+    /**
+     * Botão para salvar as alterações.
+     */
     @FXML Button saveButton;
+
+    /**
+     * Seletor de data para escolher a data em que o filme foi visto.
+     */
     @FXML DatePicker datePicker;
 
     //*********Atributos NAO FXML***********
+
+    /**
+     * Serviço de filmes utilizado para marcar o filme como visto.
+     */
     MovieService service;
+
+    /**
+     * Filme que será marcado como visto.
+     */
     Movie movie;
 
-    //*********Metodos *************
+    //*********Métodos *************
+
+    /**
+     * Define o serviço de filmes a ser utilizado.
+     *
+     * @param service O serviço de filmes.
+     */
     public void setService(MovieService service) {
         this.service = service;
     }
 
+    /**
+     * Define o filme que será marcado como visto.
+     *
+     * @param movie O filme a ser marcado como visto.
+     */
     public void setMedia(Movie movie) {
         this.movie = movie;
     }
 
+    /**
+     * Método chamado ao inicializar o controlador.
+     * <p>
+     * Configura o DatePicker para a data atual.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Configurações iniciais do DatePicker
         datePicker.setValue(java.time.LocalDate.now());
     }
 
+    /**
+     * Método chamado quando o botão de salvar é clicado.
+     * <p>
+     * Verifica se a data selecionada é válida (não pode ser futura) e, se for,
+     * marca o filme como visto no serviço de filmes.
+     * Se a operação for bem-sucedida, exibe uma mensagem de sucesso e fecha a janela.
+     * Se ocorrer um erro, exibe uma mensagem de erro.
+     */
     public void onSaveButtonClicked() {
         LocalDate pickedDate = datePicker.getValue();
         int day = pickedDate.getDayOfMonth();

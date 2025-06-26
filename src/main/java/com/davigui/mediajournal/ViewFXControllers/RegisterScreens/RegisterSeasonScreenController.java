@@ -62,7 +62,7 @@ public class RegisterSeasonScreenController implements Initializable {
      */
     private int seasonNumber;
 
-    // *********Metodos *************
+    // *********Métodos *************
 
     /**
      * Define o serviço de séries a ser utilizado pelo controlador.
@@ -85,7 +85,7 @@ public class RegisterSeasonScreenController implements Initializable {
     /**
      * Inicializa os campos da interface gráfica com o número da nova temporada e o título da série.
      * <p>
-     * Este metodo é chamado para configurar a interface antes do usuário registrar uma nova temporada,
+     * Este método é chamado para configurar a interface antes do usuário registrar uma nova temporada,
      * e deve ser chamado após a inicialização do controlador e antes de exibir a tela de registro.
      */
     public void initFields() {
@@ -97,9 +97,6 @@ public class RegisterSeasonScreenController implements Initializable {
      * Inicializa os componentes da interface gráfica.
      * <p>
      * Configura os textos temporários dos campos de texto para o número de episódios e ano.
-     *
-     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
-     * @param rb O recurso usado para localizar o objeto raiz.
      */
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
@@ -108,7 +105,7 @@ public class RegisterSeasonScreenController implements Initializable {
     }
 
     /**
-     * Metodo chamado quando o botão de registro é clicado.
+     * Método chamado quando o botão de registro é clicado.
      * <p>
      * Valida os campos de entrada e registra a nova temporada através do serviço de séries.
      * Se a validação falhar, exibe um alerta de erro. Se o registro for bem-sucedido,

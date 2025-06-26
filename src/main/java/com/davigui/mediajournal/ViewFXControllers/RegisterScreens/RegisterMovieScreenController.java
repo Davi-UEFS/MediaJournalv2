@@ -57,7 +57,7 @@ public class RegisterMovieScreenController extends RegisterScreenController{
      */
     private MovieService service;
 
-    // ***********Metodos*********************
+    // ***********Métodos*********************
 
     /**
      * Define o serviço de filmes a ser utilizado pelo controlador.
@@ -73,9 +73,6 @@ public class RegisterMovieScreenController extends RegisterScreenController{
      * <p>
      * Chama a inicialização da classe pai e configura os textos temporários adicionais
      * dos campos de texto específicos para o registro de filmes.
-     *
-     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
-     * @param rb O recurso usado para localizar o objeto raiz.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -88,7 +85,7 @@ public class RegisterMovieScreenController extends RegisterScreenController{
     }
 
     /**
-     * Metodo chamado quando o botão de registro é clicado.
+     * Método chamado quando o botão de registro é clicado.
      * <p>
      * Valida os campos de entrada e registra o filme usando o serviço de filmes.
      * Exibe mensagens de erro ou sucesso conforme o resultado da operação.

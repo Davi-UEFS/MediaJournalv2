@@ -96,15 +96,15 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
      */
     private MovieService movieService = (MovieService) service;
 
-    //***********Metodos*********************
+    //***********Métodos*********************
 
     /**
      * Define o serviço específico de filmes a ser utilizado pelo controlador.
      * O serviço herdado da classe abstrata utiliza upcasting com o controlador
      * de modelo de filmes.
      * <p>
-     * Este metodo realiza um downcast de {@code CommonService<Movie>} para {@code MovieService}
-     * para permitir acesso a metodos específicos do serviço de filmes e, portanto,
+     * Este método realiza um downcast de {@code CommonService<Movie>} para {@code MovieService}
+     * para permitir acesso a métodos específicos do serviço de filmes e, portanto,
      * pode lançar {@code ClassCastException}.
      *
      * @param service O serviço a ser atribuído
@@ -122,7 +122,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
      * Define como cada coluna extrai os dados dos objetos {@code Movie},
      * incluindo propriedades como título, ano, avaliação, direção, duração,
      * título original e data de visualização.
-     * Como os metodos do modelo retornam tipos comuns (e não propriedades observáveis),
+     * Como os métodos do modelo retornam tipos comuns (e não propriedades observáveis),
      * é necessário encapsular os valores em {@code Property}.
      */
     @Override
@@ -194,7 +194,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
     /**
      * Executa buscas específicas para os critérios "Diretor" e "Ator".
      * <p>
-     * Este metodo é chamado quando o critério de filtro selecionado não
+     * Este método é chamado quando o critério de filtro selecionado não
      * pertence aos tipos genéricos tratados na superclasse (título, ano, gênero).
      *
      * @param filter O filtro digitado no campo de busca
@@ -272,7 +272,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
      */
     @Override
     protected void onRemoveButtonClicked() {
-        // Implementação do metodo para remover um livro
+        // Implementação do método para remover um livro
         Movie selectedMovie = selectedItem.getValue();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
