@@ -258,7 +258,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
         stage.setTitle("Registro de Filme");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/movie_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 
@@ -288,7 +288,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
         if (result.isPresent() && result.get() == buttonContinuar) {
             movieService.deleteMovie(selectedMovie);
-            loadMediaList(); // Recarrega a lista de mídias após a remoção
+            resetMediaList(); // Recarrega a lista de mídias após a remoção
         }
         // Se o usuário cancelar, não faz nada
     }
@@ -320,7 +320,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
         stage.setTitle("Avaliação de Filme");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/movie_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 
@@ -361,7 +361,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
         stage.setTitle("Marcar Filme como Visto");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/seen_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 }

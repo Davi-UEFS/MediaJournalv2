@@ -93,13 +93,13 @@ public class MainScreenController implements Initializable {
         SeriesService seriesService = new SeriesService(journal);
 
         booksTabContentController.setService(bookService);
-        booksTabContentController.loadMediaList();
+        booksTabContentController.configureMediaList();
 
         moviesTabContentController.setService(movieService);
-        moviesTabContentController.loadMediaList();
+        moviesTabContentController.configureMediaList();
 
         seriesTabContentController.setService(seriesService);
-        seriesTabContentController.loadMediaList();
+        seriesTabContentController.configureMediaList();
     }
 
     /**

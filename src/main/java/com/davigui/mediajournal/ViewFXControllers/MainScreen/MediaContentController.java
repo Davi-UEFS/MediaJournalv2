@@ -245,10 +245,18 @@ public abstract class MediaContentController<T extends Media> implements Initial
      * e convertida em uma lista observável utilizando o metodo
      * estático {@code FXCollections.observableArrayList()}.
      */
-    protected void loadMediaList(){
+    protected void configureMediaList(){
         mediaObservableList = FXCollections.observableArrayList(service.getAll());
         tableView.setItems(mediaObservableList);
-        //TODO: PASSAR O  SET PARA O CONFIGURETABLE
+
+    }
+
+    /**
+     * Reseta a lista observável de mídias para o padrão. A lista padrão é
+     * obtida através do controlador da mídia parametrizada.
+     */
+    protected void resetMediaList(){
+        mediaObservableList.setAll(service.getAll());
     }
 
     /**
@@ -374,7 +382,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
         //Se o filtro não for por gênero e for vazio, apenas recarrega a tabela
         if((!selectedFilter.getValue().equals("Gênero")) && (filter == null || filter.isEmpty())){
-            loadMediaList();
+            resetMediaList();
             return;
         }
 

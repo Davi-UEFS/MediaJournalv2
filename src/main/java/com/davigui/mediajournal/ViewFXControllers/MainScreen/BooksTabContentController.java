@@ -229,7 +229,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
         stage.setTitle("Registro de Livro");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/book_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 
@@ -258,7 +258,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
         if (result.isPresent() && result.get() == buttonContinuar) {
             bookService.deleteBook(selectedBook);
-            loadMediaList(); // Recarrega a lista de mídias após a remoção
+            resetMediaList(); // Recarrega a lista de mídias após a remoção
         }
         // Se o usuário cancelar, não faz nada
     }
@@ -290,7 +290,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
         stage.setTitle("Avaliação de Livro");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/book_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 
@@ -331,7 +331,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
         stage.setTitle("Marcar Livro como Visto");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/seen_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 

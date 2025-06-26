@@ -259,7 +259,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
         stage.setTitle("Registro de Série");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/series_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 
@@ -301,7 +301,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
         if (result.isPresent() && result.get() == buttonContinuar) {
             seriesService.deleteSeries(selectedSeries);
-            loadMediaList(); // Recarrega a lista de mídias após a remoção
+            resetMediaList(); // Recarrega a lista de mídias após a remoção
         }
         // Se o usuário cancelar, não faz nada
     }
@@ -352,7 +352,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
         stage.setTitle("Avaliação de Temporada");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/series_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
 
     }
@@ -377,7 +377,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
                 alert.setTitle("Informação");
                 alert.setHeaderText("Temporada já vista");
                 alert.setContentText("Você já marcou esta temporada como vista.");
-                alert.setOnHidden(e -> loadMediaList());
+                alert.setOnHidden(e -> resetMediaList());
                 alert.showAndWait();
             } else {
                 askForSeen(selectedSeries, season);
@@ -437,7 +437,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
         stage.setTitle("Registro de Temporada");
         stage.getIcons().add(new Image(MainFX.class.getResourceAsStream("images/series_icon_G.png")));
         stage.setScene(scene);
-        stage.setOnHidden(e -> loadMediaList());
+        stage.setOnHidden(e -> resetMediaList());
         stage.show();
     }
 
@@ -519,7 +519,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
         if (result.isPresent() && result.get() == buttonContinuar) {
             seriesService.markAsSeenSeason(series, season.getSeasonNumber());
-            loadMediaList(); // Recarrega a lista de mídias após a remoção
+            resetMediaList(); // Recarrega a lista de mídias após a remoção
         }
         // Se o usuário cancelar, não faz nada
     }
