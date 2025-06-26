@@ -63,8 +63,8 @@ public class BooksTabContentController extends MediaContentController<Book> {
     /**
      * Serviço específico para operações com livros.
      * </p>
-     * Este atributo é obtido via downcast de {@code CommonService<Book>} e,
-     * portanto, pode gerar {@code ClassCastException} se um serviço incorreto
+     * Este atributo é obtido via downcast de {@code CommonService<Book>} e
+     * pode gerar {@code ClassCastException} se um serviço incorreto
      * for fornecido.
      */
     private BookService bookService;

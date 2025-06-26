@@ -12,7 +12,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,78 +27,158 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MoviesTabContentController extends MediaContentController<Movie> implements Initializable {
+/**
+ * Controlador da aba de filmes na tela principal.
+ * </p>
+ * Estende {@code MediaContentController<Movie>}. Esta classe é responsável por
+ * configurar a tabela, os filtros e as buscas específicos para filmes.
+ */
+public class MoviesTabContentController extends MediaContentController<Movie> {
 
     // *********Atributos FXML******************
+
+    /**
+     * Coluna do título original do filme.
+     */
     @FXML
     private TableColumn<Movie, String> originalTitleColumn;
 
+    /**
+     * Coluna do diretor do filme.
+     */
     @FXML
     private TableColumn<Movie, String> directionColumn;
 
+    /**
+     * Coluna da duração do filme.
+     */
     @FXML
     private TableColumn<Movie, Integer> durationColumn;
 
+    /**
+     * Coluna da data em que o filme foi assistido.
+     */
     @FXML
     private TableColumn<Movie, String> seenDateColumn;
 
+    /**
+     * Rótulo que exibe as plataformas onde o filme pode ser assistido no painel lateral.
+     */
     @FXML
     private Label whereToWatchInfo;
 
+    /**
+     * Rótulo que exibe o elenco do filme no painel lateral.
+     */
     @FXML
     private Label castInfo;
 
+    /**
+     * Rótulo que exibe o roteirista do filme no painel lateral.
+     */
     @FXML
     private Label scriptInfo;
 
+    /**
+     * Rótulo que exibe a duração do filme no painel lateral.
+     */
     @FXML
     private Label durationInfo;
 
     //*********Atributos NAO FXML***********
-    //TODO: EXPLICITAR POSSIVEL ERRO DE CAST NO JAVADOC
+
+    /**
+     * Serviço específico para operações com filmes.
+     * </p>
+     * Este atributo é obtido via downcast de {@code CommonService<Movie>} e
+     * pode gerar {@code ClassCastException} se um serviço incorreto
+     * for fornecido.
+     */
     private MovieService movieService = (MovieService) service;
 
     //***********Metodos*********************
 
-
+    /**
+     * Define o serviço específico de filmes a ser utilizado pelo controlador.
+     * O serviço herdado da classe abstrata utiliza upcasting com o controlador
+     * de modelo de filmes.
+     * <p>
+     * Este método realiza um downcast de {@code CommonService<Movie>} para {@code MovieService}
+     * para permitir acesso a métodos específicos do serviço de filmes e, portanto,
+     * pode lançar {@code ClassCastException}.
+     *
+     * @param service O serviço a ser atribuído
+     * @throws ClassCastException Se o serviço fornecido não for uma instância de {@code MovieService}
+     */
     @Override
     protected void setService(CommonService<Movie> service) {
         this.service = service;
         this.movieService = (MovieService) service;
     }
 
+    /**
+     * Configura as colunas da tabela de filmes.
+     * <p>
+     * Define como cada coluna extrai os dados dos objetos {@code Movie},
+     * incluindo propriedades como título, ano, avaliação, direção, duração,
+     * título original e data de visualização.
+     * Como os métodos do modelo retornam tipos comuns (e não propriedades observáveis),
+     * é necessário encapsular os valores em {@code Property}.
+     */
     @Override
     protected void configureTable() {
-        titleColumn.setCellValueFactory(cellData->
+        titleColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getTitle()));
 
-        yearColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getYear())).asObject());
+        yearColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getYear()).asObject());
 
-        ratingColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty("★".repeat(celldata.getValue().getRating())));
+        ratingColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty("★".repeat(cellData.getValue().getRating())));
 
-        directionColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getDirection()));
+        directionColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDirection()));
 
-        durationColumn.setCellValueFactory(celldata->
-                (new SimpleIntegerProperty(celldata.getValue().getDuration()).asObject())); // Assumindo getDuration() retorna String
+        durationColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getDuration()).asObject());
 
-        originalTitleColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getOriginalTitle()));
+        originalTitleColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getOriginalTitle()));
 
-        seenDateColumn.setCellValueFactory(celldata->
-                new SimpleStringProperty(celldata.getValue().getSeenDate()));
+        seenDateColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getSeenDate()));
     }
 
-    private void actorSearch(String filter){
+    /**
+     * Realiza a busca por ator.
+     * </p>
+     * A busca é realizada pelo serviço de filmes com base no nome do ator,
+     * e a lista retornada é atribuída à lista observável de mídias.
+     *
+     * @param filter O nome do ator
+     */
+    private void actorSearch(String filter) {
         mediaObservableList.setAll(movieService.searchByActor(filter));
     }
 
-    private void directorSearch(String filter){
+    /**
+     * Realiza a busca por diretor.
+     * </p>
+     * A busca é realizada pelo serviço de filmes com base no nome do diretor,
+     * e a lista retornada é atribuída à lista observável de mídias.
+     *
+     * @param filter O nome do diretor
+     */
+    private void directorSearch(String filter) {
         mediaObservableList.setAll(movieService.searchByDirector(filter));
     }
 
+    /**
+     * Configura os critérios disponíveis para filtragem de filmes.
+     * <p>
+     * As opções devem ser adicionadas em uma {@code ArrayList} que é convertidas
+     * em uma lista observável e atribuídas ao {@code ChoiceBox} de filtros.
+     */
     @Override
     protected void configureFilterChoices() {
         List<String> filterChoices = new ArrayList<>();
@@ -112,19 +191,35 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
         filterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
     }
 
+    /**
+     * Executa buscas específicas para os critérios "Diretor" e "Ator".
+     * <p>
+     * Este método é chamado quando o critério de filtro selecionado não
+     * pertence aos tipos genéricos tratados na superclasse (título, ano, gênero).
+     *
+     * @param filter O filtro digitado no campo de busca
+     */
     @Override
     protected void handleSpecificSearch(String filter) {
-        switch (selectedFilter.getValue()){
+        switch (selectedFilter.getValue()) {
             case "Ator":
                 actorSearch(filter);
                 break;
-
             case "Diretor":
                 directorSearch(filter);
                 break;
         }
     }
 
+    /**
+     * Exibe as informações detalhadas de um filme selecionado na interface.
+     * <p>
+     * Preenche os campos visuais com dados do filme, como título, ano, gênero,
+     * avaliação, roteiro, elenco, plataformas de exibição e duração. Caso não
+     * haja resenha cadastrada, uma mensagem padrão é exibida.
+     *
+     * @param movie O filme atualmente selecionado na tabela
+     */
     @Override
     protected void handleMediaInfo(Movie movie) {
         titleYearInfo.setText(movie.getTitle() + " (" + movie.getYear() + ")");
