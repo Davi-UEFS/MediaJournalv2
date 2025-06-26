@@ -14,24 +14,73 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para a tela de registro de séries.
+ * </p>
+ * Estende {@code RegisterScreenController} e implementa a lógica específica para registro de séries.
+ */
 public class RegisterSeriesScreenController extends RegisterScreenController{
 
     //*********Atributos FXML******************
+
+    /**
+     * Campo de texto para o título original da série.
+     */
     @FXML private TextField field_ogTitle;
+
+    /**
+     * Campo de texto para o elenco da série.
+     */
     @FXML private TextArea field_cast;
+
+    /**
+     * Campo de texto para os locais onde a série pode ser assistida.
+     */
     @FXML private TextArea field_where;
+
+    /**
+     * Campo de texto para o ano de encerramento da série.
+     */
     @FXML private TextField field_endingYear;
+
+    /**
+     * Campo de texto para o número de episódios da primeira temporada.
+     */
     @FXML private TextField field_episodeCount;
+
+    /**
+     * CheckBox para marcar se a série está em andamento.
+     */
     @FXML CheckBox andamentoCheckBox;
 
     //*********Atributos NAO FXML***********
+
+    /**
+     * Serviço de séries utilizado para registrar a série.
+     */
     private SeriesService seriesService;
 
     //***********Metodos*********************
+
+    /**
+     * Define o serviço de séries a ser utilizado pelo controlador.
+     *
+     * @param seriesService O serviço de séries a ser utilizado.
+     */
     public void setService(SeriesService seriesService) {
         this.seriesService = seriesService;
     }
 
+    /**
+     * Inicializa os componentes da interface gráfica.
+     * </p>
+     * Chama a inicialização da classe pai e configura os textos temporários adicionais
+     * dos campos de texto específicos para o registro de séries.
+     * Quando a série está em andamento, o campo de ano de encerramento é desabilitado.
+     *
+     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
+     * @param rb O recurso usado para localizar o objeto raiz.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         super.initialize(url, rb);
@@ -43,6 +92,13 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
         field_endingYear.disableProperty().bind(andamentoCheckBox.selectedProperty());
     }
 
+    /**
+     * Metodo chamado quando o botão de registro é clicado.
+     * </p>
+     * Valida os campos de entrada e registra a série usando o serviço de séries.
+     * Exibe mensagens de erro ou sucesso conforme necessário.
+     * Sempre registra a primeira temporada com o ano de lançamento da série.
+     */
     @Override
     public void onRegisterButtonClicked() {
         String title = field_title.getText();
@@ -100,6 +156,11 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
 
     }
 
+    /**
+     * Metodo chamado quando o CheckBox de andamento é marcado.
+     * </p>
+     * Limpa o campo de ano de encerramento quando a série está em andamento.
+     */
     @FXML
     public void onCheckBoxMarked() {
         field_endingYear.clear();

@@ -11,30 +11,70 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterBookScreenController extends RegisterScreenController{
+/**
+ * Controlador para a tela de registro de livros.
+ * </p>
+ * Estende {@code RegisterScreenController} e implementa a lógica específica para registro de livros.
+ */
+public class RegisterBookScreenController extends RegisterScreenController {
 
     //*********Atributos FXML******************
+
+    /**
+     * Campo de texto para a editora do livro.
+     */
     @FXML private TextField field_publisher;
+
+    /**
+     * Campo de texto para o ISBN do livro.
+     */
     @FXML private TextField field_isbn;
+
+    /**
+     * ChechkBox para marcar se possui ou não o livro.
+     */
     @FXML private CheckBox possuiLivroCheckBox;
 
     //*********Atributos NAO FXML***********
+
+    /**
+     * Serviço de livros utilizado para registrar o livro.
+     */
     private BookService service;
 
     //***********Metodos*********************
 
+    /**
+     * Define o serviço de livros a ser utilizado pelo controlador.
+     *
+     * @param bookService O serviço de livros a ser utilizado.
+     */
     public void setService(BookService bookService) {
         this.service = bookService;
     }
 
+    /**
+     * Inicializa os componentes da interface gráfica.
+     * </p>
+     * Chama a inicialização da classe pai e configura os textos temporários adicionais
+     * dos campos de texto específicos para o registro de livros.
+     *
+     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
+     * @param rb O recurso usado para localizar o objeto raiz.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         super.initialize(url, rb);
         field_publisher.setPromptText("Editora");
         field_isbn.setPromptText("ISBN");
-
     }
 
+    /**
+     * Metodo chamado quando o botão de registro é clicado.
+     * </p>
+     * Valida os campos de entrada e tenta registrar o livro através da classe serviço.
+     * Exibe mensagens de sucesso ou erro conforme o resultado da operação.
+     */
     @Override
     public void onRegisterButtonClicked() {
         String title = field_title.getText();
@@ -58,7 +98,6 @@ public class RegisterBookScreenController extends RegisterScreenController{
         }
         Genres genreE = Genres.valueOf(genre.toUpperCase());
 
-
         IResult result = service.register(title, yearInt, genreE,
                 isbn, author, publisher, possuiLivroCheckBox.isSelected());
         if (result.getClass().equals(Success.class)) {
@@ -68,9 +107,5 @@ public class RegisterBookScreenController extends RegisterScreenController{
         } else {
             showAlert(Alert.AlertType.ERROR, result.getMessage());
         }
-
-
     }
-
-
 }

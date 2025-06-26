@@ -11,24 +11,72 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para a tela de registro de filmes.
+ * </p>
+ * Estende RegisterScreenController e implementa a lógica específica para registro de filme.
+ */
 public class RegisterMovieScreenController extends RegisterScreenController{
 
     // *********Atributos FXML******************
+
+    /**
+     * Campo de texto para a direção do filme.
+     */
     @FXML private TextField field_direction;
+
+    /**
+     * Campo de texto para a duração do filme.
+     */
     @FXML private TextField field_duration;
+
+    /**
+     * Campo de texto para o título original do filme.
+     */
     @FXML private TextField field_ogTitle;
+
+    /**
+     * Campo de texto para os locais onde o filme pode ser assistido.
+     */
     @FXML private TextArea field_where;
+
+    /**
+     * Campo de texto para o elenco do filme.
+     */
     @FXML private TextArea field_cast;
+
+    /**
+     * Campo de texto para a sinopse do filme.
+     */
     @FXML private TextArea field_script;
 
     // *********Atributos NAO FXML***********
+
+    /**
+     * Serviço de filmes utilizado para registrar o filme.
+     */
     private MovieService service;
 
     // ***********Metodos*********************
+
+    /**
+     * Define o serviço de filmes a ser utilizado pelo controlador.
+     *
+     * @param movieService O serviço de filmes a ser utilizado.
+     */
     public void setService(MovieService movieService) {
         this.service = movieService;
     }
 
+    /**
+     * Inicializa os componentes da interface gráfica.
+     * </p>
+     * Chama a inicialização da classe pai e configura os textos temporários adicionais
+     * dos campos de texto específicos para o registro de filmes.
+     *
+     * @param url O local usado para resolver caminhos relativos para o objeto raiz.
+     * @param rb O recurso usado para localizar o objeto raiz.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         super.initialize(url, rb);
@@ -39,6 +87,12 @@ public class RegisterMovieScreenController extends RegisterScreenController{
         field_script.setPromptText("Sinopse");
     }
 
+    /**
+     * Metodo chamado quando o botão de registro é clicado.
+     * </p>
+     * Valida os campos de entrada e registra o filme usando o serviço de filmes.
+     * Exibe mensagens de erro ou sucesso conforme o resultado da operação.
+     */
     @Override
     public void onRegisterButtonClicked() {
         String title = field_title.getText();
