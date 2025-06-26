@@ -12,7 +12,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,33 +26,78 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BooksTabContentController extends MediaContentController<Book> implements Initializable {
+/**
+ * Controlador da aba de livros na tela principal.
+ * </p>
+ * Estende {@code MediaContentController<Book>}. Esta classe é responsável por
+ * configurar a tabela, os filtros e as buscas específicos para livros.
+ */
+public class BooksTabContentController extends MediaContentController<Book> {
 
     // *********Atributos FXML*****************
+    /**
+     * Coluna de autor do livro.
+     */
     @FXML
     private TableColumn<Book, String> authorColumn;
 
+    /**
+     * Coluna de editora do livro.
+     */
     @FXML
     private TableColumn<Book, String> publisherColumn;
 
+    /**
+     * Coluna de ISBN do livro.
+     */
     @FXML
     private TableColumn<Book, String> isbnColumn;
 
+    /**
+     * Coluna da data em que o livro foi lido.
+     */
     @FXML
     private TableColumn<Book, String> seenDateColumn;
 
     //*********Atributos NAO FXML***********
-    //TODO: EXPLICITAR POSSIVEL ERRO DE CAST NO JAVADOC
+    /**
+     * Serviço específico para operações com livros.
+     * </p>
+     * Este atributo é obtido via downcast de {@code CommonService<Book>} e,
+     * portanto, pode gerar {@code ClassCastException} se um serviço incorreto
+     * for fornecido.
+     */
     private BookService bookService;
 
     // ***********Metodos*******************
 
+    /**
+     * Define o serviço específico de livros a ser utilizado pelo controlador.
+     * O service herdado da classe abstrata utiliza upcasting com o controlador
+     * de modelo de livros.
+     * <p>
+     * Este método realiza um downcast de {@code CommonService<Book>} para {@code BookService}
+     * para permitir acesso a métodos específicos do serviço de livros e, portanto,
+     * pode lançar {@code ClassCastException}.
+     *
+     * @param bookService O serviço a ser atribuído
+     * @throws ClassCastException Se o serviço fornecido não for uma instância de {@code BookService}
+     */
     @Override
     protected void setService(CommonService<Book> bookService){
         this.service = bookService;
         this.bookService = (BookService) bookService;
     }
 
+    /**
+     * Configura as colunas da tabela de livros.
+     * <p>
+     * Define como cada coluna da tabela extrai os dados dos objetos {@code Book},
+     * incluindo propriedades como título, ano, avaliação, autor, ISBN, editora
+     * e data de leitura.
+     * Como os métodos do modelo retornam tipos comuns (e não propriedades observáveis),
+     * é necessário encapsular os valores em {@code Property} ao configurar as colunas,
+     */
     @Override
     protected void configureTable(){
         //Precisa criar o Property pois nao irei mudar o Model
@@ -82,6 +126,13 @@ public class BooksTabContentController extends MediaContentController<Book> impl
                 new SimpleStringProperty(cellData.getValue().getSeenDate()));
     }
 
+    /**
+     * Configura os critérios disponíveis para filtragem de livros.
+     * </p>
+     * As opções devem ser inicialmente inseridas em uma {@code ArrayList} que
+     * será convertida para uma lista observável com {@code FXCollections.observableArrayList()},
+     * permitindo sua atribuição ao componente gráfico.
+     */
     @Override
     protected void configureFilterChoices() {
         List<String> filterChoices = new ArrayList<>();
@@ -94,14 +145,36 @@ public class BooksTabContentController extends MediaContentController<Book> impl
         filterTypeChoiceBox.setItems(FXCollections.observableArrayList(filterChoices));
     }
 
+    /**
+     * Realiza a busca por autor.
+     * </p>
+     * A busca é executada pelo controlador de modelo de livros com base no autor
+     * e a lista retornada é atribuida à lista observável de mídias.
+     * @param author O autor do livro
+     */
     private void authorSearch(String author){
         mediaObservableList.setAll(bookService.searchBookByAuthor(author));
     }
 
+    /**
+     * Realiza a busca por ISBN.
+     * </p>
+     * A busca é executada pelo controlador de modelo de livros com base no ISBN
+     * e a lista retornada é atribuida à lista observável de mídias.
+     * @param isbn O código ISBN do livro
+     */
     private void isbnSearch(String isbn) {
         mediaObservableList.setAll(bookService.searchBookByIsbn(isbn));
     }
 
+    /**
+     * Executa buscas específicas para os critérios "Autor" e "ISBN".
+     * </p>
+     * Este método é chamado quando o critério de filtro selecionado não
+     * pertence aos tipos genéricos na superclasse (título, ano e gênero).
+     *
+     * @param filter O filtro inserido no campo de texto
+     */
     @Override
     protected void handleSpecificSearch(String filter) {
         switch (selectedFilter.getValue()){
@@ -114,6 +187,15 @@ public class BooksTabContentController extends MediaContentController<Book> impl
         }
     }
 
+    /**
+     * Exibe as informações detalhadas de um livro selecionado na interface.
+     * </p>
+     * Preenche os campos visuais com os dados do livro, como título, ano,
+     * gênero, avaliação e resenha. Caso não haja resenha cadastrada,
+     * exibe uma mensagem padrão.
+     *
+     * @param book o livro atualmente selecionado na tabela
+     */
     @Override
     public void handleMediaInfo(Book book) {
         titleYearInfo.setText(book.getTitle() + " (" + book.getYear() + ")");
