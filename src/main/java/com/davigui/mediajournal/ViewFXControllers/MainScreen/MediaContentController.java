@@ -541,37 +541,46 @@ public abstract class MediaContentController<T extends Media> implements Initial
         splitPane.setDividerPosition(0, 0.7);
     }
 
-    //TODOç JAVADOC PAREI AQUI
     /**
-     * Sets service.
+     * Define o controlador de modelo da mídia.
      *
-     * @param service the service
+     * @param service a instância do serviço de mídia
      */
     protected abstract void setService(CommonService<T> service);
 
     /**
-     * Configure filter choices.
+     * Configura a caixa de escolha de tipos de filtros. As opções de
+     * critérios de busca devem ser implementadas pelas subclasses.
      */
     protected abstract void configureFilterChoices();
 
     /**
-     * Configure table.
+     * Configura as colunas da tabela principal. As subclasses devem implementar
+     * quais colunas serão utilizadas.
      */
     protected abstract void configureTable();
 
     /**
-     * Handle specific search.
+     * Lida com buscas por critérios que não sejam título, ano ou gênero. As subclasses
+     * devem adicionar os critérios específicos num bloco switch-case e criar
+     * o método de busca correspondente.
      *
-     * @param filter the filter
+     * @param filter O filtro original que será repassado
      */
     protected abstract void handleSpecificSearch(String filter);
 
     /**
-     * Handle media info.
+     * Carrega e exibe as informações detalhadas da mídia selecionada na VBox lateral.
+     * </p>
+     * Este método deve ser implementado pelas subclasses para definir quais
+     * atributos específicos da mídia devem ser exibidos e como serão apresentados
+     * nos componentes visuais da tela.
      *
-     * @param media the media
+     * @param media A mídia atualmente selecionada na tabela
      */
     protected abstract void handleMediaInfo(T media);
+
+    // ******TODO: GUILHERME ESSA DOC E COM TU *********************************
 
     /**
      * On add button clicked.
