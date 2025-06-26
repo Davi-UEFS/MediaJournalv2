@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 /**
  * Classe abstrata que serve como controlador base para telas de registro.
- * </p>
+ * <p>
  * Implementa a interface Initializable do JavaFX para inicialização dos componentes.
  * Define campos comuns e métodos básicos para telas de registro de mídias.
  */
@@ -49,7 +49,7 @@ public abstract class RegisterScreenController implements Initializable {
 
     /**
      * Inicializa os componentes da interface gráfica.
-     * </p>
+     * <p>
      * Configura os textos temporários dos campos de texto e preenche o
      * ComboBox de gêneros com os gêneros disponíveis.
      *

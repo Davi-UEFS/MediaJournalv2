@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controlador para a tela de registro de séries.
- * </p>
+ * <p>
  * Estende {@code RegisterScreenController} e implementa a lógica específica para registro de séries.
  */
 public class RegisterSeriesScreenController extends RegisterScreenController{
@@ -73,7 +73,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
 
     /**
      * Inicializa os componentes da interface gráfica.
-     * </p>
+     * <p>
      * Chama a inicialização da classe pai e configura os textos temporários adicionais
      * dos campos de texto específicos para o registro de séries.
      * Quando a série está em andamento, o campo de ano de encerramento é desabilitado.
@@ -94,7 +94,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
 
     /**
      * Metodo chamado quando o botão de registro é clicado.
-     * </p>
+     * <p>
      * Valida os campos de entrada e registra a série usando o serviço de séries.
      * Exibe mensagens de erro ou sucesso conforme necessário.
      * Sempre registra a primeira temporada com o ano de lançamento da série.
@@ -158,7 +158,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
 
     /**
      * Metodo chamado quando o CheckBox de andamento é marcado.
-     * </p>
+     * <p>
      * Limpa o campo de ano de encerramento quando a série está em andamento.
      */
     @FXML

@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controlador para a tela de registro de filmes.
- * </p>
+ * <p>
  * Estende RegisterScreenController e implementa a lógica específica para registro de filme.
  */
 public class RegisterMovieScreenController extends RegisterScreenController{
@@ -70,7 +70,7 @@ public class RegisterMovieScreenController extends RegisterScreenController{
 
     /**
      * Inicializa os componentes da interface gráfica.
-     * </p>
+     * <p>
      * Chama a inicialização da classe pai e configura os textos temporários adicionais
      * dos campos de texto específicos para o registro de filmes.
      *
@@ -89,7 +89,7 @@ public class RegisterMovieScreenController extends RegisterScreenController{
 
     /**
      * Metodo chamado quando o botão de registro é clicado.
-     * </p>
+     * <p>
      * Valida os campos de entrada e registra o filme usando o serviço de filmes.
      * Exibe mensagens de erro ou sucesso conforme o resultado da operação.
      */

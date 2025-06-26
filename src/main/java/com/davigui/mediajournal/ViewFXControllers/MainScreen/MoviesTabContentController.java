@@ -29,7 +29,7 @@ import java.util.Optional;
 
 /**
  * Controlador da aba de filmes na tela principal.
- * </p>
+ * <p>
  * Estende {@code MediaContentController<Movie>}. Esta classe é responsável por
  * configurar a tabela, os filtros e as buscas específicos para filmes.
  */
@@ -89,7 +89,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
     /**
      * Serviço específico para operações com filmes.
-     * </p>
+     * <p>
      * Este atributo é obtido via downcast de {@code CommonService<Movie>} e
      * pode gerar {@code ClassCastException} se um serviço incorreto
      * for fornecido.
@@ -151,7 +151,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
     /**
      * Realiza a busca por ator.
-     * </p>
+     * <p>
      * A busca é realizada pelo serviço de filmes com base no nome do ator,
      * e a lista retornada é atribuída à lista observável de mídias.
      *
@@ -163,7 +163,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
     /**
      * Realiza a busca por diretor.
-     * </p>
+     * <p>
      * A busca é realizada pelo serviço de filmes com base no nome do diretor,
      * e a lista retornada é atribuída à lista observável de mídias.
      *
@@ -238,14 +238,14 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
     /**
      * Abre tela de registro de filme ao clicar no botão "Add. Filme".
-     * </p>
+     * <p>
      * Cria uma nova janela para registrar um filme, desativando a
      * janela principal até que a janela de registro seja fechada.
      * Ao fechar a janela de registro, a tabela de mídias é recarregada.
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
     @FXML
-    public void onAddButtonClicked() throws IOException {
+    protected void onAddButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterMovieScreen.fxml"));
         Parent root = loader.load();
 
@@ -264,14 +264,14 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
     /**
      * Cuida da remoção de um filme selecionado ao clicar no botão "Excluir".
-     * </p>
+     * <p>
      * Exibe um diálogo de confirmação antes de remover o filme, pegando o
      * filme selecionado da tabela.
      * Se o usuário confirmar, o filme é removido e uma mensagem de sucesso
      * é exibida. A tabela de mídias é recarregada após a remoção.
      */
     @Override
-    public void onRemoveButtonClicked() {
+    protected void onRemoveButtonClicked() {
         // Implementação do metodo para remover um livro
         Movie selectedMovie = selectedItem.getValue();
 
@@ -295,14 +295,14 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
     /**
      * Abre a tela de avaliação de filme ao clicar no botão "Avaliar".
-     * </p>
+     * <p>
      * Cria uma nova janela para avaliar o filme selecionado, desativando
      * a janela principal até que a janela de avaliação seja fechada.
      * Ao fechar a janela de avaliação, a tabela de mídias é recarregada.
      *
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
-    @Override public void onRateButtonClicked() throws IOException {
+    @Override protected void onRateButtonClicked() throws IOException {
         Movie selectedMovie = selectedItem.getValue();
 
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RateScreen.fxml"));
@@ -326,7 +326,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
 
     /**
      * Abre a tela de marcar um filme como visto ao clicar no botão "Marcar Visto".
-     * </p>
+     * <p>
      * Cria uma nova janela para marcar o filme selecionado como visto,
      * desativando a janela principal até que a janela de marcação seja fechada.
      * Ao fechar a janela de marcação, a tabela de mídias é recarregada.
@@ -335,7 +335,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
     @Override
-    public void onSeenButtonClicked() throws IOException {
+    protected void onSeenButtonClicked() throws IOException {
         Movie selectedMovie = selectedItem.getValue();
 
         if (selectedMovie.isSeen()) {

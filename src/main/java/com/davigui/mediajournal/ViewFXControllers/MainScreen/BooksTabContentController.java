@@ -28,7 +28,7 @@ import java.util.Optional;
 
 /**
  * Controlador da aba de livros na tela principal.
- * </p>
+ * <p>
  * Estende {@code MediaContentController<Book>}. Esta classe é responsável por
  * configurar a tabela, os filtros e as buscas específicos para livros.
  */
@@ -62,7 +62,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
     //*********Atributos NAO FXML***********
     /**
      * Serviço específico para operações com livros.
-     * </p>
+     * <p>
      * Este atributo é obtido via downcast de {@code CommonService<Book>} e
      * pode gerar {@code ClassCastException} se um serviço incorreto
      * for fornecido.
@@ -128,7 +128,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Configura os critérios disponíveis para filtragem de livros.
-     * </p>
+     * <p>
      * As opções devem ser inicialmente inseridas em uma {@code ArrayList} que
      * será convertida para uma lista observável com {@code FXCollections.observableArrayList()},
      * permitindo sua atribuição ao componente gráfico.
@@ -147,7 +147,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Realiza a busca por autor.
-     * </p>
+     * <p>
      * A busca é executada pelo controlador de modelo de livros com base no autor
      * e a lista retornada é atribuida à lista observável de mídias.
      * @param author O autor do livro
@@ -158,7 +158,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Realiza a busca por ISBN.
-     * </p>
+     * <p>
      * A busca é executada pelo controlador de modelo de livros com base no ISBN
      * e a lista retornada é atribuida à lista observável de mídias.
      * @param isbn O código ISBN do livro
@@ -169,7 +169,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Executa buscas específicas para os critérios "Autor" e "ISBN".
-     * </p>
+     * <p>
      * Este metodo é chamado quando o critério de filtro selecionado não
      * pertence aos tipos genéricos na superclasse (título, ano e gênero).
      *
@@ -189,7 +189,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Exibe as informações detalhadas de um livro selecionado na interface.
-     * </p>
+     * <p>
      * Preenche os campos visuais com os dados do livro, como título, ano,
      * gênero, avaliação e resenha. Caso não haja resenha cadastrada,
      * exibe uma mensagem padrão.
@@ -197,7 +197,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
      * @param book o livro atualmente selecionado na tabela
      */
     @Override
-    public void handleMediaInfo(Book book) {
+    protected void handleMediaInfo(Book book) {
         titleYearInfo.setText(book.getTitle() + " (" + book.getYear() + ")");
         genreInfo.setText(book.getGenre().toString());
         ratingInfo.setText("★".repeat(book.getRating()));
@@ -209,14 +209,14 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Abre tela de registro de livro ao clicar no botão "Add. Livro".
-     * </p>
+     * <p>
      * Cria uma nova janela para registrar um livro, desativando a
      * janela principal até que a janela de registro seja fechada.
      * Ao fechar a janela de registro, a tabela de mídias é recarregada.
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
     @Override
-    public void onAddButtonClicked() throws IOException {
+    protected void onAddButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterBookScreen.fxml"));
         Parent root = loader.load();
 
@@ -235,14 +235,14 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Cuida da remoção de um livro selecionado ao clicar no botão "Excluir".
-     * </p>
+     * <p>
      * Exibe um diálogo de confirmação antes de remover o livro, pegando o
      * livro selecionado da tabela.
      * Se o usuário confirmar, o livro é removido e uma mensagem de sucesso
      * é exibida. A tabela de mídias é recarregada após a remoção.
      */
     @Override
-    public void onRemoveButtonClicked() {
+    protected void onRemoveButtonClicked() {
         Book selectedBook = selectedItem.getValue();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -265,14 +265,14 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Abre a tela de avaliação de livro ao clicar no botão "Avaliar".
-     * </p>
+     * <p>
      * Cria uma nova janela para avaliar o livro selecionado, desativando
      * a janela principal até que a janela de avaliação seja fechada.
      * Ao fechar a janela de avaliação, a tabela de mídias é recarregada.
      *
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
-    @Override public void onRateButtonClicked() throws IOException{
+    @Override protected void onRateButtonClicked() throws IOException{
         Book selectedBook = selectedItem.getValue();
 
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RateScreen.fxml"));
@@ -296,7 +296,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
     /**
      * Abre a tela de marcar um livro como visto ao clicar no botão "Marcar Visto".
-     * </p>
+     * <p>
      * Cria uma nova janela para marcar o livro selecionado como visto,
      * desativando a janela principal até que a janela de marcação seja fechada.
      * Ao fechar a janela de marcação, a tabela de mídias é recarregada.
@@ -305,7 +305,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
     @Override
-    public void onSeenButtonClicked() throws IOException {
+    protected void onSeenButtonClicked() throws IOException {
         Book selectedBook = selectedItem.getValue();
 
         if (selectedBook.getSeenDate() != null) {

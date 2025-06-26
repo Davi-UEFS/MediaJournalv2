@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controlador da tela principal da aplicação.
- * </p>
+ * <p>
  * Gerencia as abas de mídias (livros, filmes e séries) e seus respectivos
  * controladores de conteúdo.
  * <p>

@@ -338,12 +338,12 @@ public abstract class MediaContentController<T extends Media> implements Initial
      * <p>
      * O listener é acionado a cada alteração no conteúdo do campo de texto,
      * ou seja, a cada novo caractere digitado.
-     * </p>
+     * <p>
      * Caso o critério de busca atual seja "Ano", todos os caracteres não numéricos
      * são removidos do valor digitado. Se houver alteração após essa limpeza
      * (o valor original continha letras), o campo de texto é atualizado para
      * refletir apenas os dígitos válidos.
-     * </p>
+     * <p>
      * Após esse processamento, o texto resultante é repassado ao metodo {@code handleSearch()},
      * que executa a lógica de filtragem apropriada.
      */
@@ -366,14 +366,14 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * Executa a lógica de busca com base no filtro selecionado.
-     * </p>
+     * <p>
      * Se o filtro passado for uma String nula ou vazia e o critério de busca
      * não for Gênero, recarrega toda a lista de mídias.
-     * </p>
+     * <p>
      * O fluxo é delegado de acordo com a seleção do critério de busca. Se a busca
      * for por Ano, o filtro é convertido em inteiro e, caso isto não seja possível,
      * captura a exceção e limpa a lista de mídias.
-     * </p>
+     * <p>
      * Os casos específicos das subclasses são feitos através do metodo {@code
      * handleSpecificSearch()}.
      * @param filter o valor inserido no campo de busca
@@ -411,7 +411,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * Realiza a busca por título.
-     * </p>
+     * <p>
      * A busca é executada pelo controlador de modelo da mídia com base no título
      * e a lista retornada é atribuida à lista observável de mídias.
      * @param title O título da obra
@@ -422,7 +422,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * Realiza a busca por gênero.
-     * </p>
+     * <p>
      * A busca é executada pelo controlador de modelo da mídia, com base no gênero
      * fornecido, e a lista retornada é atribuída à lista observável de mídias.
      *
@@ -434,7 +434,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * Realiza a busca por ano.
-     * </p>
+     * <p>
      * A busca é executada pelo controlador de modelo da mídia com base no ano informado e
      * a lista retornada é atribuída à lista observável de mídias.
      *
@@ -522,7 +522,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * Oculta a seção de informações detalhadas da mídia.
-     * </p>
+     * <p>
      * Define a VBox de informações como invisível e não gerenciada no layout,
      * impedindo que ocupe espaço na interface. Além disso, atualiza a posição do divisor
      * do  SplitPane, expandindo totalmente a área da tabela e ocultando a área
@@ -537,7 +537,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * Mostra a seção de informações detalhadas da mídia.
-     * </p>
+     * <p>
      * Define a VBox de informações como visível e gerenciável no layout e
      * atualiza a posição do divisor do SplitPane para mostrar as informações
      * na área lateral.
@@ -578,7 +578,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * Carrega e exibe as informações detalhadas da mídia selecionada na VBox lateral.
-     * </p>
+     * <p>
      * Este metodo deve ser implementado pelas subclasses para definir quais
      * atributos específicos da mídia devem ser exibidos e como serão apresentados
      * nos componentes visuais da tela.

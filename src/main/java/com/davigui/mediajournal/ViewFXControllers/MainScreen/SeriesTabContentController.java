@@ -28,7 +28,7 @@ import java.util.Optional;
 
 /**
  * Controlador da aba de séries na tela principal.
- * </p>
+ * <p>
  * Estende {@code MediaContentController<Series>}. Esta classe é responsável por
  * configurar a tabela, os filtros e as buscas específicos para séries.
  */
@@ -94,7 +94,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Serviço específico para operações com séries.
-     * </p>
+     * <p>
      * Este atributo é obtido via downcast de {@code CommonService<Series>} e
      * pode gerar {@code ClassCastException} caso o serviço fornecido
      * não seja do tipo esperado.
@@ -127,7 +127,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
      * Define como cada coluna extrai os dados dos objetos {@code Series},
      * incluindo propriedades como título, ano de início, ano de encerramento,
      * avaliação, título original e quantidade de temporadas.
-     * </p>
+     * <p>
      * Caso a série ainda esteja em andamento (valor 9999), o ano de encerramento
      * é exibido como "Em andamento".
      */
@@ -175,7 +175,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Realiza a busca por ator.
-     * </p>
+     * <p>
      * A busca é realizada pelo serviço de séries com base no nome do ator,
      * e a lista retornada é atribuída à lista observável de mídias.
      *
@@ -239,14 +239,14 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Abre tela de registro de série ao clicar no botão "Add. Série".
-     * </p>
+     * <p>
      * Cria uma nova janela para registrar uma série, desativando a
      * janela principal até que a janela de registro seja fechada.
      * Ao fechar a janela de registro, a tabela de mídias é recarregada.
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
     @Override
-    public void onAddButtonClicked() throws IOException {
+    protected void onAddButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterSeriesScreen.fxml"));
         Parent root = loader.load();
 
@@ -269,7 +269,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
      * Os botões só são habilitados se uma mídia estiver selecionada.
      */
     @Override
-    public void updateActionButtons() {
+    protected void updateActionButtons() {
         super.updateActionButtons();
         boolean isSelected = (selectedItem.getValue()!=null);
         addSeasonButton.setDisable(!isSelected);
@@ -278,14 +278,14 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Cuida da remoção de uma série selecionada ao clicar no botão "Excluir".
-     * </p>
+     * <p>
      * Exibe um diálogo de confirmação antes de remover a série, pegando a
      * série selecionada da tabela.
      * Se o usuário confirmar, a série é removida e uma mensagem de sucesso
      * é exibida. A tabela de mídias é recarregada após a remoção.
      */
     @Override
-    public void onRemoveButtonClicked() {
+    protected void onRemoveButtonClicked() {
         Series selectedSeries = selectedItem.getValue();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -308,7 +308,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Abre a tela de avaliação de temporada ao clicar no botão "Avaliar".
-     * </p>
+     * <p>
      * Utiliza o metodo {@code askForSeason} para solicitar ao usuário qual
      * temporada deseja avaliar.
      * Se a temporada selecionada não estiver marcada como vista, exibe um alerta.
@@ -318,7 +318,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
      *
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
-    @Override public void onRateButtonClicked() throws IOException {
+    @Override protected void onRateButtonClicked() throws IOException {
         Series selectedSeries = selectedItem.getValue();
         Season selectedSeason = askForSeason(selectedSeries, "avaliar");
 
@@ -359,7 +359,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Marca uma temporada como vista ao clicar no botão "Marcar Visto".
-     * </p>
+     * <p>
      * Utiliza o metodo {@code askForSeason} para solicitar ao usuário qual
      * temporada deseja marcar como vista.
      * Se a temporada já estiver marcada como vista, exibe um alerta informando.
@@ -367,7 +367,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
      * Ao fechar a janela de confirmação, a tabela de mídias é recarregada.
      */
     @Override
-    public void onSeenButtonClicked() {
+    protected void onSeenButtonClicked() {
         Series selectedSeries = selectedItem.getValue();
         Season season = askForSeason(selectedSeries, "marcar como vista");
 
@@ -388,14 +388,14 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Exibe as informações de uma temporada ao clicar no botão "Ver Temp".
-     * </p>
+     * <p>
      * Utiliza o metodo {@code askForSeason} para solicitar ao usuário qual
      * temporada deseja ver.
      * Se a temporada selecionada existir, exibe um diálogo com as
      * informações da temporada, incluindo avaliação e resenha, se disponíveis.
      */
     @FXML
-    public void onSeeSeasonButtonClicked() {
+    private void onSeeSeasonButtonClicked() {
         Series selectedSeries = selectedItem.getValue();
         Season season = askForSeason(selectedSeries, "ver");
 
@@ -412,7 +412,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Abre a tela de registro de temporada ao clicar no botão "Add. Temp".
-     * </p>
+     * <p>
      * Cria uma nova janela para registrar uma temporada, desativando a
      * janela principal até que a janela de registro seja fechada.
      * Ao fechar a janela de registro, a tabela de mídias é recarregada.
@@ -420,7 +420,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
      * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
      */
     @FXML
-    public void onAddSeasonButtonClicked() throws IOException {
+    private void onAddSeasonButtonClicked() throws IOException {
         Series selectedSeries = selectedItem.getValue();
 
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterSeasonScreen.fxml"));
@@ -443,7 +443,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Solicita ao usuário a seleção de uma temporada para realizar uma ação específica.
-     * </p>
+     * <p>
      * Se a série tiver apenas uma temporada, retorna essa temporada.
      * Se a série tiver mais de uma temporada, exibe um diálogo para o usuário
      * selecionar o número da temporada desejada.
@@ -496,7 +496,7 @@ public class SeriesTabContentController extends MediaContentController<Series> {
 
     /**
      * Solicita confirmação do usuário antes de marcar uma temporada como vista.
-     * </p>
+     * <p>
      * Exibe um diálogo de confirmação com a opção de continuar ou cancelar a
      * ação. Se o usuário confirmar, chama o metodo do serviço para marcar a
      * temporada como vista e recarrega a lista de mídias.

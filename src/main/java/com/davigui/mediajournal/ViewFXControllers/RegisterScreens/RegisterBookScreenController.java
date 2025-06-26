@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controlador para a tela de registro de livros.
- * </p>
+ * <p>
  * Estende {@code RegisterScreenController} e implementa a lógica específica para registro de livros.
  */
 public class RegisterBookScreenController extends RegisterScreenController {
@@ -55,7 +55,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
 
     /**
      * Inicializa os componentes da interface gráfica.
-     * </p>
+     * <p>
      * Chama a inicialização da classe pai e configura os textos temporários adicionais
      * dos campos de texto específicos para o registro de livros.
      *
@@ -71,7 +71,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
 
     /**
      * Metodo chamado quando o botão de registro é clicado.
-     * </p>
+     * <p>
      * Valida os campos de entrada e tenta registrar o livro através da classe serviço.
      * Exibe mensagens de sucesso ou erro conforme o resultado da operação.
      */
