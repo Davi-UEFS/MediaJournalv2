@@ -103,8 +103,8 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
      * O serviço herdado da classe abstrata utiliza upcasting com o controlador
      * de modelo de filmes.
      * <p>
-     * Este método realiza um downcast de {@code CommonService<Movie>} para {@code MovieService}
-     * para permitir acesso a métodos específicos do serviço de filmes e, portanto,
+     * Este metodo realiza um downcast de {@code CommonService<Movie>} para {@code MovieService}
+     * para permitir acesso a metodos específicos do serviço de filmes e, portanto,
      * pode lançar {@code ClassCastException}.
      *
      * @param service O serviço a ser atribuído
@@ -122,7 +122,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
      * Define como cada coluna extrai os dados dos objetos {@code Movie},
      * incluindo propriedades como título, ano, avaliação, direção, duração,
      * título original e data de visualização.
-     * Como os métodos do modelo retornam tipos comuns (e não propriedades observáveis),
+     * Como os metodos do modelo retornam tipos comuns (e não propriedades observáveis),
      * é necessário encapsular os valores em {@code Property}.
      */
     @Override
@@ -194,7 +194,7 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
     /**
      * Executa buscas específicas para os critérios "Diretor" e "Ator".
      * <p>
-     * Este método é chamado quando o critério de filtro selecionado não
+     * Este metodo é chamado quando o critério de filtro selecionado não
      * pertence aos tipos genéricos tratados na superclasse (título, ano, gênero).
      *
      * @param filter O filtro digitado no campo de busca
@@ -236,6 +236,14 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
         whereToWatchInfo.setText("Plataformas: " + movie.getWhereToWatch().toString());
     }
 
+    /**
+     * Abre tela de registro de filme ao clicar no botão "Add. Filme".
+     * </p>
+     * Cria uma nova janela para registrar um filme, desativando a
+     * janela principal até que a janela de registro seja fechada.
+     * Ao fechar a janela de registro, a tabela de mídias é recarregada.
+     * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
+     */
     @FXML
     public void onAddButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterMovieScreen.fxml"));
@@ -254,9 +262,17 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
         stage.show();
     }
 
+    /**
+     * Cuida da remoção de um filme selecionado ao clicar no botão "Excluir".
+     * </p>
+     * Exibe um diálogo de confirmação antes de remover o filme, pegando o
+     * filme selecionado da tabela.
+     * Se o usuário confirmar, o filme é removido e uma mensagem de sucesso
+     * é exibida. A tabela de mídias é recarregada após a remoção.
+     */
     @Override
     public void onRemoveButtonClicked() {
-        // Implementação do método para remover um livro
+        // Implementação do metodo para remover um livro
         Movie selectedMovie = selectedItem.getValue();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -277,6 +293,15 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
         // Se o usuário cancelar, não faz nada
     }
 
+    /**
+     * Abre a tela de avaliação de filme ao clicar no botão "Avaliar".
+     * </p>
+     * Cria uma nova janela para avaliar o filme selecionado, desativando
+     * a janela principal até que a janela de avaliação seja fechada.
+     * Ao fechar a janela de avaliação, a tabela de mídias é recarregada.
+     *
+     * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
+     */
     @Override public void onRateButtonClicked() throws IOException {
         Movie selectedMovie = selectedItem.getValue();
 
@@ -299,6 +324,16 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
         stage.show();
     }
 
+    /**
+     * Abre a tela de marcar um filme como visto ao clicar no botão "Marcar Visto".
+     * </p>
+     * Cria uma nova janela para marcar o filme selecionado como visto,
+     * desativando a janela principal até que a janela de marcação seja fechada.
+     * Ao fechar a janela de marcação, a tabela de mídias é recarregada.
+     * Se o filme já tiver marcado como visto, exibe um alerta.
+     *
+     * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
+     */
     @Override
     public void onSeenButtonClicked() throws IOException {
         Movie selectedMovie = selectedItem.getValue();

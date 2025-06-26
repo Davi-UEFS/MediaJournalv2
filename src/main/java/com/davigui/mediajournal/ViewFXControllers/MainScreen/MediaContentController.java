@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * Classe abstrata que contém os métodos compartilhados entre as cenas de mídias.
+ * Classe abstrata que contém os metodos compartilhados entre as cenas de mídias.
  * Deve ser parametrizada com o tipo de mídia a ser trabalhada. Implementa a interface
- * Initializable e o método initialize() passa a ser um Template Method e sua
+ * Initializable e o metodo initialize() passa a ser um Template Method e sua
  * implementação se dá pela sobrecarga dos Hook Methods.
  * Os atributos comuns referentes à tela são injetados por FXML.
  *
@@ -166,14 +166,14 @@ public abstract class MediaContentController<T extends Media> implements Initial
     // *********Atributos nao FXMLs******************
 
     /**
-     * O controlador de modelo do tipo de mídia parametrizado. Utiliza os métodos
+     * O controlador de modelo do tipo de mídia parametrizado. Utiliza os metodos
      * da classe abstrata CommonService por composição.
      */
     protected CommonService<T> service;
 
     /**
      * Lista observável da mídia parametrizada usada na tabela. A atualização
-     * dos items se dá pelo método setAll().
+     * dos items se dá pelo metodo setAll().
      */
     protected ObservableList<T> mediaObservableList;
 
@@ -196,13 +196,13 @@ public abstract class MediaContentController<T extends Media> implements Initial
     // ***********Metodos*******************
 
     /**
-     * O método de inicialização dos elementos do GUI. É um Template Method que
+     * O metodo de inicialização dos elementos do GUI. É um Template Method que
      * utiliza os Hook Methods: {@code configureFilterChoices()} e {@code configureTable()}.
-     * As subclasses devem implementar esses métodos de suas maneiras. Dessa forma,
-     * o método initialize não precisa ser implementado pelas subclasses, sendo usado
+     * As subclasses devem implementar esses metodos de suas maneiras. Dessa forma,
+     * o metodo initialize não precisa ser implementado pelas subclasses, sendo usado
      * o desta superclasse ao carregar o FXML.
      * <p>
-     * O método começa configurando a tabela e seu listener. Em seguida, define
+     * O metodo começa configurando a tabela e seu listener. Em seguida, define
      * o texto padrão do campo de busca e inicializa seu listener.
      * Depois, configura as opções das caixas de escolha de filtro e de gênero,
      * também iniciando seus respectivos listeners. Por fim, desativa os
@@ -242,7 +242,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     /**
      * Carrega a lista observável de mídias e a atribui à tabela.
      * A lista original de mídias é obtida a partir do controlador
-     * e convertida em uma lista observável utilizando o método
+     * e convertida em uma lista observável utilizando o metodo
      * estático {@code FXCollections.observableArrayList()}.
      */
     protected void loadMediaList(){
@@ -254,11 +254,11 @@ public abstract class MediaContentController<T extends Media> implements Initial
     /**
      * Inicializa o listener de seleção da tabela.
      * Sempre que uma nova mídia for selecionada, os dados serão exibidos
-     * no painel lateral direito (VBox) por meio do método {@code handleMediaInfo()}.
-     * Se a nova seleção for nula, a exibição lateral é escondida através do método
+     * no painel lateral direito (VBox) por meio do metodo {@code handleMediaInfo()}.
+     * Se a nova seleção for nula, a exibição lateral é escondida através do metodo
      * {@code hideMediaInfo()}.
      * Por fim, os botões de ação são habilitados ou desativados com base na
-     * seleção no método {@code updateActionButtons()}.
+     * seleção no metodo {@code updateActionButtons()}.
      */
     protected void initTableListener() {
 
@@ -336,7 +336,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
      * (o valor original continha letras), o campo de texto é atualizado para
      * refletir apenas os dígitos válidos.
      * </p>
-     * Após esse processamento, o texto resultante é repassado ao método {@code handleSearch()},
+     * Após esse processamento, o texto resultante é repassado ao metodo {@code handleSearch()},
      * que executa a lógica de filtragem apropriada.
      */
 
@@ -366,7 +366,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
      * for por Ano, o filtro é convertido em inteiro e, caso isto não seja possível,
      * captura a exceção e limpa a lista de mídias.
      * </p>
-     * Os casos específicos das subclasses são feitos através do método {@code
+     * Os casos específicos das subclasses são feitos através do metodo {@code
      * handleSpecificSearch()}.
      * @param filter o valor inserido no campo de busca
      */
@@ -388,7 +388,6 @@ public abstract class MediaContentController<T extends Media> implements Initial
                     yearSearch(Integer.parseInt(filter));
                 }catch (NumberFormatException numberFormatException){
                     mediaObservableList.clear();
-                    //TODO: LANCAR UM AVISO AQUI CASO DE MERDA?
                 }
                 break;
 
@@ -563,7 +562,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     /**
      * Lida com buscas por critérios que não sejam título, ano ou gênero. As subclasses
      * devem adicionar os critérios específicos num bloco switch-case e criar
-     * o método de busca correspondente.
+     * o metodo de busca correspondente.
      *
      * @param filter O filtro original que será repassado
      */
@@ -572,7 +571,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
     /**
      * Carrega e exibe as informações detalhadas da mídia selecionada na VBox lateral.
      * </p>
-     * Este método deve ser implementado pelas subclasses para definir quais
+     * Este metodo deve ser implementado pelas subclasses para definir quais
      * atributos específicos da mídia devem ser exibidos e como serão apresentados
      * nos componentes visuais da tela.
      *
@@ -580,31 +579,37 @@ public abstract class MediaContentController<T extends Media> implements Initial
      */
     protected abstract void handleMediaInfo(T media);
 
-    // ******TODO: GUILHERME ESSA DOC E COM TU *********************************
-
     /**
-     * On add button clicked.
+     * Assinatura do metodo que deve ser implementado pelas subclasses,
+     * implementando a lógica de adição de uma nova mídia, recarregando a
+     * tabela de mídias com a nova obra adicionada.
      *
-     * @throws IOException the io exception
+     * @throws IOException pois precisa carregar uma nova tela FXML.
      */
     @FXML abstract void onAddButtonClicked() throws IOException;
 
     /**
-     * On remove button clicked.
+     * Assinatura do metodo que deve ser implementado pelas subclasses,
+     * implementando a lógica de remoção da obra selecionada, recarregando a
+     * tabela de mídias após a remoção.
      */
     @FXML abstract void onRemoveButtonClicked();
 
     /**
-     * On rate button clicked.
+     * Assinatura do metodo que deve ser implementado pelas subclasses,
+     * implementando a lógica de avaliação e escrita de review da obra selecionada,
+     * recarregando a tabela de mídias com a obra avaliada.
      *
-     * @throws IOException the io exception
+     * @throws IOException pois precisa carregar uma nova tela FXML.
      */
     @FXML abstract void onRateButtonClicked() throws IOException;
 
     /**
-     * On seen button clicked.
+     * Assinatura do metodo que deve ser implementado pelas subclasses,
+     * implementando a lógica de marcar a obra selecionada como vista, recarregando
+     * a tabela de mídias com a obra atualizada.
      *
-     * @throws IOException the io exception
+     * @throws IOException pois precisa carregar uma nova tela FXML.
      */
     @FXML abstract void onSeenButtonClicked() throws IOException;
 

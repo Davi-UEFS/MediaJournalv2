@@ -76,8 +76,8 @@ public class BooksTabContentController extends MediaContentController<Book> {
      * O service herdado da classe abstrata utiliza upcasting com o controlador
      * de modelo de livros.
      * <p>
-     * Este método realiza um downcast de {@code CommonService<Book>} para {@code BookService}
-     * para permitir acesso a métodos específicos do serviço de livros e, portanto,
+     * Este metodo realiza um downcast de {@code CommonService<Book>} para {@code BookService}
+     * para permitir acesso a metodos específicos do serviço de livros e, portanto,
      * pode lançar {@code ClassCastException}.
      *
      * @param bookService O serviço a ser atribuído
@@ -95,7 +95,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
      * Define como cada coluna da tabela extrai os dados dos objetos {@code Book},
      * incluindo propriedades como título, ano, avaliação, autor, ISBN, editora
      * e data de leitura.
-     * Como os métodos do modelo retornam tipos comuns (e não propriedades observáveis),
+     * Como os metodos do modelo retornam tipos comuns (e não propriedades observáveis),
      * é necessário encapsular os valores em {@code Property} ao configurar as colunas,
      */
     @Override
@@ -170,7 +170,7 @@ public class BooksTabContentController extends MediaContentController<Book> {
     /**
      * Executa buscas específicas para os critérios "Autor" e "ISBN".
      * </p>
-     * Este método é chamado quando o critério de filtro selecionado não
+     * Este metodo é chamado quando o critério de filtro selecionado não
      * pertence aos tipos genéricos na superclasse (título, ano e gênero).
      *
      * @param filter O filtro inserido no campo de texto
@@ -207,6 +207,14 @@ public class BooksTabContentController extends MediaContentController<Book> {
             reviewInfo.setText("RESENHA: " + book.getReview());
     }
 
+    /**
+     * Abre tela de registro de livro ao clicar no botão "Add. Livro".
+     * </p>
+     * Cria uma nova janela para registrar um livro, desativando a
+     * janela principal até que a janela de registro seja fechada.
+     * Ao fechar a janela de registro, a tabela de mídias é recarregada.
+     * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
+     */
     @Override
     public void onAddButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainFX.class.getResource("fxml/RegisterBookScreen.fxml"));
@@ -225,9 +233,16 @@ public class BooksTabContentController extends MediaContentController<Book> {
         stage.show();
     }
 
+    /**
+     * Cuida da remoção de um livro selecionado ao clicar no botão "Excluir".
+     * </p>
+     * Exibe um diálogo de confirmação antes de remover o livro, pegando o
+     * livro selecionado da tabela.
+     * Se o usuário confirmar, o livro é removido e uma mensagem de sucesso
+     * é exibida. A tabela de mídias é recarregada após a remoção.
+     */
     @Override
     public void onRemoveButtonClicked() {
-        // Implementação do método para remover um livro
         Book selectedBook = selectedItem.getValue();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -248,6 +263,15 @@ public class BooksTabContentController extends MediaContentController<Book> {
         // Se o usuário cancelar, não faz nada
     }
 
+    /**
+     * Abre a tela de avaliação de livro ao clicar no botão "Avaliar".
+     * </p>
+     * Cria uma nova janela para avaliar o livro selecionado, desativando
+     * a janela principal até que a janela de avaliação seja fechada.
+     * Ao fechar a janela de avaliação, a tabela de mídias é recarregada.
+     *
+     * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
+     */
     @Override public void onRateButtonClicked() throws IOException{
         Book selectedBook = selectedItem.getValue();
 
@@ -270,6 +294,16 @@ public class BooksTabContentController extends MediaContentController<Book> {
         stage.show();
     }
 
+    /**
+     * Abre a tela de marcar um livro como visto ao clicar no botão "Marcar Visto".
+     * </p>
+     * Cria uma nova janela para marcar o livro selecionado como visto,
+     * desativando a janela principal até que a janela de marcação seja fechada.
+     * Ao fechar a janela de marcação, a tabela de mídias é recarregada.
+     * Se o livro já tiver marcado como visto, exibe um alerta.
+     *
+     * @throws IOException Se ocorrer um erro ao carregar o arquivo FXML.
+     */
     @Override
     public void onSeenButtonClicked() throws IOException {
         Book selectedBook = selectedItem.getValue();
