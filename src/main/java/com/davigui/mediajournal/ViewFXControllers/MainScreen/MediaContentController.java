@@ -197,7 +197,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
     /**
      * O método de inicialização dos elementos do GUI. É um Template Method que
-     * utiliza os Hook Methods: configureFilterChoices() e configureTable().
+     * utiliza os Hook Methods: {@code configureFilterChoices()} e {@code configureTable()}.
      * As subclasses devem implementar esses métodos de suas maneiras. Dessa forma,
      * o método initialize não precisa ser implementado pelas subclasses, sendo usado
      * o desta superclasse ao carregar o FXML.
@@ -251,10 +251,14 @@ public abstract class MediaContentController<T extends Media> implements Initial
         //TODO: PASSAR O  SET PARA O CONFIGURETABLE
     }
 
-    //TODO: PAREI AQUI NA DOCUMENTACAO.
-
     /**
-     * Init table listener.
+     * Inicializa o listener de seleção da tabela.
+     * Sempre que uma nova mídia for selecionada, os dados serão exibidos
+     * no painel lateral direito (VBox) por meio do método {@code handleMediaInfo()}.
+     * Se a nova seleção for nula, a exibição lateral é escondida através do método
+     * {@code hideMediaInfo()}.
+     * Por fim, os botões de ação são habilitados ou desativados com base na
+     * seleção no método {@code updateActionButtons()}.
      */
     protected void initTableListener() {
 
@@ -271,7 +275,8 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Update action buttons.
+     * Atualiza o estado dos botões de ação (avaliar, remover, marcar como visto).
+     * Os botões só são habilitados se uma mídia estiver selecionada.
      */
     protected void updateActionButtons(){
         boolean isSelected = (selectedItem.getValue()!=null);
@@ -281,7 +286,9 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Init filter choice box listener.
+     * Inicializa o listener da caixa de escolha de filtro.
+     * Alterna entre os campos de busca por texto e por gênero de acordo com
+     * o novo valor observado.
      */
     protected void initFilterChoiceBoxListener() {
 
@@ -303,7 +310,8 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Init genre choice box listener.
+     * Inicializa o listener da caixa de escolha de gênero.
+     * A busca é automaticamente realizada após observar um novo valor não nulo.
      */
     protected void initGenreChoiceBoxListener() {
 
@@ -318,8 +326,20 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Init text field listener.
+     * Inicializa o listener do campo de texto de busca.
+     * <p>
+     * O listener é acionado a cada alteração no conteúdo do campo de texto,
+     * ou seja, a cada novo caractere digitado.
+     * </p>
+     * Caso o critério de busca atual seja "Ano", todos os caracteres não numéricos
+     * são removidos do valor digitado. Se houver alteração após essa limpeza
+     * (o valor original continha letras), o campo de texto é atualizado para
+     * refletir apenas os dígitos válidos.
+     * </p>
+     * Após esse processamento, o texto resultante é repassado ao método {@code handleSearch()},
+     * que executa a lógica de filtragem apropriada.
      */
+
     protected void initTextFieldListener(){
 
         filterTextField.textProperty().addListener((obsValue, oldValue, newValue) -> {
@@ -337,9 +357,18 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Handle search.
-     *
-     * @param filter the filter
+     * Executa a lógica de busca com base no filtro selecionado.
+     * </p>
+     * Se o filtro passado for uma String nula ou vazia e o critério de busca
+     * não for Gênero, recarrega toda a lista de mídias.
+     * </p>
+     * O fluxo é delegado de acordo com a seleção do critério de busca. Se a busca
+     * for por Ano, o filtro é convertido em inteiro e, caso isto não seja possível,
+     * captura a exceção e limpa a lista de mídias.
+     * </p>
+     * Os casos específicos das subclasses são feitos através do método {@code
+     * handleSpecificSearch()}.
+     * @param filter o valor inserido no campo de busca
      */
     protected void handleSearch(String filter){
 
@@ -374,37 +403,45 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Title search.
-     *
-     * @param title the title
+     * Realiza a busca por título.
+     * </p>
+     * A busca é executada pelo controlador de modelo da mídia com base no título
+     * e a lista retornada é atribuida à lista observável de mídias.
+     * @param title O título da obra
      */
     protected void titleSearch(String title){
         mediaObservableList.setAll(service.searchByTitle(title));
     }
 
     /**
-     * Genre search.
+     * Realiza a busca por gênero.
+     * </p>
+     * A busca é executada pelo controlador de modelo da mídia, com base no gênero
+     * fornecido, e a lista retornada é atribuída à lista observável de mídias.
      *
-     * @param genre the genre
+     * @param genre O gênero da obra
      */
     protected void genreSearch(Genres genre) {
         mediaObservableList.setAll(service.searchByGenre(genre));
     }
 
     /**
-     * Year search.
+     * Realiza a busca por ano.
+     * </p>
+     * A busca é executada pelo controlador de modelo da mídia com base no ano informado e
+     * a lista retornada é atribuída à lista observável de mídias.
      *
-     * @param year the year
+     * @param year O ano de lançamento da obra
      */
     protected void yearSearch(int year){
         mediaObservableList.setAll(service.searchByYear(year));
     }
 
     /**
-     * Set visible and managed.
+     * Ativa ou desativa a visibilidade e o gerenciamento de um componente.
      *
-     * @param control the control
-     * @param active  the active
+     * @param control O componente
+     * @param active  O estado
      */
     protected void setVisibleAndManaged(Control control, boolean active){
         control.setVisible(active);
@@ -412,7 +449,8 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * On filter button clicked.
+     * Evento chamado ao clicar no botão de filtro.
+     * Alterna a visibilidade dos componentes relacionados ao filtro.
      */
     @FXML
     protected void onFilterButtonClicked() {
@@ -427,7 +465,8 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Clear search.
+     * Limpa todos as seleções e filtros aplicados, desativa o campo de texto e
+     * caixa de escolha de gênero e recarrega a tabela com todas as mídias.
      */
     @FXML
     protected void clearSearch() {
@@ -439,9 +478,10 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Toggle genre choice box.
+     * Alterna a visibilidade e o estado da caixa de escolha de gênero. Se o
+     * novo estado for desativado, também limpa a seleção.
      *
-     * @param active the active
+     * @param active O novo estado
      */
     protected void toggleGenreChoiceBox(boolean active){
         setVisibleAndManaged(genreChoiceBox, active);
@@ -449,9 +489,11 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Toggle filter type components.
+     * Alterna a visibilidade dos componentes de tipo de filtro (label,
+     * choiceBox e botão de limpar). Se o novo estado for desativado, também
+     * limpa a seleção.
      *
-     * @param active the active
+     * @param active O novo estado
      */
     protected void toggleFilterTypeComponents(boolean active){
         setVisibleAndManaged(filterTypeChoiceBox, active);
@@ -461,9 +503,10 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Toggle filter text field.
+     * Alterna a visibilidade do campo de busca textual. Se o novo estado for
+     * desativado, também limpa o campo de texto.
      *
-     * @param active the active
+     * @param active O novo estado
      */
     protected void toggleFilterTextField(boolean active){
         setVisibleAndManaged(filterTextField, active);
@@ -471,7 +514,12 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Hide media info.
+     * Oculta a seção de informações detalhadas da mídia.
+     * </p>
+     * Define a VBox de informações como invisível e não gerenciada no layout,
+     * impedindo que ocupe espaço na interface. Além disso, atualiza a posição do divisor
+     * do  SplitPane, expandindo totalmente a área da tabela e ocultando a área
+     * lateral.
      */
     protected void hideMediaInfo(){
         mediaInfoVbox.setVisible(false);
@@ -481,7 +529,11 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Show media info.
+     * Mostra a seção de informações detalhadas da mídia.
+     * </p>
+     * Define a VBox de informações como visível e gerenciável no layout e
+     * atualiza a posição do divisor do SplitPane para mostrar as informações
+     * na área lateral.
      */
     protected void showMediaInfo(){
         mediaInfoVbox.setVisible(true);
@@ -489,6 +541,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
         splitPane.setDividerPosition(0, 0.7);
     }
 
+    //TODOç JAVADOC PAREI AQUI
     /**
      * Sets service.
      *
