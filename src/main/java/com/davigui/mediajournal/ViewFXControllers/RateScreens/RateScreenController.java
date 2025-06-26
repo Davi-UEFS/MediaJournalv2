@@ -47,9 +47,7 @@ public class RateScreenController<T extends Media> implements Initializable {
     @FXML
     public void onSaveButtonClicked() {
         IResult result1 = service.rate(media, (int) rateSlider.getValue());
-        System.out.println(result1.getMessage());
         IResult result2 = service.writeReview(media, reviewField.getText());
-        System.out.println(result2.getMessage());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(result1.getMessage() + "\n" + result2.getMessage());
         alert.showAndWait();

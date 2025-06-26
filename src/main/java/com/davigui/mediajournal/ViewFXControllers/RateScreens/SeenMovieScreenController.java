@@ -65,7 +65,6 @@ public class SeenMovieScreenController implements Initializable {
         Months monthE = Months.values()[month - 1];
 
         IResult result = service.markAsSeen(movie, year, monthE);
-        System.out.println(result);
 
         if (result.getClass().equals(Success.class)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

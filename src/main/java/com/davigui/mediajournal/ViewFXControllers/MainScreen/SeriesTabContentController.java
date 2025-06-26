@@ -195,7 +195,6 @@ public class SeriesTabContentController extends MediaContentController<Series> i
         if (result.isPresent() && result.get() == buttonContinuar) {
             seriesService.deleteSeries(selectedSeries);
             loadMediaList(); // Recarrega a lista de mídias após a remoção
-            System.out.println("Série removida: " + selectedSeries.getTitle());
         }
         // Se o usuário cancelar, não faz nada
     }

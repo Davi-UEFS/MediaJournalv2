@@ -53,9 +53,7 @@ public class RateSeasonScreenController implements Initializable {
     @FXML
     public void onSaveButtonClicked() {
         IResult result1 = service.rateSeason(series, season.getSeasonNumber(), (int) rateSlider.getValue());
-        System.out.println(result1.getMessage());
         IResult result2 = service.writeReviewSeason(series, season.getSeasonNumber(), reviewField.getText());
-        System.out.println(result2.getMessage());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(result1.getMessage() + "\n" + result2.getMessage());
         alert.showAndWait();

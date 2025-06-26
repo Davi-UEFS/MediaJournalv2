@@ -178,7 +178,6 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
         if (result.isPresent() && result.get() == buttonContinuar) {
             movieService.deleteMovie(selectedMovie);
             loadMediaList(); // Recarrega a lista de mídias após a remoção
-            System.out.println("Filme removido: " + selectedMovie.getTitle());
         }
         // Se o usuário cancelar, não faz nada
     }
@@ -208,9 +207,6 @@ public class MoviesTabContentController extends MediaContentController<Movie> im
     @Override
     public void onSeenButtonClicked() throws IOException {
         Movie selectedMovie = selectedItem.getValue();
-        System.out.println("Filme selecionado: " + selectedMovie.getTitle());
-        System.out.println("Data de visto: " + selectedMovie.getSeenDate());
-        System.out.println("Visto: " + selectedMovie.isSeen());
 
         if (selectedMovie.isSeen()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

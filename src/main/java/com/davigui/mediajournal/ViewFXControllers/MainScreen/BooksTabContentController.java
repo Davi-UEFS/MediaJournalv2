@@ -162,7 +162,6 @@ public class BooksTabContentController extends MediaContentController<Book> impl
         if (result.isPresent() && result.get() == buttonContinuar) {
             bookService.deleteBook(selectedBook);
             loadMediaList(); // Recarrega a lista de mídias após a remoção
-            System.out.println("Livro removido: " + selectedBook.getTitle());
         }
         // Se o usuário cancelar, não faz nada
     }
