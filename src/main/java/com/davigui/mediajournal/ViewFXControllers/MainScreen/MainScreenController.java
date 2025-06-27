@@ -51,6 +51,12 @@ public class MainScreenController implements Initializable {
     private Tab moviesTab;
 
     /**
+     * Aba que contém as configurações do sistema.
+     */
+    @FXML
+    private Tab optionsTab;
+
+    /**
      * Controlador da aba de livros.
      */
     @FXML
