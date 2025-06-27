@@ -21,7 +21,7 @@ public class MainFX extends Application {
         Scene scene = new Scene(root);
         Image icon = new Image(MainFX.class.getResourceAsStream("images/library_icon_G.png"));
         stage.getIcons().add(icon);
-        stage.setTitle("Diario Cultural");
+        stage.setTitle("Diário Cultural");
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
             mainScreenController.saveLibrary();
