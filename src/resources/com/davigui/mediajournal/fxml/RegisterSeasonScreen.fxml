@@ -5,8 +5,8 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="236.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeasonScreenController">
-    <TextField fx:id="field_episodeCount" layoutX="14.0" layoutY="81.0" prefHeight="26.0" prefWidth="200.0" promptText="n episodes" />
-    <TextField fx:id="field_year" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
+    <TextField fx:id="fieldEpisodeCount" layoutX="14.0" layoutY="81.0" prefHeight="26.0" prefWidth="200.0" promptText="n episodes" />
+    <TextField fx:id="fieldYear" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
 
     <Button fx:id="registerButton" layoutX="13.0" layoutY="181.0" onAction="#onRegisterButtonClicked" prefHeight="37.0" prefWidth="118.0" text="Registrar">
         <font>

@@ -27,19 +27,19 @@ public class OptionsController implements Initializable {
      * Botão para tocar ou pausar a música.
      */
     @FXML
-    private ToggleButton toggle_music;
+    private ToggleButton toggleMusic;
 
     /**
      * Slider para ajustar o volume da música.
      */
     @FXML
-    private Slider slider_volume;
+    private Slider sliderVolume;
 
     /**
      * Caixa de seleção para escolher a música a ser reproduzida.
      */
     @FXML
-    private ChoiceBox<String> choice_song;
+    private ChoiceBox<String> choiceSong;
 
     //*********Atributos NAO FXML ************
 
@@ -58,7 +58,7 @@ public class OptionsController implements Initializable {
     @FXML
     public void onPlayAudio() {
         if (mediaPlayer != null) {
-            if (toggle_music.isSelected()) {
+            if (toggleMusic.isSelected()) {
                 mediaPlayer.play();
             } else {
                 mediaPlayer.pause();
@@ -74,7 +74,7 @@ public class OptionsController implements Initializable {
     @FXML
     public void onUpdateVolume() {
         if (mediaPlayer != null) {
-            double volume = slider_volume.getValue() / 100.0;
+            double volume = sliderVolume.getValue() / 100.0;
             mediaPlayer.setVolume(volume);
         }
     }
@@ -91,7 +91,7 @@ public class OptionsController implements Initializable {
             mediaPlayer.stop();
         }
 
-        String fileName = switch (choice_song.getValue()) {
+        String fileName = switch (choiceSong.getValue()) {
             case "Música 1" -> "audio/song1.mp3";
             case "Música 2" -> "audio/song2.mp3";
             default -> "audio/song1.mp3";
@@ -100,9 +100,9 @@ public class OptionsController implements Initializable {
 
         Media media = new Media(Objects.requireNonNull(MainFX.class.getResource(fileName)).toString());
         mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setVolume(slider_volume.getValue() / 100.0);
+        mediaPlayer.setVolume(sliderVolume.getValue() / 100.0);
 
-        if (toggle_music.isSelected()) {
+        if (toggleMusic.isSelected()) {
             mediaPlayer.play();
         }
     }
@@ -114,14 +114,14 @@ public class OptionsController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        choice_song.getItems().addAll("Música 1", "Música 2");
-        choice_song.getSelectionModel().selectFirst();
-        slider_volume.setValue(100);
+        choiceSong.getItems().addAll("Música 1", "Música 2");
+        choiceSong.getSelectionModel().selectFirst();
+        sliderVolume.setValue(100);
 
         // Carrega a música inicial
         String fileName = "audio/song1.mp3";
         Media media = new Media(Objects.requireNonNull(MainFX.class.getResource(fileName)).toString());
         mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setVolume(slider_volume.getValue() / 100.0);
+        mediaPlayer.setVolume(sliderVolume.getValue() / 100.0);
     }
 }

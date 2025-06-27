@@ -23,12 +23,12 @@ public class RegisterBookScreenController extends RegisterScreenController {
     /**
      * Campo de texto para a editora do livro.
      */
-    @FXML private TextField field_publisher;
+    @FXML private TextField fieldPublisher;
 
     /**
      * Campo de texto para o ISBN do livro.
      */
-    @FXML private TextField field_isbn;
+    @FXML private TextField fieldIsbn;
 
     /**
      * CheckBox para marcar se possui ou não o livro.
@@ -62,8 +62,8 @@ public class RegisterBookScreenController extends RegisterScreenController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         super.initialize(url, rb);
-        field_publisher.setPromptText("Editora");
-        field_isbn.setPromptText("ISBN");
+        fieldPublisher.setPromptText("Editora");
+        fieldIsbn.setPromptText("ISBN");
     }
 
     /**
@@ -74,11 +74,11 @@ public class RegisterBookScreenController extends RegisterScreenController {
      */
     @Override
     public void onRegisterButtonClicked() {
-        String title = field_title.getText();
-        String author = field_author.getText();
-        String publisher = field_publisher.getText();
-        String year = field_year.getText();
-        String isbn = field_isbn.getText();
+        String title = fieldTitle.getText();
+        String author = fieldAuthor.getText();
+        String publisher = fieldPublisher.getText();
+        String year = fieldYear.getText();
+        String isbn = fieldIsbn.getText();
         String genre = genreBox.getValue();
 
         if (title.isEmpty() || author.isEmpty() || publisher.isEmpty() ||
@@ -89,7 +89,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
         }
         int yearInt = validateInt(year);
         if (yearInt == -1) {
-            field_year.clear();
+            fieldYear.clear();
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");
             return;
         }

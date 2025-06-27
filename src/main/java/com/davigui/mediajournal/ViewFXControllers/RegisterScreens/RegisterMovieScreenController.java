@@ -23,32 +23,32 @@ public class RegisterMovieScreenController extends RegisterScreenController{
     /**
      * Campo de texto para a direção do filme.
      */
-    @FXML private TextField field_direction;
+    @FXML private TextField fieldDirection;
 
     /**
      * Campo de texto para a duração do filme.
      */
-    @FXML private TextField field_duration;
+    @FXML private TextField fieldDuration;
 
     /**
      * Campo de texto para o título original do filme.
      */
-    @FXML private TextField field_ogTitle;
+    @FXML private TextField fieldOGTitle;
 
     /**
      * Campo de texto para os locais onde o filme pode ser assistido.
      */
-    @FXML private TextArea field_where;
+    @FXML private TextArea fieldWhere;
 
     /**
      * Campo de texto para o elenco do filme.
      */
-    @FXML private TextArea field_cast;
+    @FXML private TextArea fieldCast;
 
     /**
      * Campo de texto para a sinopse do filme.
      */
-    @FXML private TextArea field_script;
+    @FXML private TextArea fieldScript;
 
     // *********Atributos NAO FXML***********
 
@@ -77,11 +77,11 @@ public class RegisterMovieScreenController extends RegisterScreenController{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         super.initialize(url, rb);
-        field_direction.setPromptText("Direção");
-        field_duration.setPromptText("Duração (minutos)");
-        field_where.setPromptText("Streaming1, Streaming2, ...");
-        field_cast.setPromptText("Ator1, Ator2, ...");
-        field_script.setPromptText("Sinopse");
+        fieldDirection.setPromptText("Direção");
+        fieldDuration.setPromptText("Duração (minutos)");
+        fieldWhere.setPromptText("Streaming1, Streaming2, ...");
+        fieldCast.setPromptText("Ator1, Ator2, ...");
+        fieldScript.setPromptText("Sinopse");
     }
 
     /**
@@ -92,15 +92,15 @@ public class RegisterMovieScreenController extends RegisterScreenController{
      */
     @Override
     public void onRegisterButtonClicked() {
-        String title = field_title.getText();
-        String year = field_year.getText();
-        String direction = field_direction.getText();
-        String duration = field_duration.getText();
-        String whereToWatch = field_where.getText();
-        String cast = field_cast.getText();
-        String script = field_script.getText();
+        String title = fieldTitle.getText();
+        String year = fieldYear.getText();
+        String direction = fieldDirection.getText();
+        String duration = fieldDuration.getText();
+        String whereToWatch = fieldWhere.getText();
+        String cast = fieldCast.getText();
+        String script = fieldScript.getText();
         String genre = genreBox.getValue();
-        String originalTitle = field_ogTitle.getText();
+        String originalTitle = fieldOGTitle.getText();
 
         if (title.isEmpty() || year.isEmpty() || direction.isEmpty() || duration.isEmpty() || whereToWatch.isEmpty() ||
                 cast.isEmpty() || script.isEmpty() || genre.equals("- Gênero -") || originalTitle.isEmpty()) {
@@ -111,13 +111,13 @@ public class RegisterMovieScreenController extends RegisterScreenController{
 
         int yearInt = validateInt(year);
         if (yearInt == -1) {
-            field_year.clear();
+            fieldYear.clear();
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");
             return;
         }
         int durationInt = validateInt(duration);
         if (durationInt == -1) {
-            field_duration.clear();
+            fieldDuration.clear();
             showAlert(Alert.AlertType.ERROR, "Duração inválida. Por favor, insira uma duração válida.");
             return;
         }

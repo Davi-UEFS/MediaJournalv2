@@ -24,17 +24,17 @@ public abstract class RegisterScreenController implements Initializable {
     /**
      * Campo de texto para o título da obra.
      */
-    @FXML protected TextField field_title;
+    @FXML protected TextField fieldTitle;
 
     /**
      * Campo de texto para o autor da obra.
      */
-    @FXML protected TextField field_author;
+    @FXML protected TextField fieldAuthor;
 
     /**
      * Campo de texto para o ano de lançamento da obra.
      */
-    @FXML protected TextField field_year;
+    @FXML protected TextField fieldYear;
 
     /**
      * ComboBox para seleção do gênero da obra.
@@ -56,9 +56,9 @@ public abstract class RegisterScreenController implements Initializable {
      */
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
-        field_title.setPromptText("Título");
-        field_author.setPromptText("Autor");
-        field_year.setPromptText("Ano");
+        fieldTitle.setPromptText("Título");
+        fieldAuthor.setPromptText("Autor");
+        fieldYear.setPromptText("Ano");
 
         genreBox.getItems().add("- Gênero -");
         for (Genres genre : Genres.values()) {

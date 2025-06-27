@@ -26,27 +26,27 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
     /**
      * Campo de texto para o título original da série.
      */
-    @FXML private TextField field_ogTitle;
+    @FXML private TextField fieldOGTitle;
 
     /**
      * Campo de texto para o elenco da série.
      */
-    @FXML private TextArea field_cast;
+    @FXML private TextArea fieldCast;
 
     /**
      * Campo de texto para os locais onde a série pode ser assistida.
      */
-    @FXML private TextArea field_where;
+    @FXML private TextArea fieldWhere;
 
     /**
      * Campo de texto para o ano de encerramento da série.
      */
-    @FXML private TextField field_endingYear;
+    @FXML private TextField fieldEndingYear;
 
     /**
      * Campo de texto para o número de episódios da primeira temporada.
      */
-    @FXML private TextField field_episodeCount;
+    @FXML private TextField fieldEpisodeCount;
 
     /**
      * CheckBox para marcar se a série está em andamento.
@@ -81,12 +81,12 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         super.initialize(url, rb);
-        field_ogTitle.setPromptText("Título Original");
-        field_cast.setPromptText("Ator1, Ator2, ...");
-        field_where.setPromptText("Streaming1, Streaming2, ...");
-        field_endingYear.setPromptText("Ano");
-        field_episodeCount.setPromptText("N° de Ep.");
-        field_endingYear.disableProperty().bind(andamentoCheckBox.selectedProperty());
+        fieldOGTitle.setPromptText("Título Original");
+        fieldCast.setPromptText("Ator1, Ator2, ...");
+        fieldWhere.setPromptText("Streaming1, Streaming2, ...");
+        fieldEndingYear.setPromptText("Ano");
+        fieldEpisodeCount.setPromptText("N° de Ep.");
+        fieldEndingYear.disableProperty().bind(andamentoCheckBox.selectedProperty());
     }
 
     /**
@@ -98,13 +98,13 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
      */
     @Override
     public void onRegisterButtonClicked() {
-        String title = field_title.getText();
-        String year = field_year.getText();
-        String ogTitle = field_ogTitle.getText();
-        String cast = field_cast.getText();
-        String whereToWatch = field_where.getText();
-        String endingYear = field_endingYear.getText();
-        String episodeCount = field_episodeCount.getText();
+        String title = fieldTitle.getText();
+        String year = fieldYear.getText();
+        String ogTitle = fieldOGTitle.getText();
+        String cast = fieldCast.getText();
+        String whereToWatch = fieldWhere.getText();
+        String endingYear = fieldEndingYear.getText();
+        String episodeCount = fieldEpisodeCount.getText();
         String genre = genreBox.getValue();
 
         if (title.isEmpty() || year.isEmpty() || ogTitle.isEmpty() || cast.isEmpty() ||
@@ -116,7 +116,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
         }
         int yearInt = validateInt(year);
         if (yearInt == -1) {
-            field_year.clear();
+            fieldYear.clear();
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");
             return;
         }
@@ -126,14 +126,14 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
         } else {
             endingYearInt = validateInt(endingYear);
             if (endingYearInt == -1 || endingYearInt < yearInt) {
-                field_endingYear.clear();
+                fieldEndingYear.clear();
                 showAlert(Alert.AlertType.ERROR, "Ano de encerramento inválido. Por favor, insira um ano válido.");
                 return;
             }
         }
         int episodeCountInt = validateInt(episodeCount);
         if (episodeCountInt == -1) {
-            field_episodeCount.clear();
+            fieldEpisodeCount.clear();
             showAlert(Alert.AlertType.ERROR, "Número de episódios inválido. Por favor, insira um número válido.");
             return;
         }
@@ -160,6 +160,6 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
      */
     @FXML
     public void onCheckBoxMarked() {
-        field_endingYear.clear();
+        fieldEndingYear.clear();
     }
 }

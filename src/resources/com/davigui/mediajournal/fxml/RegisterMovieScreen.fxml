@@ -6,12 +6,12 @@
 
 <AnchorPane prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController">
 
-    <TextField fx:id="field_title" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
-    <TextField fx:id="field_author" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
-    <TextField fx:id="field_duration" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="duração" />
-    <TextField fx:id="field_year" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
-    <TextField fx:id="field_direction" layoutX="14.0" layoutY="238.0" prefWidth="200.0" promptText="direção" />
-    <TextField fx:id="field_ogTitle" layoutX="14.0" layoutY="347.0" prefWidth="200.0" promptText="título original" />
+    <TextField fx:id="fieldTitle" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
+    <TextField fx:id="fieldAuthor" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
+    <TextField fx:id="fieldDuration" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="duração" />
+    <TextField fx:id="fieldYear" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
+    <TextField fx:id="fieldDirection" layoutX="14.0" layoutY="238.0" prefWidth="200.0" promptText="direção" />
+    <TextField fx:id="fieldOGTitle" layoutX="14.0" layoutY="347.0" prefWidth="200.0" promptText="título original" />
 
     <ComboBox fx:id="genreBox" layoutX="14.0" layoutY="180.0" prefWidth="150.0" promptText="Select one" />
 
@@ -73,8 +73,8 @@
             <Font size="14.0" />
         </font>
     </Text>
-    <TextArea fx:id="field_where" layoutX="233.0" layoutY="37.0" prefHeight="50.0" prefWidth="275.0" promptText="Streaming1, Streaming2..." />
-    <TextArea fx:id="field_cast" layoutX="233.0" layoutY="115.0" prefHeight="50.0" prefWidth="275.0" promptText="Ator1, Ator2..." />
-    <TextArea fx:id="field_script" layoutX="233.0" layoutY="195.0" prefHeight="103.0" prefWidth="275.0" promptText="Sinopse do filme" />
+    <TextArea fx:id="fieldWhere" layoutX="233.0" layoutY="37.0" prefHeight="50.0" prefWidth="275.0" promptText="Streaming1, Streaming2..." />
+    <TextArea fx:id="fieldCast" layoutX="233.0" layoutY="115.0" prefHeight="50.0" prefWidth="275.0" promptText="Ator1, Ator2..." />
+    <TextArea fx:id="fieldScript" layoutX="233.0" layoutY="195.0" prefHeight="103.0" prefWidth="275.0" promptText="Sinopse do filme" />
 
 </AnchorPane>
