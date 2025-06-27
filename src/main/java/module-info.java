@@ -2,6 +2,7 @@ module journal {
     requires com.google.gson;
     requires javafx.fxml;
     requires javafx.controls;
+    requires javafx.media;
 
     exports com.davigui.mediajournal to javafx.graphics;
     opens com.davigui.mediajournal to javafx.fxml, com.google.gson;

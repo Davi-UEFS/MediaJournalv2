@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<SplitPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreen.OptionsController">
+    <VBox spacing="20.0">
+        <HBox prefHeight="64.0" prefWidth="774.0" spacing="20.0">
+            <Label text="Ligar/desligar música:">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
+         <ToggleButton fx:id="toggle_music" mnemonicParsing="false" onAction="#onPlayAudio" text="Música" />
+        </HBox>
+        <HBox prefHeight="64.0" prefWidth="774.0" spacing="20.0">
+            <Label text="Volume da música:">
+                <font>
+                    <Font size="14.0" />
+                </font></Label>
+         <Slider fx:id="slider_volume" blockIncrement="1.0" onMouseReleased="#onUpdateVolume" prefHeight="38.0" prefWidth="209.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0" />
+        </HBox>
+        <HBox prefHeight="64.0" prefWidth="774.0" spacing="20.0">
+            <Label text="Música:">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+         <ChoiceBox fx:id="choice_song" prefWidth="150.0" onAction="#onSongUpdated" />
+        </HBox>
+    </VBox>
+</SplitPane>
