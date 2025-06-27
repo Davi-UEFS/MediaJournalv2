@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <VBox spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreen.OptionsController">
-        <HBox prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
+    <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreen.OptionsController">
+        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
             <Label text="Ligar/desligar música:">
                 <font>
                    <Font size="14.0" />
@@ -22,7 +26,7 @@
         </ToggleButton>
         </HBox>
 
-        <HBox prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
+        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
             <Label text="Volume da música:">
                 <font>
                     <Font size="14.0" />
@@ -38,7 +42,7 @@
             </Slider>
         </HBox>
 
-        <HBox prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
+        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
             <Label text="Música:">
                 <font>
                     <Font size="14.0" />
