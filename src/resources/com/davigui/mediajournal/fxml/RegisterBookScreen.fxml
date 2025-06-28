@@ -6,11 +6,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterBookScreenController">
 
-    <TextField fx:id="field_title" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
-    <TextField fx:id="field_author" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
-    <TextField fx:id="field_publisher" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="publisher" />
-    <TextField fx:id="field_year" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
-    <TextField fx:id="field_isbn" layoutX="14.0" layoutY="238.0" prefWidth="200.0" promptText="isbn" />
+    <TextField fx:id="fieldTitle" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
+    <TextField fx:id="fieldAuthor" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
+    <TextField fx:id="fieldPublisher" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="publisher" />
+    <TextField fx:id="fieldYear" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
+    <TextField fx:id="fieldIsbn" layoutX="14.0" layoutY="238.0" prefWidth="200.0" promptText="isbn" />
 
     <ComboBox fx:id="genreBox" layoutX="14.0" layoutY="180.0" prefWidth="150.0" promptText="Select one" />
 

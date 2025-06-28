@@ -15,4 +15,7 @@
      <Tab fx:id="seriesTab" text="Series">
          <fx:include fx:id="seriesTabContent" source="SeriesTabContent.fxml" />
      </Tab>
+    <Tab fx:id="optionsTab" text="Opções">
+        <fx:include fx:id="optionsTabContent" source="OptionsTabContent.fxml" />
+    </Tab>
  </TabPane>

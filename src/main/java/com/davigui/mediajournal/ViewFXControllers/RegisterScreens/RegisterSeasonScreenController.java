@@ -33,12 +33,12 @@ public class RegisterSeasonScreenController implements Initializable {
     /**
      * Campo de texto para o número de episódios da temporada.
      */
-    @FXML private TextField field_episodeCount;
+    @FXML private TextField fieldEpisodeCount;
 
     /**
      * Campo de texto para o ano da temporada.
      */
-    @FXML private TextField field_year;
+    @FXML private TextField fieldYear;
 
     /**
      * Texto que exibe a temporada e o título da série.
@@ -100,8 +100,8 @@ public class RegisterSeasonScreenController implements Initializable {
      */
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
-        field_episodeCount.setPromptText("Número do Episódios");
-        field_year.setPromptText("Ano");
+        fieldEpisodeCount.setPromptText("Número do Episódios");
+        fieldYear.setPromptText("Ano");
     }
 
     /**
@@ -117,11 +117,11 @@ public class RegisterSeasonScreenController implements Initializable {
         int year;
 
         try {
-            episodeCount = Integer.parseInt(field_episodeCount.getText());
-            year = Integer.parseInt(field_year.getText());
+            episodeCount = Integer.parseInt(fieldEpisodeCount.getText());
+            year = Integer.parseInt(fieldYear.getText());
         } catch (NumberFormatException e) {
-            field_episodeCount.clear();
-            field_year.clear();
+            fieldEpisodeCount.clear();
+            fieldYear.clear();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Por favor, insira números válidos para o número de episódios e ano.");
             alert.showAndWait();

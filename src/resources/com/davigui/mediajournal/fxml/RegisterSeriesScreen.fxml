@@ -6,12 +6,12 @@
 
 <AnchorPane prefHeight="380.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterSeriesScreenController">
 
-    <TextField fx:id="field_title" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
-    <TextField fx:id="field_author" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
-    <TextField fx:id="field_endingYear" layoutX="237.0" layoutY="279.0" prefHeight="26.0" prefWidth="70.0" promptText="ano de encerramento" />
-    <TextField fx:id="field_year" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
+    <TextField fx:id="fieldTitle" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
+    <TextField fx:id="fieldAuthor" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
+    <TextField fx:id="fieldEndingYear" layoutX="237.0" layoutY="279.0" prefHeight="26.0" prefWidth="70.0" promptText="ano de encerramento" />
+    <TextField fx:id="fieldYear" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
     <TextField fx:id="field_direction" layoutX="14.0" layoutY="238.0" prefWidth="200.0" promptText="direção" />
-    <TextField fx:id="field_ogTitle" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="título original" />
+    <TextField fx:id="fieldOGTitle" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="título original" />
 
     <ComboBox fx:id="genreBox" layoutX="14.0" layoutY="180.0" prefWidth="150.0" promptText="Select one" />
 
@@ -67,8 +67,8 @@
             <Font size="14.0" />
         </font>
     </Text>
-    <TextArea fx:id="field_where" layoutX="233.0" layoutY="37.0" prefHeight="50.0" prefWidth="275.0" promptText="Streaming1, Streaming2..." />
-    <TextArea fx:id="field_cast" layoutX="233.0" layoutY="115.0" prefHeight="50.0" prefWidth="275.0" promptText="Ator1, Ator2..." />
+    <TextArea fx:id="fieldWhere" layoutX="233.0" layoutY="37.0" prefHeight="50.0" prefWidth="275.0" promptText="Streaming1, Streaming2..." />
+    <TextArea fx:id="fieldCast" layoutX="233.0" layoutY="115.0" prefHeight="50.0" prefWidth="275.0" promptText="Ator1, Ator2..." />
 
     <Label layoutX="237.0" layoutY="235.0" text="Série em andamento?">
         <font>
@@ -87,6 +87,6 @@
             <Font size="14.0" />
         </font>
     </Label>
-   <TextField fx:id="field_episodeCount" layoutX="233.0" layoutY="196.0" prefHeight="26.0" prefWidth="70.0" promptText="N° Ep." />
+   <TextField fx:id="fieldEpisodeCount" layoutX="233.0" layoutY="196.0" prefHeight="26.0" prefWidth="70.0" promptText="N° Ep." />
 
 </AnchorPane>
