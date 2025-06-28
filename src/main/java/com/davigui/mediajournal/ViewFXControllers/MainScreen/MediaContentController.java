@@ -283,17 +283,6 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Atualiza o estado dos botões de ação (avaliar, remover, marcar como visto).
-     * Os botões só são habilitados se uma mídia estiver selecionada.
-     */
-    protected void updateActionButtons(){
-        boolean isSelected = (selectedItem.getValue()!=null);
-        rateButton.setDisable(!isSelected);
-        removeButton.setDisable(!isSelected);
-        seenButton.setDisable(!isSelected);
-    }
-
-    /**
      * Inicializa o listener da caixa de escolha de filtro.
      * Alterna entre os campos de busca por texto e por gênero de acordo com
      * o novo valor observado.
@@ -456,6 +445,17 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
+     * Atualiza o estado dos botões de ação (avaliar, remover, marcar como visto).
+     * Os botões só são habilitados se uma mídia estiver selecionada.
+     */
+    protected void updateActionButtons(){
+        boolean isSelected = (selectedItem.getValue()!=null);
+        rateButton.setDisable(!isSelected);
+        removeButton.setDisable(!isSelected);
+        seenButton.setDisable(!isSelected);
+    }
+
+    /**
      * Evento chamado ao clicar no botão de filtro.
      * Alterna a visibilidade dos componentes relacionados ao filtro.
      */
@@ -477,7 +477,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
      */
     @FXML
     protected void clearSearch() {
-        mediaObservableList.setAll(service.getAll());
+        resetMediaList();
         filterTypeChoiceBox.getSelectionModel().clearSelection();
         tableView.getSelectionModel().clearSelection();
         toggleFilterTextField(false);
