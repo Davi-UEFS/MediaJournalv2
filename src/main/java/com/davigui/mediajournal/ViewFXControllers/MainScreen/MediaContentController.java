@@ -217,10 +217,6 @@ public abstract class MediaContentController<T extends Media> implements Initial
         configureTable();
         initTableListener();
 
-        //***********TEXTFIELDS*********************
-        filterTextField.setPromptText("Buscar");
-        initTextFieldListener();
-
         //***********CHOICEBOXES*********************
         configureFilterChoices();
         initFilterChoiceBoxListener();
@@ -228,6 +224,10 @@ public abstract class MediaContentController<T extends Media> implements Initial
         List<Genres> genreChoices = Arrays.asList(Genres.values());
         genreChoiceBox.setItems(FXCollections.observableList(genreChoices));
         initGenreChoiceBoxListener();
+
+        //***********TEXTFIELDS*********************
+        filterTextField.setPromptText("Buscar");
+        initTextFieldListener();
 
         //***********BOTOES*************************
         toggleFilterTypeComponents(false);
