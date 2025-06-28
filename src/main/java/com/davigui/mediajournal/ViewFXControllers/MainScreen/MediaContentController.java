@@ -476,7 +476,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
      * caixa de escolha de gênero e recarrega a tabela com todas as mídias.
      */
     @FXML
-    protected void clearSearch() {
+    protected void onClearSearchButtonClicked() {
         resetMediaList();
         filterTypeChoiceBox.getSelectionModel().clearSelection();
         tableView.getSelectionModel().clearSelection();
