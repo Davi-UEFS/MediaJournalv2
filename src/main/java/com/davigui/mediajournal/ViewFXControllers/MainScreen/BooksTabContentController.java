@@ -59,6 +59,12 @@ public class BooksTabContentController extends MediaContentController<Book> {
     @FXML
     private TableColumn<Book, String> seenDateColumn;
 
+    /**
+     * Coluna da posse de um exemplar.
+     */
+    @FXML
+    private TableColumn<Book, String> ownedColumn;
+
     //*********Atributos NAO FXML***********
     /**
      * Serviço específico para operações com livros.
@@ -124,6 +130,10 @@ public class BooksTabContentController extends MediaContentController<Book> {
 
         seenDateColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getSeenDate()));
+
+        //Se existir, marca com o Vzinho. Se não, marca um X
+        ownedColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().isOwned() ? "✔" : "✘"));
     }
 
     /**
