@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
  * Gerencia as configurações de áudio, como tocar/pausar música, ajustar volume e
  * selecionar a música a ser reproduzida.
  */
-public class OptionsController implements Initializable {
+public class OptionsTabController implements Initializable {
 
     //*********Atributos FXML ************
 
