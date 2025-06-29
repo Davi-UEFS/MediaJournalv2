@@ -84,10 +84,10 @@ public class RegisterBookScreenController extends RegisterScreenController {
         String publisher = fieldPublisher.getText();
         String year = fieldYear.getText();
         String isbn = fieldIsbn.getText();
-        String genre = genreBox.getValue();
+        Genres genre = genreBox.getValue();
 
         if (title.isEmpty() || author.isEmpty() || publisher.isEmpty() ||
-                year.isEmpty() || isbn.isEmpty() || genre.equals("- Gênero -")) {
+                year.isEmpty() || isbn.isEmpty() || genreBox.getSelectionModel().isEmpty()) {
             // Exibir mensagem de erro ou alerta
             showAlert(Alert.AlertType.ERROR, "Por favor, preencha todos os campos.");
             return;
@@ -98,9 +98,8 @@ public class RegisterBookScreenController extends RegisterScreenController {
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");
             return;
         }
-        Genres genreE = Genres.valueOf(genre.toUpperCase());
 
-        IResult result = service.register(title, yearInt, genreE,
+        IResult result = service.register(title, yearInt, genre,
                 isbn, author, publisher, ownBookCheckBox.isSelected());
         if (result.getClass().equals(Success.class)) {
             showAlert(Alert.AlertType.INFORMATION, "Registrado com sucesso!");

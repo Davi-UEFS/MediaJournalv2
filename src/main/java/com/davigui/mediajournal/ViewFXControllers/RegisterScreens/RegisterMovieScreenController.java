@@ -99,11 +99,11 @@ public class RegisterMovieScreenController extends RegisterScreenController{
         String whereToWatch = fieldWhere.getText();
         String cast = fieldCast.getText();
         String script = fieldScript.getText();
-        String genre = genreBox.getValue();
+        Genres genre = genreBox.getValue();
         String originalTitle = fieldOGTitle.getText();
 
         if (title.isEmpty() || year.isEmpty() || direction.isEmpty() || duration.isEmpty() || whereToWatch.isEmpty() ||
-                cast.isEmpty() || script.isEmpty() || genre.equals("- Gênero -") || originalTitle.isEmpty()) {
+                cast.isEmpty() || script.isEmpty() || genre == null || originalTitle.isEmpty()) {
             // Exibir mensagem de erro ou alerta
             showAlert(Alert.AlertType.ERROR, "Por favor, preencha todos os campos.");
             return;
@@ -121,11 +121,11 @@ public class RegisterMovieScreenController extends RegisterScreenController{
             showAlert(Alert.AlertType.ERROR, "Duração inválida. Por favor, insira uma duração válida.");
             return;
         }
-        Genres genreE = Genres.valueOf(genre.toUpperCase());
+
         String[] castBuffer = cast.split(",");
         String[] whereToWatchBuffer = whereToWatch.split(",");
 
-        IResult result = service.register(title, yearInt, genreE, castBuffer,
+        IResult result = service.register(title, yearInt, genre, castBuffer,
                 durationInt, direction, script, originalTitle, whereToWatchBuffer);
         if (result.getClass().equals(Success.class)) {
             showAlert(Alert.AlertType.INFORMATION, "Filme registrado com sucesso!");

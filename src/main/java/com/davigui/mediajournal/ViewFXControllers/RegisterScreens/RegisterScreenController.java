@@ -1,6 +1,7 @@
 package com.davigui.mediajournal.ViewFXControllers.RegisterScreens;
 
 import com.davigui.mediajournal.Model.Enums.Genres;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -9,6 +10,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -26,8 +29,6 @@ public abstract class RegisterScreenController implements Initializable {
      */
     @FXML protected TextField fieldTitle;
 
-
-
     /**
      * Campo de texto para o ano de lançamento da obra.
      */
@@ -36,7 +37,7 @@ public abstract class RegisterScreenController implements Initializable {
     /**
      * ComboBox para seleção do gênero da obra.
      */
-    @FXML protected ComboBox<String> genreBox;
+    @FXML protected ComboBox<Genres> genreBox;
 
     /**
      * Botão para registrar a obra.
@@ -56,10 +57,9 @@ public abstract class RegisterScreenController implements Initializable {
         fieldTitle.setPromptText("Título");
         fieldYear.setPromptText("Ano");
 
-        genreBox.getItems().add("- Gênero -");
-        for (Genres genre : Genres.values()) {
-            genreBox.getItems().add(genre.toString());
-        }
+        genreBox.setPromptText("- Gênero -");
+        List<Genres> genreChoices = Arrays.asList(Genres.values());
+        genreBox.setItems(FXCollections.observableList(genreChoices));
         genreBox.getSelectionModel().selectFirst();
     }
 

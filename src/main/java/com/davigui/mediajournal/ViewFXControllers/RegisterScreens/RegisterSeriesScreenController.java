@@ -105,10 +105,10 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
         String whereToWatch = fieldWhere.getText();
         String endingYear = fieldEndingYear.getText();
         String episodeCount = fieldEpisodeCount.getText();
-        String genre = genreBox.getValue();
+        Genres genre = genreBox.getValue();
 
         if (title.isEmpty() || year.isEmpty() || ogTitle.isEmpty() || cast.isEmpty() ||
-                whereToWatch.isEmpty() || genre.equals("- Gênero -") || episodeCount.isEmpty() ||
+                whereToWatch.isEmpty() || genre == null || episodeCount.isEmpty() ||
                 (!andamentoCheckBox.isSelected() && endingYear.isEmpty())) {
             // Exibir mensagem de erro ou alerta
             showAlert(Alert.AlertType.ERROR, "Por favor, preencha todos os campos.");
@@ -137,11 +137,11 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
             showAlert(Alert.AlertType.ERROR, "Número de episódios inválido. Por favor, insira um número válido.");
             return;
         }
-        Genres genreE = Genres.valueOf(genre.toUpperCase());
+
         String[] castBuffer = cast.split(",");
         String[] whereBuffer = whereToWatch.split(",");
 
-        IResult result = seriesService.register(title, yearInt, genreE, endingYearInt, castBuffer, ogTitle,
+        IResult result = seriesService.register(title, yearInt, genre, endingYearInt, castBuffer, ogTitle,
                 whereBuffer, 1, episodeCountInt, yearInt);
         if (result.getClass().equals(Success.class)) {
             showAlert(Alert.AlertType.INFORMATION, "Registrado com sucesso!");
