@@ -98,6 +98,7 @@ public class SeenMovieScreenController implements Initializable {
         int currentMonth = now.getMonthValue();
         int currentYear = now.getYear();
 
+        //TODO: USAR ALGUM METODO DE LOCALDATE?
         if (year > currentYear || (year == currentYear && month > currentMonth)
                 || (year == currentYear && month == currentMonth && day > currentDay)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
