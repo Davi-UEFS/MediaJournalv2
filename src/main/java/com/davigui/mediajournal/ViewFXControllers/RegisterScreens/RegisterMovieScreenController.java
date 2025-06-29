@@ -109,13 +109,13 @@ public class RegisterMovieScreenController extends RegisterScreenController{
             return;
         }
 
-        int yearInt = validateInt(year);
+        int yearInt = parseAndValidateInt(year);
         if (yearInt == -1) {
             fieldYear.clear();
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");
             return;
         }
-        int durationInt = validateInt(duration);
+        int durationInt = parseAndValidateInt(duration);
         if (durationInt == -1) {
             fieldDuration.clear();
             showAlert(Alert.AlertType.ERROR, "Duração inválida. Por favor, insira uma duração válida.");

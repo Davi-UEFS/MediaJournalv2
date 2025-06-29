@@ -92,7 +92,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
             showAlert(Alert.AlertType.ERROR, "Por favor, preencha todos os campos.");
             return;
         }
-        int yearInt = validateInt(year);
+        int yearInt = parseAndValidateInt(year);
         if (yearInt == -1) {
             fieldYear.clear();
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");

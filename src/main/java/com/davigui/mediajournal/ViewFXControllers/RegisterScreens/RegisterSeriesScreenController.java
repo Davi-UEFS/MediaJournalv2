@@ -114,7 +114,7 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
             showAlert(Alert.AlertType.ERROR, "Por favor, preencha todos os campos.");
             return;
         }
-        int yearInt = validateInt(year);
+        int yearInt = parseAndValidateInt(year);
         if (yearInt == -1) {
             fieldYear.clear();
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");
@@ -124,14 +124,14 @@ public class RegisterSeriesScreenController extends RegisterScreenController{
         if (andamentoCheckBox.isSelected()) {
             endingYearInt = 9999; // 9999 representa "Em andamento"
         } else {
-            endingYearInt = validateInt(endingYear);
+            endingYearInt = parseAndValidateInt(endingYear);
             if (endingYearInt == -1 || endingYearInt < yearInt) {
                 fieldEndingYear.clear();
                 showAlert(Alert.AlertType.ERROR, "Ano de encerramento inválido. Por favor, insira um ano válido.");
                 return;
             }
         }
-        int episodeCountInt = validateInt(episodeCount);
+        int episodeCountInt = parseAndValidateInt(episodeCount);
         if (episodeCountInt == -1) {
             fieldEpisodeCount.clear();
             showAlert(Alert.AlertType.ERROR, "Número de episódios inválido. Por favor, insira um número válido.");

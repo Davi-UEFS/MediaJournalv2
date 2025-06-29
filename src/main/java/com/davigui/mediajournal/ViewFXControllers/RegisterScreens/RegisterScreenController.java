@@ -79,7 +79,7 @@ public abstract class RegisterScreenController implements Initializable {
      * @return O número convertido ou -1 se for inválido.
      */
     @FXML
-    public int validateInt(String string) {
+    public int parseAndValidateInt(String string) {
         int num;
         try {
             num = Integer.parseInt(string);
