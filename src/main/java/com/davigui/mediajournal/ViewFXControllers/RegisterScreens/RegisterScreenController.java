@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -60,7 +61,7 @@ public abstract class RegisterScreenController implements Initializable {
         genreBox.setPromptText("- Gênero -");
         List<Genres> genreChoices = Arrays.asList(Genres.values());
         genreBox.setItems(FXCollections.observableList(genreChoices));
-        genreBox.getSelectionModel().selectFirst();
+
     }
 
     /**
@@ -86,7 +87,7 @@ public abstract class RegisterScreenController implements Initializable {
         } catch (NumberFormatException e) {
             return -1;
         }
-        if (num > 2025) return -1;
+        if (num > LocalDate.now().getYear()) return -1;
         return num;
     }
 
