@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController">
+<AnchorPane prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.RegisterScreens.RegisterMovieScreenController">
 
     <TextField fx:id="fieldTitle" layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="200.0" promptText="title" />
-    <TextField fx:id="fieldAuthor" layoutX="14.0" layoutY="88.0" prefWidth="200.0" promptText="author" />
     <TextField fx:id="fieldDuration" layoutX="14.0" layoutY="291.0" prefWidth="200.0" promptText="duração" />
     <TextField fx:id="fieldYear" layoutX="14.0" layoutY="138.0" prefHeight="26.0" prefWidth="70.0" promptText="year" />
     <TextField fx:id="fieldDirection" layoutX="14.0" layoutY="238.0" prefWidth="200.0" promptText="direção" />
@@ -21,12 +24,6 @@
         </font></Button>
 
     <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título:">
-        <font>
-            <Font size="14.0" />
-        </font>
-    </Text>
-
-    <Text layoutX="14.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:">
         <font>
             <Font size="14.0" />
         </font>

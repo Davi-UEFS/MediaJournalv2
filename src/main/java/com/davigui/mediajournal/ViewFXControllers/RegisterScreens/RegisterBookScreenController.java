@@ -26,6 +26,11 @@ public class RegisterBookScreenController extends RegisterScreenController {
     @FXML private TextField fieldPublisher;
 
     /**
+     * Campo de texto para o autor da obra.
+     */
+    @FXML private TextField fieldAuthor;
+
+    /**
      * Campo de texto para o ISBN do livro.
      */
     @FXML private TextField fieldIsbn;
