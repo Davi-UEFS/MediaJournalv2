@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-    <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreen.OptionsTabController">
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davigui.mediajournal.ViewFXControllers.MainScreen.OptionsTabController">
         <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
             <Label text="Ligar/desligar música:">
                 <font>
@@ -19,11 +15,19 @@
                     <Insets left="20.0" right="20.0" top="20.0" />
                 </HBox.margin>
             </Label>
-         <ToggleButton fx:id="toggleMusic" mnemonicParsing="false" onAction="#onPlayAudio" text="Música">
+         <ToggleButton fx:id="toggleMusic" mnemonicParsing="false" onAction="#onToggleMusic" text="Música">
             <HBox.margin>
                 <Insets left="20.0" right="20.0" top="20.0" />
             </HBox.margin>
         </ToggleButton>
+      <Label fx:id="labelOnOff" text="[on/off]">
+         <HBox.margin>
+            <Insets left="20.0" right="20.0" top="20.0" />
+         </HBox.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
         </HBox>
 
         <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
@@ -35,11 +39,19 @@
                     <Insets left="20.0" right="20.0" top="20.0" />
                 </HBox.margin>
             </Label>
-         <Slider fx:id="sliderVolume" blockIncrement="1.0" onMouseReleased="#onUpdateVolume" prefHeight="38.0" prefWidth="209.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0">
+         <Slider fx:id="sliderVolume" blockIncrement="1.0" onMouseDragged="#onUpdateVolumeLabel" onMouseReleased="#onUpdateVolumeValue" prefHeight="38.0" prefWidth="209.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0">
             <HBox.margin>
                 <Insets left="20.0" right="20.0" top="20.0" />
             </HBox.margin>
             </Slider>
+      <Label fx:id="labelVolume" text="[volume]">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <HBox.margin>
+            <Insets left="20.0" right="20.0" top="20.0" />
+         </HBox.margin>
+      </Label>
         </HBox>
 
         <HBox alignment="CENTER" prefHeight="64.0" prefWidth="774.0" spacing="-20.0">
@@ -51,7 +63,7 @@
                     <Insets left="20.0" right="20.0" top="20.0" />
                 </HBox.margin>
             </Label>
-         <ChoiceBox fx:id="choiceSong" onAction="#onSongUpdated" prefWidth="150.0">
+         <ChoiceBox fx:id="choiceSong" onAction="#onUpdateCurrentSong" prefHeight="26.0" prefWidth="220.0">
             <HBox.margin>
                 <Insets left="20.0" right="20.0" top="20.0" />
             </HBox.margin>

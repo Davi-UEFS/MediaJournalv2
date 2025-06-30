@@ -4,6 +4,7 @@ import com.davigui.mediajournal.MainFX;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.media.Media;
@@ -22,6 +23,18 @@ import java.util.ResourceBundle;
 public class OptionsTabController implements Initializable {
 
     //*********Atributos FXML ************
+
+    /**
+     * Rótulos para exibir o estado do áudio.
+     */
+    @FXML
+    private Label labelOnOff;
+
+    /**
+     * Rótulo para exibir o volume atual.
+     */
+    @FXML
+    private Label labelVolume;
 
     /**
      * Botão para tocar ou pausar a música.
@@ -56,12 +69,14 @@ public class OptionsTabController implements Initializable {
      * Inicia ou pausa a reprodução da música dependendo do estado do botão.
      */
     @FXML
-    public void onPlayAudio() {
+    public void onToggleMusic() {
         if (mediaPlayer != null) {
             if (toggleMusic.isSelected()) {
                 mediaPlayer.play();
+                labelOnOff.setText("(Ligada)");
             } else {
                 mediaPlayer.pause();
+                labelOnOff.setText("(Desligada)");
             }
         }
     }
@@ -72,11 +87,21 @@ public class OptionsTabController implements Initializable {
      * Atualiza o volume do player de mídia com base no valor do slider.
      */
     @FXML
-    public void onUpdateVolume() {
+    public void onUpdateVolumeValue() {
         if (mediaPlayer != null) {
             double volume = sliderVolume.getValue() / 100.0;
             mediaPlayer.setVolume(volume);
         }
+    }
+
+    /**
+     * Método chamado ao atualizar o rótulo de volume.
+     * <p>
+     * Atualiza o texto do rótulo de volume com o valor atual do slider.
+     */
+    @FXML
+    public void onUpdateVolumeLabel() {
+        labelVolume.setText(String.format("%.0f%%", sliderVolume.getValue()));
     }
 
     /**
@@ -86,14 +111,14 @@ public class OptionsTabController implements Initializable {
      * se o botão de tocar estiver ativo.
      */
     @FXML
-    public void onSongUpdated() {
+    public void onUpdateCurrentSong() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
 
         String fileName = switch (choiceSong.getValue()) {
-            case "Música 1" -> "audio/song1.mp3";
-            case "Música 2" -> "audio/song2.mp3";
+            case "Kevin MacLeod - Local Forecast" -> "audio/song1.mp3";
+            case "BuGuMi - Today's diary" -> "audio/song2.mp3";
             default -> "audio/song1.mp3";
         };
 
@@ -114,9 +139,11 @@ public class OptionsTabController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        choiceSong.getItems().addAll("Música 1", "Música 2");
+        choiceSong.getItems().addAll("Kevin MacLeod - Local Forecast", "BuGuMi - Today's diary");
         choiceSong.getSelectionModel().selectFirst();
         sliderVolume.setValue(100);
+        labelVolume.setText("100%");
+        labelOnOff.setText("(Desligada)");
 
         // Carrega a música inicial
         String fileName = "audio/song1.mp3";
