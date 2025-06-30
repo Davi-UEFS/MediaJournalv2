@@ -89,19 +89,10 @@ public class SeenBookScreenController implements Initializable {
      */
     public void onSaveButtonClicked() {
         LocalDate pickedDate = datePicker.getValue();
-        int day = pickedDate.getDayOfMonth();
-        int month = pickedDate.getMonthValue();
-        int year = pickedDate.getYear();
 
         LocalDate now = LocalDate.now();
-        int currentDay = now.getDayOfMonth();
-        int currentMonth = now.getMonthValue();
-        int currentYear = now.getYear();
 
-        //TODO: USAR ALGUM METODO DE LOCALDATE?
-
-        if (year > currentYear || (year == currentYear && month > currentMonth)
-                || (year == currentYear && month == currentMonth && day > currentDay)) {
+        if (pickedDate.isAfter(now)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText("Data inválida");
@@ -109,6 +100,9 @@ public class SeenBookScreenController implements Initializable {
             alert.showAndWait();
             return;
         }
+
+        int month = pickedDate.getMonthValue();
+        int year = pickedDate.getYear();
 
         Months monthE = Months.values()[month - 1];
 

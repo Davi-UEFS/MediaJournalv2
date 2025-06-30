@@ -83,24 +83,16 @@ public class SeenMovieScreenController implements Initializable {
      * Método chamado quando o botão de salvar é clicado.
      * <p>
      * Verifica se a data selecionada é válida (não pode ser futura) e, se for,
-     * marca o filme como visto no serviço de filmes.
+     * marca o filme como lido no serviço de filmes.
      * Se a operação for bem-sucedida, exibe uma mensagem de sucesso e fecha a janela.
      * Se ocorrer um erro, exibe uma mensagem de erro.
      */
     public void onSaveButtonClicked() {
         LocalDate pickedDate = datePicker.getValue();
-        int day = pickedDate.getDayOfMonth();
-        int month = pickedDate.getMonthValue();
-        int year = pickedDate.getYear();
 
         LocalDate now = LocalDate.now();
-        int currentDay = now.getDayOfMonth();
-        int currentMonth = now.getMonthValue();
-        int currentYear = now.getYear();
 
-        //TODO: USAR ALGUM METODO DE LOCALDATE?
-        if (year > currentYear || (year == currentYear && month > currentMonth)
-                || (year == currentYear && month == currentMonth && day > currentDay)) {
+        if (pickedDate.isAfter(now)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
             alert.setHeaderText("Data inválida");
@@ -109,6 +101,9 @@ public class SeenMovieScreenController implements Initializable {
             return;
         }
 
+        int month = pickedDate.getMonthValue();
+        int year = pickedDate.getYear();
+
         Months monthE = Months.values()[month - 1];
 
         IResult result = service.markAsSeen(movie, year, monthE);
@@ -116,8 +111,8 @@ public class SeenMovieScreenController implements Initializable {
         if (result.getClass().equals(Success.class)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Sucesso");
-            alert.setHeaderText("Filme marcado como visto");
-            alert.setContentText("O filme foi marcado como visto com sucesso!");
+            alert.setHeaderText("Filme marcado como lido");
+            alert.setContentText("O filme foi marcado como lido com sucesso!");
             alert.showAndWait();
 
             // Fecha a janela atual
@@ -126,7 +121,7 @@ public class SeenMovieScreenController implements Initializable {
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
-            alert.setHeaderText("Erro ao marcar filme como visto");
+            alert.setHeaderText("Erro ao marcar filme como lido");
             alert.setContentText(result.getMessage());
             alert.showAndWait();
         }
