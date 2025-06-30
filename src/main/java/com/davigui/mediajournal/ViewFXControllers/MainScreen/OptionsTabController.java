@@ -131,7 +131,7 @@ public class OptionsTabController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        choiceSong.getItems().addAll("Kevin MacLeod - Local Forecast", "BuGuMi - Today's diary");
+        choiceSong.getItems().addAll("Kevin MacLeod - Local Forecast", "BuGuMi - Today's Diary");
         choiceSong.getSelectionModel().selectFirst();
         sliderVolume.setValue(100);
         labelVolume.setText("100%");
