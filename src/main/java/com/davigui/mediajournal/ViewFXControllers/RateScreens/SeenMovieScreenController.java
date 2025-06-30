@@ -90,6 +90,15 @@ public class SeenMovieScreenController implements Initializable {
     public void onSaveButtonClicked() {
         LocalDate pickedDate = datePicker.getValue();
 
+        if (pickedDate == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Data inválida");
+            alert.setContentText("Selecione uma data no formato DD/MM/AAAA.");
+            alert.showAndWait();
+            return;
+        }
+
         LocalDate now = LocalDate.now();
 
         if (pickedDate.isAfter(now)) {
