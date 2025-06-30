@@ -231,9 +231,16 @@ public class MoviesTabContentController extends MediaContentController<Movie> {
             reviewInfo.setText("RESENHA: " + movie.getReview());
 
         durationInfo.setText("Duração: " + movie.getDuration() + "min");
-        castInfo.setText("Elenco: " + movie.getCast().toString());
+
+        StringBuilder watchString = new StringBuilder(movie.getWhereToWatch().toString());
+        watchString.deleteCharAt(0).deleteCharAt(watchString.length() - 1);
+
+        StringBuilder castString = new StringBuilder(movie.getCast().toString());
+        castString.deleteCharAt(0).deleteCharAt(castString.length() - 1);
+
+        castInfo.setText("Elenco: " + watchString);
         scriptInfo.setText("Roteiro: " + movie.getScript());
-        whereToWatchInfo.setText("Plataformas: " + movie.getWhereToWatch().toString());
+        whereToWatchInfo.setText("Plataformas: " + castString);
     }
 
     /**

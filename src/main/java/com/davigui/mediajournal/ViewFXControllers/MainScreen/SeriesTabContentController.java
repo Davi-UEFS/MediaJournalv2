@@ -228,8 +228,14 @@ public class SeriesTabContentController extends MediaContentController<Series> {
         else
             reviewInfo.setText("RESENHA: " + series.getReview());
 
-        castInfo.setText("Elenco: " + series.getCast().toString());
-        whereToWatchInfo.setText("Plataformas: " + series.getWhereToWatch().toString());
+        StringBuilder watchString = new StringBuilder(series.getWhereToWatch().toString());
+        watchString.deleteCharAt(0).deleteCharAt(watchString.length() - 1);
+
+        StringBuilder castString = new StringBuilder(series.getCast().toString());
+        castString.deleteCharAt(0).deleteCharAt(castString.length() - 1);
+
+        castInfo.setText("Elenco: " + watchString);
+        whereToWatchInfo.setText("Plataformas: " + castString);
 
         StringBuffer seasonsString = new StringBuffer();
         series.getSeasons().forEach(season ->
