@@ -118,7 +118,7 @@ public class OptionsTabController implements Initializable {
 
         String fileName = switch (choiceSong.getValue()) {
             case "Kevin MacLeod - Local Forecast" -> "audio/song1.mp3";
-            case "BuGuMi - Today's diary" -> "audio/song2.mp3";
+            case "BuGuMi - Today's Diary" -> "audio/song2.mp3";
             default -> "audio/song1.mp3";
         };
 
