@@ -85,23 +85,15 @@ public class OptionsTabController implements Initializable {
      * Método chamado ao ajustar o volume do slider.
      * <p>
      * Atualiza o volume do player de mídia com base no valor do slider.
+     * Atualiza o texto do rótulo de volume com o valor atual do slider.
      */
     @FXML
     public void onUpdateVolumeValue() {
         if (mediaPlayer != null) {
-            double volume = sliderVolume.getValue() / 100.0;
-            mediaPlayer.setVolume(volume);
+            double volume = sliderVolume.getValue();
+            labelVolume.setText(String.format("%.0f%%", volume));
+            mediaPlayer.setVolume(volume/100.0);
         }
-    }
-
-    /**
-     * Método chamado ao atualizar o rótulo de volume.
-     * <p>
-     * Atualiza o texto do rótulo de volume com o valor atual do slider.
-     */
-    @FXML
-    public void onUpdateVolumeLabel() {
-        labelVolume.setText(String.format("%.0f%%", sliderVolume.getValue()));
     }
 
     /**
