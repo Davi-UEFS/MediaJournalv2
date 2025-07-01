@@ -252,11 +252,17 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Reseta a lista observável de mídias para o padrão. A lista padrão é
-     * obtida através do controlador da mídia parametrizada.
+     * Reseta a lista observável de mídias para o padrão, limpando as seleções
+     * da tabela e dos elementos de filtro no processo, desativando estes
+     * últimos. A lista padrão é obtida através do controlador da mídia
+     * parametrizada.
      */
     protected void resetMediaList(){
         mediaObservableList.setAll(service.getAll());
+        filterTypeChoiceBox.getSelectionModel().clearSelection();
+        tableView.getSelectionModel().clearSelection();
+        toggleFilterTextField(false);
+        toggleGenreChoiceBox(false);
     }
 
     /**
@@ -279,6 +285,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
             }else
                 hideMediaInfo();
             updateActionButtons();
+
         });
     }
 
@@ -341,7 +348,7 @@ public abstract class MediaContentController<T extends Media> implements Initial
 
         filterTextField.textProperty().addListener((obsValue, oldValue, newValue) -> {
 
-            if(filterTypeChoiceBox.getValue().equals("Ano")){
+            if("Ano".equals(filterTypeChoiceBox.getValue())){
                 String onlyIntValue = newValue.replaceAll("[^\\d]", "");
 
                 if(!newValue.equals(onlyIntValue)){
@@ -369,13 +376,17 @@ public abstract class MediaContentController<T extends Media> implements Initial
      */
     protected void handleSearch(String filter){
 
+        String filterType = selectedFilter.getValue();
+
+        if(filterType == null) return;
+
         //Se o filtro não for por gênero e for vazio, apenas recarrega a tabela
-        if((!selectedFilter.getValue().equals("Gênero")) && (filter == null || filter.isEmpty())){
-            resetMediaList();
+        if(!"Gênero".equals(filterType) && (filter == null || filter.isEmpty())){
+            mediaObservableList.setAll(service.getAll());
             return;
         }
 
-        switch (selectedFilter.getValue()){
+        switch (filterType){
             case "Título":
                 titleSearch(filter);
                 break;
@@ -472,16 +483,11 @@ public abstract class MediaContentController<T extends Media> implements Initial
     }
 
     /**
-     * Limpa todos as seleções e filtros aplicados, desativa o campo de texto e
-     * caixa de escolha de gênero e recarrega a tabela com todas as mídias.
+     * Limpa todos as seleções e filtros aplicados e recarrega a lista.
      */
     @FXML
     protected void onClearSearchButtonClicked() {
         resetMediaList();
-        filterTypeChoiceBox.getSelectionModel().clearSelection();
-        tableView.getSelectionModel().clearSelection();
-        toggleFilterTextField(false);
-        toggleGenreChoiceBox(false);
     }
 
     /**
