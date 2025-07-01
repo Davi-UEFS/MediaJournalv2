@@ -68,7 +68,7 @@ public class RegisterBookScreenController extends RegisterScreenController {
     public void initialize(URL url, ResourceBundle rb) {
         super.initialize(url, rb);
         fieldPublisher.setPromptText("Editora");
-        fieldIsbn.setPromptText("ISBN");
+        fieldIsbn.setPromptText("ISBN (sem hífens)");
     }
 
     /**
@@ -96,6 +96,13 @@ public class RegisterBookScreenController extends RegisterScreenController {
         if (yearInt == -1) {
             fieldYear.clear();
             showAlert(Alert.AlertType.ERROR, "Ano inválido. Por favor, insira um ano válido.");
+            return;
+        }
+
+        //A expressao regular confere se a String contem 10 ou 13 inteiros
+        if (!isbn.matches("^(\\d{10}|\\d{13})$")) {
+            fieldIsbn.clear();
+            showAlert(Alert.AlertType.ERROR, "ISBN inválido. Por favor, insira um ISBN de 10 ou 13 algarismos.");
             return;
         }
 
